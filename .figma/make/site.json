@@ -1,0 +1,10 @@
+{
+  "description": "Discover personalized fashion recommendations tailored to your unique style preferences, helping you elevate your wardrobe effortlessly.",
+  "robots": {
+    "index": false
+  },
+  "accessibility": {
+    "addBypassLinks": false,
+    "ignoreReducedMotion": false
+  }
+}
