@@ -1,5 +1,5 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
-import { motion, useScroll, useMotionValueEvent } from 'framer-motion';
+import { motion, useScroll, useMotionValueEvent, useTransform, useReducedMotion } from 'framer-motion';
 import Lenis from 'lenis';
 import { expertiseItems, showcaseItems, basicEditsSection, testimonialsSection } from './data/portfolio';
 import { MediaCard } from './components/MediaCard';
@@ -248,6 +248,65 @@ export default function App() {
   const heroParallaxRef = useParallax(0.25);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const lenisRef = useRef<Lenis | null>(null);
+
+  // --- Contact Section Scroll Animations (Scrapbook Editorial Style) ---
+  const contactRef = useRef<HTMLElement>(null);
+  const { scrollYProgress: contactY } = useScroll({
+    target: contactRef,
+    offset: ["start 85%", "end start"]
+  });
+  const reducedMotion = useReducedMotion();
+
+  // Left side global
+  const cOpacity = useTransform(contactY, [0, 0.15, 0.85, 1], [0, 1, 1, 0]);
+  const cY = useTransform(contactY, [0, 0.25, 0.85, 1], [reducedMotion ? 0 : 50, 0, 0, reducedMotion ? 0 : -25]);
+
+  // Typography: LET'S
+  const letsX = useTransform(contactY, [0, 0.25, 0.85, 1], [reducedMotion ? 0 : -35, 0, 0, reducedMotion ? 0 : -20]);
+  const letsRot = useTransform(contactY, [0, 0.25, 0.85, 1], [reducedMotion ? 0 : -2, 0, 0, 0]);
+  
+  // Typography: CREATE
+  const createX = useTransform(contactY, [0.05, 0.3, 0.85, 1], [reducedMotion ? 0 : 35, 0, 0, reducedMotion ? 0 : 15]);
+  const createRot = useTransform(contactY, [0.05, 0.3, 0.85, 1], [reducedMotion ? 0 : 1.5, 0, 0, 0]);
+  
+  // Typography: TOGETHER.
+  const togY = useTransform(contactY, [0.1, 0.35, 0.85, 1], [reducedMotion ? 0 : 35, 0, 0, reducedMotion ? 0 : 20]);
+  const togScale = useTransform(contactY, [0.1, 0.35, 0.85, 1], [reducedMotion ? 1 : 0.94, 1, 1, 1]);
+  const togRot = useTransform(contactY, [0.1, 0.35, 0.85, 1], [reducedMotion ? 0 : -3, 0, 0, 0]);
+
+  // Form Paper
+  const formOp = useTransform(contactY, [0.1, 0.25, 0.85, 1], [0, 1, 1, 0]);
+  const formY = useTransform(contactY, [0.15, 0.4, 0.85, 1], [reducedMotion ? 0 : 60, 0, 0, reducedMotion ? 0 : 40]);
+  const formRot = useTransform(contactY, [0.15, 0.4, 0.85, 1], [reducedMotion ? 0 : 1.5, 0, 0, 0]);
+  const formScale = useTransform(contactY, [0.15, 0.4, 0.85, 1], [reducedMotion ? 1 : 0.98, 1, 1, 1]);
+
+  // Floating Photos (Final states: 6deg and -4deg respectively)
+  const p1X = useTransform(contactY, [0.2, 0.45, 0.85, 1], [reducedMotion ? 0 : -40, 0, 0, reducedMotion ? 0 : 25]);
+  const p1Rot = useTransform(contactY, [0.2, 0.45, 0.85, 1], [reducedMotion ? 6 : 2, 6, 6, reducedMotion ? 6 : 8]);
+  const p1Op = useTransform(contactY, [0.2, 0.35, 0.85, 1], [0, 0.9, 0.9, 0]);
+
+  const p2X = useTransform(contactY, [0.25, 0.5, 0.85, 1], [reducedMotion ? 0 : 40, 0, 0, reducedMotion ? 0 : -20]);
+  const p2Rot = useTransform(contactY, [0.25, 0.5, 0.85, 1], [reducedMotion ? -4 : -1, -4, -4, reducedMotion ? -4 : -7]);
+  const p2Op = useTransform(contactY, [0.25, 0.4, 0.85, 1], [0, 0.9, 0.9, 0]);
+
+  // Form Fields Stagger
+  const field1Op = useTransform(contactY, [0.2, 0.3], [0, 1]);
+  const field1Y = useTransform(contactY, [0.2, 0.3], [reducedMotion ? 0 : 15, 0]);
+  
+  const field2Op = useTransform(contactY, [0.25, 0.35], [0, 1]);
+  const field2Y = useTransform(contactY, [0.25, 0.35], [reducedMotion ? 0 : 15, 0]);
+
+  const field3Op = useTransform(contactY, [0.3, 0.4], [0, 1]);
+  const field3Y = useTransform(contactY, [0.3, 0.4], [reducedMotion ? 0 : 15, 0]);
+
+  const field4Op = useTransform(contactY, [0.35, 0.45], [0, 1]);
+  const field4Y = useTransform(contactY, [0.35, 0.45], [reducedMotion ? 0 : 15, 0]);
+
+  const btnOp = useTransform(contactY, [0.4, 0.5], [0, 1]);
+  const btnScale = useTransform(contactY, [0.4, 0.5], [reducedMotion ? 1 : 0.96, 1]);
+
+  // --- Hand-Drawn Sketches: Triggered Animations ---
+  // Replaced useScroll with native Framer Motion whileInView for standard trigger behavior
 
   useEffect(() => {
     const lenis = new Lenis({
@@ -862,6 +921,10 @@ export default function App() {
             <div className="content-stretch flex flex-[1_0_0] flex-col gap-[20px] items-start min-w-px relative">
               <div className="content-stretch flex flex-col h-[230px] items-start justify-between overflow-clip p-[22px] relative rounded-[18px] shrink-0 w-full">
                 <MediaCard item={showcaseItems[1]} className="absolute inset-0 size-full" imgClassName="rounded-[18px]" />
+                <motion.svg className="absolute inset-0 overflow-visible pointer-events-none z-50" viewBox="0 0 300 230" preserveAspectRatio="none">
+                  <motion.path initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: false, amount: 0.3 }} transition={{ duration: 0.8, ease: "easeOut" }} d="M -30 115 Q 150 0 280 115" fill="none" stroke="#111" strokeWidth="5" strokeLinecap="round" />
+                  <motion.path initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: false, amount: 0.3 }} transition={{ duration: 0.4, ease: "easeOut", delay: 0.6 }} d="M 260 105 L 280 115 L 265 125" fill="none" stroke="#111" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
+                </motion.svg>
                 <div className="content-stretch flex items-center justify-between relative shrink-0 w-full">
                   <div className="bg-[rgba(255,255,255,0.1)] border border-[rgba(255,255,255,0.16)] border-solid content-stretch flex items-start px-[10px] py-[5px] relative rounded-[999px] shrink-0">
                     <p className="[word-break:break-word] font-['Barlow:Bold'] leading-[normal] not-italic relative shrink-0 text-[10px] text-white tracking-[1.5px] uppercase whitespace-nowrap">Cinematic</p>
@@ -878,6 +941,9 @@ export default function App() {
               </div>
               <div className="content-stretch flex flex-col h-[230px] items-start justify-between overflow-clip p-[22px] relative rounded-[18px] shrink-0 w-full">
                 <MediaCard item={showcaseItems[2]} className="absolute inset-0 size-full" imgClassName="rounded-[18px]" />
+                <motion.svg className="absolute inset-0 overflow-visible pointer-events-none z-50" viewBox="0 0 300 230" preserveAspectRatio="none">
+                  <motion.path initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: false, amount: 0.3 }} transition={{ duration: 0.8, ease: "easeOut" }} d="M -10 220 Q 150 240 310 215" fill="none" stroke="#e63228" strokeWidth="5" strokeLinecap="round" />
+                </motion.svg>
                 <div className="content-stretch flex items-center justify-between relative shrink-0 w-full">
                   <div className="bg-[rgba(255,255,255,0.1)] border border-[rgba(255,255,255,0.16)] border-solid content-stretch flex items-start px-[10px] py-[5px] relative rounded-[999px] shrink-0">
                     <p className="[word-break:break-word] font-['Barlow:Bold'] leading-[normal] not-italic relative shrink-0 text-[10px] text-white tracking-[1.5px] uppercase whitespace-nowrap">Sound Design</p>
@@ -955,8 +1021,9 @@ export default function App() {
       </div>
 
       {/* Some Stories / How It Works */}
-      <ScaledArtSection designHeight={1108.845}>
-        <div className="absolute bg-[rgba(0,0,0,0)] h-[1108.845px] left-0 right-0 top-0">
+      <div>
+        <ScaledArtSection designHeight={1108.845}>
+          <div className="absolute bg-[rgba(0,0,0,0)] h-[1108.845px] left-0 right-0 top-0">
           <div className="absolute bottom-0 h-[1108.845px] right-0 w-[1440px]">
             <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgImage45} />
           </div>
@@ -977,6 +1044,10 @@ export default function App() {
             <div className="[word-break:break-word] absolute bottom-[265.64px] flex flex-col font-['Oswald:Bold'] font-bold justify-center leading-[0] right-[1372.57px] text-[#e55377] text-[68.928px] translate-x-full translate-y-1/2 w-[197.794px]">
               <p className="leading-[78.762px] mb-0">{`WE'VE`}</p>
               <p className="leading-[78.762px]">BUILT.</p>
+              <motion.svg className="absolute inset-0 overflow-visible pointer-events-none" viewBox="0 0 198 158">
+                <motion.path initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: false, amount: 0.3 }} transition={{ duration: 0.8, ease: "easeOut" }} d="M -30 140 Q 20 190 70 130" fill="none" stroke="#111" strokeWidth="5" strokeLinecap="round" />
+                <motion.path initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: false, amount: 0.3 }} transition={{ duration: 0.4, ease: "easeOut", delay: 0.6 }} d="M 60 145 L 70 130 L 50 125" fill="none" stroke="#111" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
+              </motion.svg>
             </div>
             <div className="absolute bottom-[370.11px] right-[61.44px] size-[58.439px]">
               <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgImage47} />
@@ -989,6 +1060,9 @@ export default function App() {
             </div>
             <div className="[word-break:break-word] absolute bottom-[464.52px] flex flex-col font-['Oswald:Bold'] font-bold h-[80.916px] justify-center leading-[0] right-[1371.07px] text-[#111] text-[79.417px] translate-x-full translate-y-1/2 w-[182.81px]">
               <p className="leading-[normal]">SOME</p>
+              <motion.svg className="absolute inset-0 overflow-visible pointer-events-none" viewBox="0 0 183 81">
+                <motion.path initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: false, amount: 0.3 }} transition={{ duration: 0.8, ease: "easeOut" }} d="M -10 80 Q 90 95 195 75" fill="none" stroke="#e63228" strokeWidth="5" strokeLinecap="round" />
+              </motion.svg>
             </div>
             <div className="[word-break:break-word] absolute bottom-[540.43px] flex flex-col font-['Inter:Regular'] font-normal justify-center leading-[0] not-italic right-[1273.67px] text-[#a4a39f] text-[17.981px] translate-x-full translate-y-1/2 w-[164.828px]">
               <p className="leading-[normal]">FEATURED WORK</p>
@@ -1008,23 +1082,62 @@ export default function App() {
             </div>
             <div className="absolute bottom-[131.4px] h-[272.716px] right-[125.87px] w-[188.803px]">
               <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgImage52} />
+              <motion.svg className="absolute inset-0 overflow-visible pointer-events-none" viewBox="0 0 189 273">
+                <motion.path initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: false, amount: 0.3 }} transition={{ duration: 1, ease: "easeInOut", delay: 1.2 }} d="M 95 10 C 200 0 210 280 95 285 C -10 290 0 20 95 10" fill="none" stroke="#e63228" strokeWidth="4" strokeLinecap="round" />
+                <motion.path initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: false, amount: 0.3 }} transition={{ duration: 0.6, ease: "easeOut", delay: 2.0 }} d="M 180 140 L 195 155 L 225 110" fill="none" stroke="#111" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
+              </motion.svg>
             </div>
             <div className="absolute bottom-[120.91px] h-[289.199px] right-[365.62px] w-[205.286px]">
               <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgImage58} />
+              <motion.svg className="absolute inset-0 overflow-visible pointer-events-none -z-10 mix-blend-multiply" viewBox="0 0 205 289">
+                <motion.path initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: false, amount: 0.3 }} transition={{ duration: 0.8, ease: "easeOut", delay: 0.8 }} d="M -10 145 Q 100 120 215 155" fill="none" stroke="rgba(230, 50, 40, 0.4)" strokeWidth="60" strokeLinecap="round" />
+              </motion.svg>
             </div>
             <div className="absolute bottom-[123.91px] h-[284.703px] right-[614.36px] w-[187.305px]">
               <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgImage62} />
+              <motion.svg className="absolute inset-0 overflow-visible pointer-events-none" viewBox="0 0 187 285">
+                <motion.path initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: false, amount: 0.3 }} transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }} d="M 0 285 Q 90 295 190 280" fill="none" stroke="#111" strokeWidth="4" strokeLinecap="round" />
+                <motion.path initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: false, amount: 0.3 }} transition={{ duration: 0.8, ease: "easeOut", delay: 0.6 }} d="M 90 -20 L 95 -5 L 110 -5 L 98 5 L 105 20 L 90 10 L 75 20 L 82 5 L 70 -5 L 85 -5 Z" fill="none" stroke="#e63228" strokeWidth="3" strokeLinejoin="round" />
+              </motion.svg>
             </div>
             <div className="absolute bottom-[125.41px] h-[277.211px] right-[851.11px] w-[170.822px]">
               <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgImage65} />
+              <motion.svg className="absolute inset-0 overflow-visible pointer-events-none z-50" viewBox="0 0 171 277">
+                <motion.path initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: false, amount: 0.3 }} transition={{ duration: 1, ease: "easeInOut", delay: 0 }} d="M 85 0 C 180 -10 190 280 85 285 C -20 290 -10 10 85 0" fill="none" stroke="#e63228" strokeWidth="4" strokeLinecap="round" />
+                <motion.path initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: false, amount: 0.3 }} transition={{ duration: 0.6, ease: "easeOut", delay: 0.8 }} d="M 190 140 Q 220 130 250 150" fill="none" stroke="#111" strokeWidth="3" strokeLinecap="round" />
+                <motion.path initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: false, amount: 0.3 }} transition={{ duration: 0.3, ease: "easeOut", delay: 1.2 }} d="M 240 142 L 250 150 L 235 155" fill="none" stroke="#111" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" />
+              </motion.svg>
             </div>
             <div className="absolute bottom-[122.41px] h-[290.697px] right-[1045.91px] w-[266.722px]">
               <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgImage68} />
             </div>
-            <div className="[word-break:break-word] absolute bottom-[213.06px] flex flex-col font-['Oswald:Bold'] font-bold h-[97.399px] justify-center leading-[0] right-[1288.66px] text-[#0c1012] text-[74.922px] translate-x-full translate-y-1/2 w-[223.267px]">
+            {/* Camouflage block to hide baked-in static text and highlights */}
+            <div className="absolute left-[130px] bottom-[150px] w-[260px] h-[280px] bg-[#F4F3CA]">
+              <div className="absolute inset-0 opacity-40 mix-blend-multiply" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }} />
+            </div>
+            
+            <div className="[word-break:break-word] absolute bottom-[213.06px] flex flex-col font-['Oswald:Bold'] font-bold h-[97.399px] justify-center leading-[0] right-[1288.66px] text-[#0c1012] text-[74.922px] translate-x-full translate-y-1/2 w-[223.267px] z-10">
+              <motion.div 
+                className="absolute -inset-x-2 -inset-y-1 bg-[#8bc3f0] -z-10 origin-left"
+                initial={{ scaleX: 0, rotate: 2 }} whileInView={{ scaleX: 1, rotate: 2 }} viewport={{ once: false, amount: 0.3 }} transition={{ duration: 0.6, ease: "easeOut", delay: 0.4 }}
+              />
               <p className="leading-[normal]">WORKS</p>
             </div>
-            <div className="[word-break:break-word] absolute bottom-[365.91px] flex flex-col font-['Oswald:Bold'] font-bold h-[88.408px] justify-center leading-[0] right-[1297.65px] text-[#0f0f09] text-[80.916px] translate-x-full translate-y-1/2 w-[154.339px]">
+            
+            <div className="[word-break:break-word] absolute bottom-[290px] flex flex-col font-['Oswald:Bold'] font-bold h-[70px] justify-center leading-[0] right-[1290px] text-[#0f0f09] text-[65px] translate-x-full translate-y-1/2 w-[100px] z-10">
+              <motion.p 
+                initial={{ opacity: 0 }} whileInView={{ opacity: 1 }} viewport={{ once: false, amount: 0.3 }} transition={{ duration: 0.3, delay: 0.3 }}
+                className="leading-[normal]" style={{ transform: 'rotate(-2deg)' }}
+              >
+                IT
+              </motion.p>
+            </div>
+
+            <div className="[word-break:break-word] absolute bottom-[365.91px] flex flex-col font-['Oswald:Bold'] font-bold h-[88.408px] justify-center leading-[0] right-[1297.65px] text-[#0f0f09] text-[80.916px] translate-x-full translate-y-1/2 w-[154.339px] z-10">
+              <motion.div 
+                className="absolute -inset-x-2 -inset-y-1 bg-[#F4D160] -z-10 origin-left"
+                initial={{ scaleX: 0, rotate: -3 }} whileInView={{ scaleX: 1, rotate: -3 }} viewport={{ once: false, amount: 0.3 }} transition={{ duration: 0.5, ease: "easeOut" }}
+              />
               <p className="leading-[normal]">HOW</p>
             </div>
             <div className="[word-break:break-word] absolute bottom-[195.08px] flex flex-col font-['Inter:Regular'] font-normal h-[76.42px] justify-center leading-[0] not-italic right-[539.44px] text-[#a9a7a2] text-[14.984px] translate-x-full translate-y-1/2 w-[157.336px]">
@@ -1049,42 +1162,43 @@ export default function App() {
           </div>
         </div>
       </ScaledArtSection>
+      </div>
 
-      {/* Let's Create Together — Minimalist Redesign */}
-      <section id="contact" className="relative w-full min-h-[100dvh] bg-[#F5F2E8] overflow-hidden flex flex-col justify-center py-24 md:py-32">
+      {/* Let's Create Together — Animated Scrapbook Version */}
+      <section id="contact" ref={contactRef} className="relative w-full min-h-[100dvh] bg-[#F5F2E8] overflow-hidden flex flex-col justify-center py-24 md:py-32">
         {/* Background Noise Overlay */}
-        <div 
-          className="absolute inset-0 z-0 pointer-events-none opacity-50 mix-blend-overlay" 
-          style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }} 
-        />
+        <motion.div 
+          style={{ opacity: useTransform(contactY, [0, 0.1, 0.9, 1], [0, 0.5, 0.5, 0]) }}
+          className="absolute inset-0 z-0 pointer-events-none mix-blend-overlay" 
+        >
+          <div className="absolute inset-0 w-full h-full" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }} />
+        </motion.div>
         
         <div className="relative z-10 max-w-7xl mx-auto px-5 md:px-10 lg:px-20 w-full flex flex-col lg:flex-row items-center justify-between gap-16 lg:gap-8">
           
           {/* Left: Typography & Contact Info */}
           <div className="flex flex-col lg:w-[45%] shrink-0">
-            <Reveal direction="up">
+            <motion.div style={{ opacity: cOpacity, y: cY }}>
               <div className="font-['Barlow:Bold'] text-[11px] tracking-[3px] uppercase text-[#888] mb-12 flex items-center gap-4">
                 <span className="w-8 h-[1px] bg-black/20" />
                 LET'S WORK TOGETHER
               </div>
-            </Reveal>
+            </motion.div>
             
-            <Reveal direction="left" delay={100}>
-              <div className="flex flex-col leading-[0.8] tracking-tighter -ml-1">
-                <span className="font-['Barlow_Condensed:Black'] text-[clamp(80px,12vw,140px)] text-[#111] uppercase">LET'S</span>
-                <span className="font-['Barlow_Condensed:Black'] text-[clamp(80px,12vw,140px)] text-[#111] uppercase">CREATE</span>
-                <span className="font-['Barlow_Condensed:Black'] text-[clamp(80px,12vw,140px)] text-[#e63228] uppercase">TOGETHER.</span>
-              </div>
-            </Reveal>
+            <div className="flex flex-col leading-[0.8] tracking-tighter -ml-1">
+              <motion.span style={{ x: letsX, rotate: letsRot, opacity: cOpacity }} className="font-['Barlow_Condensed:Black'] text-[clamp(80px,12vw,140px)] text-[#111] uppercase block origin-left">LET'S</motion.span>
+              <motion.span style={{ x: createX, rotate: createRot, opacity: cOpacity }} className="font-['Barlow_Condensed:Black'] text-[clamp(80px,12vw,140px)] text-[#111] uppercase block origin-right">CREATE</motion.span>
+              <motion.span style={{ y: togY, scale: togScale, rotate: togRot, opacity: cOpacity }} className="font-['Barlow_Condensed:Black'] text-[clamp(80px,12vw,140px)] text-[#e63228] uppercase block origin-bottom-left">TOGETHER.</motion.span>
+            </div>
 
-            <Reveal direction="up" delay={200}>
+            <motion.div style={{ opacity: cOpacity, y: cY }}>
               <p className="font-['Inter:Regular'] text-[#666] text-lg mt-8 max-w-[320px] leading-relaxed">
                 Have a project in mind? Let's talk. I'd love to hear your ideas and turn them into reality.
               </p>
-            </Reveal>
+            </motion.div>
 
             {/* Social / contact info */}
-            <Reveal direction="up" delay={300}>
+            <motion.div style={{ opacity: cOpacity, y: cY }}>
               <div className="mt-16 flex flex-col gap-6 border-l border-black/10 pl-6">
                 <p className="font-['Barlow:Bold'] text-[#111] text-xs tracking-widest uppercase">Other ways to reach me</p>
                 <div className="flex flex-col gap-4">
@@ -1102,22 +1216,28 @@ export default function App() {
                   </div>
                 </div>
               </div>
-            </Reveal>
+            </motion.div>
           </div>
 
           {/* Right: Floating Form & Images */}
-          <div className="relative lg:w-[50%] w-full flex justify-end">
+          <div className="relative lg:w-[50%] w-full flex justify-end mt-12 lg:mt-0">
             
-            {/* Minimalist Floating Photos (Replacing messy polaroids) */}
-            <div className="absolute -right-[10%] top-[10%] w-48 h-64 bg-white p-2 shadow-xl rotate-[6deg] z-0 hidden lg:block opacity-90 transition-transform duration-500 hover:rotate-[2deg] hover:scale-105 hover:z-20">
+            {/* Animated Floating Photos */}
+            <motion.div 
+              style={{ x: p1X, rotate: p1Rot, opacity: p1Op }}
+              className="absolute -right-[10%] top-[10%] w-48 h-64 bg-white p-2 shadow-xl z-0 hidden lg:block transition-transform duration-500 hover:scale-105 hover:z-20 origin-center"
+            >
               <img src={showcaseItems[0].mediaSrc} alt="" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" />
-            </div>
-            <div className="absolute -right-[5%] bottom-[5%] w-40 h-56 bg-white p-2 shadow-xl rotate-[-4deg] z-0 hidden lg:block opacity-90 transition-transform duration-500 hover:rotate-[-2deg] hover:scale-105 hover:z-20">
+            </motion.div>
+            <motion.div 
+              style={{ x: p2X, rotate: p2Rot, opacity: p2Op }}
+              className="absolute -right-[5%] bottom-[5%] w-40 h-56 bg-white p-2 shadow-xl z-0 hidden lg:block transition-transform duration-500 hover:scale-105 hover:z-20 origin-center"
+            >
               <img src={showcaseItems[1].mediaSrc} alt="" className="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-500" />
-            </div>
+            </motion.div>
 
-            {/* Clean, Sharp Form */}
-            <Reveal direction="up" delay={200} className="w-full max-w-[480px] relative z-10">
+            {/* Clean, Sharp Form Paper */}
+            <motion.div style={{ y: formY, rotate: formRot, scale: formScale, opacity: formOp }} className="w-full max-w-[480px] relative z-10 origin-bottom">
               <form onSubmit={handleSubmit} noValidate className="bg-white border border-black/5 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.08)] p-8 md:p-12 w-full flex flex-col gap-8">
                 {formStatus === 'success' ? (
                   <div className="flex flex-col items-center justify-center text-center py-16">
@@ -1127,7 +1247,7 @@ export default function App() {
                   </div>
                 ) : (
                   <>
-                    <div className="flex flex-col gap-1 group">
+                    <motion.div style={{ opacity: field1Op, y: field1Y }} className="flex flex-col gap-1 group">
                       <label htmlFor="contact-name" className="font-['Barlow:Bold'] text-[#111] text-[10px] tracking-widest uppercase transition-colors group-focus-within:text-[#e63228]">Your Name</label>
                       <input
                         id="contact-name" name="name" type="text" autoComplete="name"
@@ -1137,9 +1257,9 @@ export default function App() {
                         className={`w-full bg-transparent border-b ${formErrors.name ? 'border-[#e63228]' : 'border-black/20'} py-3 font-['Inter:Regular'] text-[#111] text-[15px] placeholder:text-[#ccc] outline-none focus:border-[#111] transition-colors`}
                       />
                       {formErrors.name && <p className="font-['Inter:Regular'] text-[#e63228] text-[11px] mt-1">{formErrors.name}</p>}
-                    </div>
+                    </motion.div>
 
-                    <div className="flex flex-col gap-1 group">
+                    <motion.div style={{ opacity: field2Op, y: field2Y }} className="flex flex-col gap-1 group">
                       <label htmlFor="contact-email" className="font-['Barlow:Bold'] text-[#111] text-[10px] tracking-widest uppercase transition-colors group-focus-within:text-[#e63228]">Your Email</label>
                       <input
                         id="contact-email" name="email" type="email" autoComplete="email"
@@ -1149,9 +1269,9 @@ export default function App() {
                         className={`w-full bg-transparent border-b ${formErrors.email ? 'border-[#e63228]' : 'border-black/20'} py-3 font-['Inter:Regular'] text-[#111] text-[15px] placeholder:text-[#ccc] outline-none focus:border-[#111] transition-colors`}
                       />
                       {formErrors.email && <p className="font-['Inter:Regular'] text-[#e63228] text-[11px] mt-1">{formErrors.email}</p>}
-                    </div>
+                    </motion.div>
 
-                    <div className="flex flex-col gap-1 group">
+                    <motion.div style={{ opacity: field3Op, y: field3Y }} className="flex flex-col gap-1 group">
                       <label htmlFor="contact-project" className="font-['Barlow:Bold'] text-[#111] text-[10px] tracking-widest uppercase transition-colors group-focus-within:text-[#e63228]">Project Type</label>
                       <div className="relative">
                         <select
@@ -1168,9 +1288,9 @@ export default function App() {
                         </select>
                         <svg className="absolute right-0 top-1/2 -translate-y-1/2 w-4 h-4 text-[#888] pointer-events-none" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M19 9l-7 7-7-7" /></svg>
                       </div>
-                    </div>
+                    </motion.div>
 
-                    <div className="flex flex-col gap-1 group">
+                    <motion.div style={{ opacity: field4Op, y: field4Y }} className="flex flex-col gap-1 group">
                       <label htmlFor="contact-message" className="font-['Barlow:Bold'] text-[#111] text-[10px] tracking-widest uppercase transition-colors group-focus-within:text-[#e63228]">Your Message</label>
                       <textarea
                         id="contact-message" name="message" rows={4}
@@ -1180,28 +1300,29 @@ export default function App() {
                         className={`w-full bg-transparent border-b ${formErrors.message ? 'border-[#e63228]' : 'border-black/20'} py-3 font-['Inter:Regular'] text-[#111] text-[15px] placeholder:text-[#ccc] outline-none focus:border-[#111] transition-colors resize-none`}
                       />
                       {formErrors.message && <p className="font-['Inter:Regular'] text-[#e63228] text-[11px] mt-1">{formErrors.message}</p>}
-                    </div>
+                    </motion.div>
 
                     {formStatus === 'error' && (
                       <p className="font-['Inter:Regular'] text-[#e63228] text-xs">Unable to send your message. Please try again.</p>
                     )}
 
-                    <button
+                    <motion.button
                       type="submit"
                       disabled={formStatus === 'submitting'}
-                      className="mt-4 bg-[#111] text-[#F5F2E8] py-4 px-8 font-['Barlow:Bold'] text-[13px] tracking-[2px] uppercase cursor-pointer hover:bg-[#e63228] disabled:opacity-60 disabled:cursor-not-allowed transition-colors duration-300 flex items-center justify-center gap-3 w-full"
+                      style={{ opacity: btnOp, scale: btnScale }}
+                      className="mt-4 bg-[#111] text-[#F5F2E8] py-4 px-8 font-['Barlow:Bold'] text-[13px] tracking-[2px] uppercase cursor-pointer hover:bg-[#e63228] hover:-translate-y-1 disabled:opacity-60 disabled:cursor-not-allowed transition-all duration-300 flex items-center justify-center gap-3 w-full origin-bottom"
                     >
                       {formStatus === 'submitting' ? 'SENDING...' : (
                         <>
                           <span>Send Message</span>
-                          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+                          <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
                         </>
                       )}
-                    </button>
+                    </motion.button>
                   </>
                 )}
               </form>
-            </Reveal>
+            </motion.div>
           </div>
         </div>
       </section>
