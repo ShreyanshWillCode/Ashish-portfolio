@@ -98,12 +98,12 @@ export function PodcastEdits() {
           {/* Cards */}
           <div className="absolute inset-0 flex items-center justify-center w-full max-w-[1000px] mx-auto z-20 pointer-events-auto">
             {/* 1 */}
-            <PhoneMedia item={podcastEditsSection.media[0] as any} className="absolute w-full h-full z-10 hidden md:block transition-transform duration-500 hover:-translate-y-2" style={{ transform: 'translateX(-240%) translateY(35%) rotate(-18deg) scale(0.7)' }} />
+            <PhoneMedia item={podcastEditsSection.media[0] as any} className="absolute w-[240px] sm:w-[280px] md:w-[320px] h-[480px] sm:h-[560px] md:h-[640px] z-10 hidden md:block transition-transform duration-500 hover:-translate-y-2 -translate-x-[240%] translate-y-[35%] -rotate-[18deg] scale-[0.7]" />
             {/* 2 */}
-            <PhoneMedia item={podcastEditsSection.media[1] as any} className="absolute w-full h-full z-20 transition-transform duration-500 hover:-translate-y-2" style={{ transform: 'translateX(-150%) translateY(15%) rotate(-10deg) scale(0.85)' }} />
+            <PhoneMedia item={podcastEditsSection.media[1] as any} className="absolute w-[240px] sm:w-[280px] md:w-[320px] h-[480px] sm:h-[560px] md:h-[640px] z-20 transition-transform duration-500 hover:-translate-y-2 -translate-x-[80%] sm:-translate-x-[110%] md:-translate-x-[150%] translate-y-[15%] -rotate-[6deg] md:-rotate-[10deg] scale-[0.85]" />
             {/* 3 (Center Main) */}
-            <div className="absolute w-[280px] md:w-[320px] h-auto z-30 transition-transform duration-500 hover:-translate-y-2 group" style={{ transform: 'translateX(0%) scale(1)' }}>
-               <PhoneMedia item={podcastEditsSection.media[2] as any} />
+            <div className="absolute w-[240px] sm:w-[280px] md:w-[320px] h-[480px] sm:h-[560px] md:h-[640px] z-30 transition-transform duration-500 hover:-translate-y-2 group translate-x-0 scale-100">
+               <PhoneMedia item={podcastEditsSection.media[2] as any} className="absolute inset-0 w-full h-full" />
                
                {/* Live Scroll Waveform Bar overlay */}
                <div className="absolute bottom-[20%] left-0 w-full h-12 flex items-center justify-center px-6">
@@ -124,9 +124,9 @@ export function PodcastEdits() {
                </div>
             </div>
             {/* 4 */}
-            <PhoneMedia item={podcastEditsSection.media[3] as any} className="absolute w-full h-full z-20 transition-transform duration-500 hover:-translate-y-2" style={{ transform: 'translateX(150%) translateY(15%) rotate(10deg) scale(0.85)' }} />
+            <PhoneMedia item={podcastEditsSection.media[3] as any} className="absolute w-[240px] sm:w-[280px] md:w-[320px] h-[480px] sm:h-[560px] md:h-[640px] z-20 transition-transform duration-500 hover:-translate-y-2 translate-x-[80%] sm:translate-x-[110%] md:translate-x-[150%] translate-y-[15%] rotate-[6deg] md:rotate-[10deg] scale-[0.85]" />
             {/* 5 */}
-            <PhoneMedia item={podcastEditsSection.media[4] as any} className="absolute w-full h-full z-10 hidden md:block transition-transform duration-500 hover:-translate-y-2" style={{ transform: 'translateX(240%) translateY(35%) rotate(18deg) scale(0.7)' }} />
+            <PhoneMedia item={podcastEditsSection.media[4] as any} className="absolute w-[240px] sm:w-[280px] md:w-[320px] h-[480px] sm:h-[560px] md:h-[640px] z-10 hidden md:block transition-transform duration-500 hover:-translate-y-2 translate-x-[240%] translate-y-[35%] rotate-[18deg] scale-[0.7]" />
           </div>
 
           <button className="absolute right-[2%] md:right-[8%] z-40 w-12 h-12 md:w-14 md:h-14 rounded-full border border-black/10 bg-[#F5F2E8]/80 backdrop-blur-sm flex items-center justify-center hover:bg-white hover:shadow-md transition-all pointer-events-auto cursor-pointer">

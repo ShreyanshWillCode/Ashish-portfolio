@@ -30,7 +30,7 @@ export function PhoneMedia({ item, className = "", style }: PhoneMediaProps) {
 
   return (
     <div 
-      className={`relative rounded-[24px] md:rounded-[32px] overflow-hidden bg-black shadow-lg ${className}`}
+      className={`${className.includes('absolute') ? '' : 'relative'} rounded-[24px] md:rounded-[32px] overflow-hidden bg-black shadow-lg ${className}`}
       style={style}
     >
       {/* Removed notch */}

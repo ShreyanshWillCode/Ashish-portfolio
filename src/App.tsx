@@ -373,8 +373,12 @@ export default function App() {
     setFormErrors({});
     setFormStatus('submitting');
     try {
-      // TODO: wire to your backend/email service here
-      await new Promise(r => setTimeout(r, 1200));
+      // Open native mail client as a fallback since no backend is wired
+      const subject = `New Project Inquiry from ${formData.name}`;
+      const body = `Name: ${formData.name}\nEmail: ${formData.email}\nProject Type: ${formData.projectType || 'Not specified'}\n\nMessage:\n${formData.message}`;
+      window.location.href = `mailto:hello@golfedits.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      
+      await new Promise(r => setTimeout(r, 800)); // Short UI delay for feedback
       setFormStatus('success');
       setFormData({ name: '', email: '', projectType: '', message: '' });
     } catch {
@@ -440,16 +444,16 @@ export default function App() {
                 {`Video Editing & Motion Design Studio`}
               </ScrollUnderline>
             </div>
-            <div className="[word-break:break-word] content-stretch flex flex-col gap-[8px] items-start not-italic relative shrink-0 w-full" style={{ fontSize: 'clamp(48px, 7vw, 96px)' }}>
-              <div className="hero-enter font-['Barlow_Condensed:ExtraBold'] leading-[0] relative shrink-0 text-[#242423] w-full" style={{ animationDelay: '0.18s' }}>
-                <p className="leading-[1.05] mb-0">{`Editing That Turns `}</p>
-                <p className="leading-[1.05]">Vision Into</p>
+            <div className="[word-break:break-word] content-stretch flex flex-col gap-[clamp(4px,1vw,8px)] items-start not-italic relative shrink-0 w-full" style={{ fontSize: 'clamp(48px, 9vw, 96px)' }}>
+              <div className="hero-enter font-['Barlow_Condensed:ExtraBold'] leading-[1] relative shrink-0 text-[#242423] w-full" style={{ animationDelay: '0.18s' }}>
+                <p className="leading-[1] mb-0">{`Editing That Turns `}</p>
+                <p className="leading-[1]">Vision Into</p>
               </div>
-              <p className="hero-enter font-['Barlow_Condensed:Black'] leading-[1.05] relative shrink-0 text-[#828280]" style={{ animationDelay: '0.3s' }}>
+              <p className="hero-enter font-['Barlow_Condensed:Black'] leading-[1] relative shrink-0 text-[#828280]" style={{ animationDelay: '0.3s' }}>
                 Cinematic Reality
               </p>
             </div>
-            <p className="hero-enter [word-break:break-word] font-['Barlow:Regular'] leading-[1.5] not-italic relative shrink-0 text-[#787774] text-[16px] md:text-[20px] w-full max-w-[480px]" style={{ animationDelay: '0.44s' }}>{`Professional video editing & motion design built to increase engagement, retention, and brand authority.`}</p>
+            <p className="hero-enter [word-break:break-word] font-['Barlow:Regular'] leading-[1.5] not-italic relative shrink-0 text-[#787774] text-[clamp(16px,2vw,20px)] w-full max-w-[480px]" style={{ animationDelay: '0.44s' }}>{`Professional video editing & motion design built to increase engagement, retention, and brand authority.`}</p>
             <div className="hero-enter content-stretch flex items-start pt-[12px] relative shrink-0" style={{ animationDelay: '0.56s' }}>
               <button onClick={() => scrollTo('expertise')} className="[word-break:break-word] bg-[#111] content-stretch flex font-['Barlow:SemiBold'] gap-[12px] items-center leading-[normal] px-[24px] py-[12px] relative rounded-[24px] shrink-0 whitespace-nowrap cursor-pointer hover:bg-[#333] transition-colors duration-150">
                 <span className="not-italic relative shrink-0 text-[#a09f99] text-[15px] tracking-[1.2px]">View Our Work</span>
@@ -471,11 +475,11 @@ export default function App() {
                   <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[18px] size-full" src={imgRectangle3} />
                 </div>
               </div>
-              <p className="[word-break:break-word] font-['DM_Sans:Bold'] font-bold leading-[normal] relative shrink-0 text-[#787774] text-[18px] whitespace-nowrap" style={{ fontVariationSettings: '"opsz" 14' }}>100+</p>
-              <p className="[word-break:break-word] font-['DM_Sans:Regular'] font-normal leading-[normal] relative shrink-0 text-[#b4b1ab] text-[13px] whitespace-nowrap" style={{ fontVariationSettings: '"opsz" 14' }}>Brands That Trust Us</p>
+              <p className="[word-break:break-word] font-['DM_Sans:Bold'] font-bold leading-[normal] relative shrink-0 text-[#787774] text-[clamp(16px,2vw,18px)] whitespace-nowrap" style={{ fontVariationSettings: '"opsz" 14' }}>100+</p>
+              <p className="[word-break:break-word] font-['DM_Sans:Regular'] font-normal leading-[normal] relative shrink-0 text-[#b4b1ab] text-[clamp(12px,1.5vw,13px)] whitespace-nowrap" style={{ fontVariationSettings: '"opsz" 14' }}>Brands That Trust Us</p>
             </div>
           </div>
-          <div className="hero-enter hidden md:flex content-stretch h-[400px] lg:h-[540px] items-center justify-center relative shrink-0 w-[220px] lg:w-[263px]" style={{ animationDelay: '0.25s' }}>
+          <div className="hero-enter flex content-stretch h-[clamp(320px,50vw,540px)] items-center justify-center relative shrink-0 w-[clamp(180px,30vw,263px)] mx-auto md:mx-0 mt-8 md:mt-0" style={{ animationDelay: '0.25s' }}>
             <div className="content-stretch flex h-full items-start relative rounded-[8px] shrink-0 w-full overflow-hidden">
               <div className="flex-[1_0_0] h-full min-w-px relative">
                 <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgRectangle4} />
@@ -643,8 +647,8 @@ export default function App() {
             {/* Left: Typography */}
             <div className="flex flex-col relative z-10 shrink-0">
               <div className="flex flex-col leading-[0.8] tracking-tighter -ml-1">
-                <span className="font-['Barlow_Condensed:Black'] text-[clamp(80px,10vw,140px)] text-[#111] uppercase">{basicEditsSection.titlePrimary}</span>
-                <span className="font-['Barlow_Condensed:Black'] text-[clamp(80px,10vw,140px)] text-[#999] uppercase">{basicEditsSection.titleSecondary}</span>
+                <span className="font-['Barlow_Condensed:Black'] text-[clamp(56px,10vw,140px)] text-[#111] uppercase">{basicEditsSection.titlePrimary}</span>
+                <span className="font-['Barlow_Condensed:Black'] text-[clamp(56px,10vw,140px)] text-[#999] uppercase">{basicEditsSection.titleSecondary}</span>
               </div>
               <div className="w-12 h-[3px] bg-[#ff4a4a] mt-6 mb-4" />
               <p className="font-['Inter:Regular'] text-[#555] text-[15px] md:text-[17px] max-w-[240px] leading-relaxed">
@@ -696,38 +700,32 @@ export default function App() {
               {/* L2 (Card 1) */}
               <PhoneMedia 
                 item={basicEditsSection.media[0] as any} 
-                className="absolute w-full h-full z-10 transition-transform duration-500 hover:-translate-y-2"
-                style={{ transform: 'translateX(-170%) translateY(25%) rotate(-12deg) scale(0.8)' }} 
+                className="absolute w-full h-full z-10 transition-transform duration-500 hover:-translate-y-2 -translate-x-[120%] sm:-translate-x-[140%] md:-translate-x-[170%] translate-y-[20%] md:translate-y-[25%] -rotate-[8deg] md:-rotate-[12deg] scale-[0.8]" 
               />
               {/* L1 (Card 2) */}
               <PhoneMedia 
                 item={basicEditsSection.media[1] as any} 
-                className="absolute w-full h-full z-20 transition-transform duration-500 hover:-translate-y-2"
-                style={{ transform: 'translateX(-90%) translateY(12%) rotate(-6deg) scale(0.9)' }} 
+                className="absolute w-full h-full z-20 transition-transform duration-500 hover:-translate-y-2 -translate-x-[60%] sm:-translate-x-[70%] md:-translate-x-[90%] translate-y-[10%] md:translate-y-[12%] -rotate-[4deg] md:-rotate-[6deg] scale-[0.9]" 
               />
               {/* Center (Card 3) */}
               <PhoneMedia 
                 item={basicEditsSection.media[2] as any} 
-                className="absolute w-full h-full z-40 shadow-2xl transition-transform duration-500 hover:-translate-y-2"
-                style={{ transform: 'translateX(0%) translateY(0%) rotate(0deg) scale(1.05)' }} 
+                className="absolute w-full h-full z-40 shadow-2xl transition-transform duration-500 hover:-translate-y-2 translate-x-0 translate-y-0 rotate-0 scale-[1.05]" 
               />
               {/* R1 (Card 4) */}
               <PhoneMedia 
                 item={basicEditsSection.media[3] as any} 
-                className="absolute w-full h-full z-30 transition-transform duration-500 hover:-translate-y-2"
-                style={{ transform: 'translateX(90%) translateY(12%) rotate(6deg) scale(0.9)' }} 
+                className="absolute w-full h-full z-30 transition-transform duration-500 hover:-translate-y-2 translate-x-[60%] sm:translate-x-[70%] md:translate-x-[90%] translate-y-[10%] md:translate-y-[12%] rotate-[4deg] md:rotate-[6deg] scale-[0.9]" 
               />
               {/* R2 (Card 5) */}
               <PhoneMedia 
                 item={basicEditsSection.media[4] as any} 
-                className="absolute w-full h-full z-20 transition-transform duration-500 hover:-translate-y-2"
-                style={{ transform: 'translateX(170%) translateY(25%) rotate(12deg) scale(0.8)' }} 
+                className="absolute w-full h-full z-20 transition-transform duration-500 hover:-translate-y-2 translate-x-[120%] sm:translate-x-[140%] md:translate-x-[170%] translate-y-[20%] md:translate-y-[25%] rotate-[8deg] md:rotate-[12deg] scale-[0.8]" 
               />
               {/* R3 (Card 6) */}
               <PhoneMedia 
                 item={basicEditsSection.media[5] as any} 
-                className="absolute w-full h-full z-10 hidden md:block transition-transform duration-500 hover:-translate-y-2"
-                style={{ transform: 'translateX(240%) translateY(35%) rotate(18deg) scale(0.7)' }} 
+                className="absolute w-full h-full z-10 hidden md:block transition-transform duration-500 hover:-translate-y-2 translate-x-[240%] translate-y-[35%] rotate-[18deg] scale-[0.7]" 
               />
             </div>
 
@@ -756,15 +754,15 @@ export default function App() {
            <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-black/50 to-transparent" />
          </div>
 
-         <div className="relative z-10 flex flex-col items-center justify-center whitespace-nowrap leading-[0.75] -rotate-3 scale-110 pointer-events-none">
-            <span className="font-['Road_Rage:Regular'] text-[clamp(120px,18vw,300px)] text-[#111] opacity-90 -mb-[4%] ml-[-10%]">PURE CREATIVE</span>
+         <div className="relative z-10 flex flex-col items-center justify-center whitespace-nowrap leading-[0.75] -rotate-3 scale-110 pointer-events-none w-full max-w-[100vw]">
+            <span className="font-['Road_Rage:Regular'] text-[clamp(60px,18vw,300px)] text-[#111] opacity-90 -mb-[2%] ml-[-5%]">PURE CREATIVE</span>
             <span 
-              className="font-['Barlow_Condensed:Black'] text-[clamp(140px,22vw,350px)] text-transparent uppercase tracking-tighter" 
+              className="font-['Barlow_Condensed:Black'] text-[clamp(70px,22vw,350px)] text-transparent uppercase tracking-tighter" 
               style={{ WebkitTextStroke: '2px #F5F2E8' }}
             >
               MAXIMAL
             </span>
-            <span className="font-['Road_Rage:Regular'] text-[clamp(120px,18vw,300px)] text-[#111] opacity-90 -mt-[6%] ml-[10%] z-10">IMPACT.</span>
+            <span className="font-['Road_Rage:Regular'] text-[clamp(60px,18vw,300px)] text-[#111] opacity-90 -mt-[4%] ml-[5%] z-10">IMPACT.</span>
          </div>
          
          {/* Marquee Stripe */}
@@ -798,9 +796,9 @@ export default function App() {
             </div>
             
             <div className="flex flex-col leading-[0.8] tracking-tighter -ml-1">
-              <span className="font-['Barlow_Condensed:Black'] text-[clamp(80px,12vw,140px)] text-[#111] uppercase">{testimonialsSection.titleLine1}</span>
-              <span className="font-['Barlow_Condensed:Black'] text-[clamp(80px,12vw,140px)] text-[#ccc9c0] uppercase">{testimonialsSection.titleLine2}</span>
-              <span className="font-['Barlow_Condensed:Black'] text-[clamp(80px,12vw,140px)] text-[#e63228] uppercase">{testimonialsSection.titleHighlight}</span>
+              <span className="font-['Barlow_Condensed:Black'] text-[clamp(56px,12vw,140px)] text-[#111] uppercase">{testimonialsSection.titleLine1}</span>
+              <span className="font-['Barlow_Condensed:Black'] text-[clamp(56px,12vw,140px)] text-[#ccc9c0] uppercase">{testimonialsSection.titleLine2}</span>
+              <span className="font-['Barlow_Condensed:Black'] text-[clamp(56px,12vw,140px)] text-[#e63228] uppercase">{testimonialsSection.titleHighlight}</span>
             </div>
             
             <p className="font-['Inter:Regular'] text-[#666] text-lg mt-12 max-w-[280px] leading-relaxed">
@@ -1186,9 +1184,9 @@ export default function App() {
             </motion.div>
             
             <div className="flex flex-col leading-[0.8] tracking-tighter -ml-1">
-              <motion.span style={{ x: letsX, rotate: letsRot, opacity: cOpacity }} className="font-['Barlow_Condensed:Black'] text-[clamp(80px,12vw,140px)] text-[#111] uppercase block origin-left">LET'S</motion.span>
-              <motion.span style={{ x: createX, rotate: createRot, opacity: cOpacity }} className="font-['Barlow_Condensed:Black'] text-[clamp(80px,12vw,140px)] text-[#111] uppercase block origin-right">CREATE</motion.span>
-              <motion.span style={{ y: togY, scale: togScale, rotate: togRot, opacity: cOpacity }} className="font-['Barlow_Condensed:Black'] text-[clamp(80px,12vw,140px)] text-[#e63228] uppercase block origin-bottom-left">TOGETHER.</motion.span>
+              <motion.span style={{ x: letsX, rotate: letsRot, opacity: cOpacity }} className="font-['Barlow_Condensed:Black'] text-[clamp(56px,12vw,140px)] text-[#111] uppercase block origin-left">LET'S</motion.span>
+              <motion.span style={{ x: createX, rotate: createRot, opacity: cOpacity }} className="font-['Barlow_Condensed:Black'] text-[clamp(56px,12vw,140px)] text-[#111] uppercase block origin-right">CREATE</motion.span>
+              <motion.span style={{ y: togY, scale: togScale, rotate: togRot, opacity: cOpacity }} className="font-['Barlow_Condensed:Black'] text-[clamp(56px,12vw,140px)] text-[#e63228] uppercase block origin-bottom-left">TOGETHER.</motion.span>
             </div>
 
             <motion.div style={{ opacity: cOpacity, y: cY }}>
