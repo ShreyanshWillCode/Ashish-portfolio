@@ -90,6 +90,13 @@ body {
 }
 .badge-float { animation: floatY 4s ease-in-out infinite; }
 
+/* ─── Logo float ─── */
+@keyframes floatLogo {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-3px); }
+}
+.animate-floatLogo { animation: floatLogo 4s ease-in-out infinite; }
+
 /* ─── Marquee ─── */
 @keyframes marqueeSlide {
   from { transform: translateX(0); }

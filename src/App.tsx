@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect, useCallback } from 'react';
 import { motion, useScroll, useMotionValueEvent, useTransform, useReducedMotion } from 'framer-motion';
 import Lenis from 'lenis';
-import { expertiseItems, showcaseItems, basicEditsSection, testimonialsSection } from './data/portfolio';
+import { expertiseItems, showcaseItems, basicEditsSection, testimonialsSection, storiesItems } from './data/portfolio';
 import { MediaCard } from './components/MediaCard';
 import { PhoneMedia } from './components/PhoneMedia';
 import { PodcastEdits } from './components/PodcastEdits';
@@ -148,6 +148,13 @@ const imgImage4 = `${assetPathPrefix}/db8c8.png`;
 const imgImage5 = `${assetPathPrefix}/2e388.png`;
 const imgImage6 = `${assetPathPrefix}/72957.png`;
 const imgImage7 = `${assetPathPrefix}/6d6fd.png`;
+
+const heroBrands = [
+  { id: 'brand-01', name: 'Spotify', logo: imgRectangle, href: '#commercials', delay: '0s' },
+  { id: 'brand-02', name: 'Nike', logo: imgRectangle1, href: '#commercials', delay: '0.7s' },
+  { id: 'brand-03', name: 'Netflix', logo: imgRectangle2, href: '#commercials', delay: '1.4s' },
+  { id: 'brand-04', name: 'Vogue', logo: imgRectangle3, href: '#commercials', delay: '2.1s' }
+];
 const imgBackground = `${assetPathPrefix}/bdda8.png`;
 const imgImage8 = `${assetPathPrefix}/4e13e.png`;
 const imgBackground1 = `${assetPathPrefix}/f7468.png`;
@@ -399,18 +406,9 @@ export default function App() {
               <a key={label} href={`#${id}`} onClick={e => { e.preventDefault(); scrollTo(id); }} className="relative shrink-0 hover:text-[#e63228] transition-colors duration-150 no-underline text-[#111]" style={{ fontVariationSettings: '"opsz" 14' }}>{label}</a>
             ))}
           </div>
-          <div className="hidden md:flex content-stretch gap-[12px] items-center relative shrink-0">
-            <button className="bg-[#f1ece5] border-[#343030] border-[0.8px] border-solid content-stretch flex items-start px-[20px] py-[8px] relative rounded-[4px] shrink-0 cursor-pointer hover:bg-[#e8e3dc] transition-colors duration-150">
-              <span className="[word-break:break-word] font-['DM_Sans:Regular'] font-normal leading-[normal] relative shrink-0 text-[#111] text-[12px] whitespace-nowrap" style={{ fontVariationSettings: '"opsz" 14' }}>Sign In</span>
-            </button>
-            <button className="bg-[#111] content-stretch flex items-start px-[20px] py-[8px] relative rounded-[4px] shrink-0 cursor-pointer hover:bg-[#333] transition-colors duration-150">
-              <span className="[word-break:break-word] font-['DM_Sans:SemiBold'] font-semibold leading-[normal] relative shrink-0 text-[12px] text-white whitespace-nowrap" style={{ fontVariationSettings: '"opsz" 14' }}>Sign Up</span>
-            </button>
-          </div>
+
           <div className="md:hidden flex items-center gap-[10px]">
-            <button className="bg-[#111] content-stretch flex items-start px-[14px] py-[7px] relative rounded-[4px] shrink-0 cursor-pointer hover:bg-[#333] transition-colors duration-150">
-              <span className="[word-break:break-word] font-['DM_Sans:SemiBold'] font-semibold leading-[normal] relative shrink-0 text-[11px] text-white whitespace-nowrap" style={{ fontVariationSettings: '"opsz" 14' }}>Sign Up</span>
-            </button>
+
             <button
               aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={mobileMenuOpen}
@@ -434,9 +432,9 @@ export default function App() {
       </nav>
 
       {/* Hero */}
-      <div id="hero" className="bg-[#ece8df] px-5 md:px-10 lg:px-20 content-stretch flex flex-col items-center pb-[48px] md:pb-[64px] pt-[132px] md:pt-[152px] relative shrink-0 w-full overflow-hidden">
+      <div id="hero" className="bg-[#ece8df] px-5 md:px-10 lg:px-20 content-stretch flex flex-col items-center pb-[48px] md:pb-[64px] pt-[76px] md:pt-[104px] relative shrink-0 w-full overflow-hidden">
         <div ref={heroParallaxRef} className="parallax-inner content-stretch flex flex-col md:flex-row gap-[40px] md:gap-[80px] items-center max-w-7xl mx-auto relative shrink-0 w-full">
-          <div className="content-stretch flex flex-[1_0_0] flex-col gap-[24px] items-start min-w-px relative w-full">
+          <div className="content-stretch flex flex-[1_0_0] flex-col gap-[12px] md:gap-[20px] items-start min-w-px relative w-full">
             <div className="hero-enter content-stretch flex gap-[12px] items-center relative shrink-0" style={{ animationDelay: '0.05s' }}>
               <p className="[word-break:break-word] font-['Barlow:Regular'] leading-[normal] not-italic relative shrink-0 text-[#bebcb6] text-[12px] tracking-[1px] whitespace-nowrap">001</p>
               <div className="bg-[#bebcb6] h-px relative shrink-0 w-[32px]" />
@@ -460,23 +458,37 @@ export default function App() {
                 <span className="font-semibold relative shrink-0 text-[#868684] text-[14px]" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>→</span>
               </button>
             </div>
-            <div className="hero-enter content-stretch flex gap-[16px] items-center pt-[24px] relative shrink-0" style={{ animationDelay: '0.68s' }}>
+            <div className="content-stretch flex flex-wrap gap-[16px] items-center pt-[24px] relative shrink-0">
               <div className="content-stretch flex items-start relative shrink-0">
-                <div className="border-2 border-[#ece8df] border-solid mr-[-8px] relative rounded-[18px] shrink-0 size-[36px]">
-                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[18px] size-full" src={imgRectangle} />
-                </div>
-                <div className="border-2 border-[#ece8df] border-solid mr-[-8px] relative rounded-[18px] shrink-0 size-[36px]">
-                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[18px] size-full" src={imgRectangle1} />
-                </div>
-                <div className="border-2 border-[#ece8df] border-solid mr-[-8px] relative rounded-[18px] shrink-0 size-[36px]">
-                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[18px] size-full" src={imgRectangle2} />
-                </div>
-                <div className="border-2 border-[#ece8df] border-solid relative rounded-[18px] shrink-0 size-[36px]">
-                  <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[18px] size-full" src={imgRectangle3} />
-                </div>
+                {heroBrands.map((brand, i) => (
+                  <div 
+                    key={brand.id}
+                    className="hero-enter relative shrink-0"
+                    style={{
+                      marginRight: i === heroBrands.length - 1 ? '0' : '-8px',
+                      zIndex: heroBrands.length - i,
+                      animationDelay: `${0.68 + i * 0.1}s`
+                    }}
+                  >
+                    <a
+                      href={brand.href}
+                      aria-label={`View ${brand.name} project`}
+                      className="block group border-2 border-[#ece8df] border-solid relative rounded-[18px] shrink-0 size-[36px] cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-[#e63228] transition-all duration-300 hover:scale-[1.15] hover:-translate-y-1 hover:shadow-md hover:border-white animate-floatLogo motion-reduce:animate-none"
+                      style={{ animationDelay: brand.delay }}
+                    >
+                      <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[18px] size-full" src={brand.logo} />
+                      
+                      {/* Tooltip */}
+                      <div className="hidden md:block absolute -top-10 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none bg-[#111] text-[#ece8df] text-[11px] font-['DM_Sans:Medium'] px-2 py-1 rounded shadow-md whitespace-nowrap z-50">
+                        {brand.name}
+                        <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-[#111]" />
+                      </div>
+                    </a>
+                  </div>
+                ))}
               </div>
-              <p className="[word-break:break-word] font-['DM_Sans:Bold'] font-bold leading-[normal] relative shrink-0 text-[#787774] text-[clamp(16px,2vw,18px)] whitespace-nowrap" style={{ fontVariationSettings: '"opsz" 14' }}>100+</p>
-              <p className="[word-break:break-word] font-['DM_Sans:Regular'] font-normal leading-[normal] relative shrink-0 text-[#b4b1ab] text-[clamp(12px,1.5vw,13px)] whitespace-nowrap" style={{ fontVariationSettings: '"opsz" 14' }}>Brands That Trust Us</p>
+              <p className="hero-enter [word-break:break-word] font-['DM_Sans:Bold'] font-bold leading-[normal] relative shrink-0 text-[#787774] text-[clamp(16px,2vw,18px)] whitespace-nowrap" style={{ fontVariationSettings: '"opsz" 14', animationDelay: `${0.68 + heroBrands.length * 0.1}s` }}>100+</p>
+              <p className="hero-enter [word-break:break-word] font-['DM_Sans:Regular'] font-normal leading-[normal] relative shrink-0 text-[#b4b1ab] text-[clamp(12px,1.5vw,13px)] whitespace-nowrap" style={{ fontVariationSettings: '"opsz" 14', animationDelay: `${0.68 + heroBrands.length * 0.1 + 0.1}s` }}>Brands That Trust Us</p>
             </div>
           </div>
           <div className="hero-enter flex content-stretch h-[clamp(320px,50vw,540px)] items-center justify-center relative shrink-0 w-[clamp(180px,30vw,263px)] mx-auto md:mx-0 mt-8 md:mt-0" style={{ animationDelay: '0.25s' }}>
@@ -534,25 +546,25 @@ export default function App() {
           </div>
 
           {/* OUR + EDITING EXPERTISE heading */}
-          <div className="flex gap-[16px] md:gap-[32px] items-end pt-[40px] relative shrink-0 w-full">
+          <div className="flex flex-col md:flex-row gap-[16px] md:gap-[32px] items-start md:items-end pt-[24px] md:pt-[40px] relative shrink-0 w-full">
             {/* OUR column — pb creates the 44px "lift" so OUR appears higher than EDITING */}
             <Reveal direction="left" className="flex flex-col items-start shrink-0">
               <p
-                className="clip-reveal [word-break:break-word] font-['Barlow_Condensed:Black'] not-italic relative shrink-0 text-[#e63228]"
-                style={{ fontSize: 'clamp(72px, 21vw, 300px)', lineHeight: '0.5415', letterSpacing: '-0.01274em', paddingBottom: 'clamp(8px, 3.1vw, 44px)' }}
+                className="clip-reveal [word-break:break-word] font-['Barlow_Condensed:Black'] not-italic relative shrink-0 text-[#e63228] leading-[1.0] md:leading-[0.5415] pb-0 md:pb-[clamp(8px,3.1vw,44px)] text-[clamp(120px,32vw,160px)] md:text-[clamp(72px,21vw,300px)]"
+                style={{ letterSpacing: '-0.01274em' }}
               >OUR</p>
             </Reveal>
             {/* EDITING EXPERTISE column */}
-            <Reveal direction="right" delay={120} className="flex flex-col items-start shrink-0">
+            <Reveal direction="right" delay={120} className="flex flex-col items-start shrink-0 w-full">
               <div
-                className="[word-break:break-word] font-['Barlow_Condensed:Black'] not-italic relative shrink-0 text-[#111]"
-                style={{ fontSize: 'clamp(34px, 6.7vw, 96px)', lineHeight: '0.7440', letterSpacing: '-0.01617em' }}
+                className="[word-break:break-word] font-['Barlow_Condensed:Black'] not-italic relative shrink-0 text-[#111] leading-[1.0] md:leading-[0.7440] text-[clamp(42px,10vw,64px)] md:text-[clamp(34px,6.7vw,96px)]"
+                style={{ letterSpacing: '-0.01617em' }}
               >
                 <p className="mb-0">EDITING</p>
                 <p>EXPERTISE</p>
               </div>
-              <div className="content-stretch flex flex-col items-start pt-[24px] relative shrink-0 max-w-[380px]">
-                <p className="[word-break:break-word] font-['Barlow:Regular'] leading-[24.75px] not-italic relative shrink-0 text-[#555] text-[13px]">
+              <div className="content-stretch flex flex-col items-start pt-[20px] md:pt-[24px] relative shrink-0 w-full max-w-[380px]">
+                <p className="[word-break:break-word] font-['Barlow:Regular'] leading-[1.6] md:leading-[24.75px] not-italic relative shrink-0 text-[#555] text-[clamp(14px,4vw,16px)] md:text-[13px]">
                   From podcasts to commercials, motion graphics to clean edits — we turn your ideas into high-impact visuals.
                 </p>
               </div>
@@ -697,35 +709,20 @@ export default function App() {
 
             {/* Cards (Deck) */}
             <div className="relative w-[140px] md:w-[220px] h-[220px] md:h-[340px] flex justify-center items-center">
-              {/* L2 (Card 1) */}
+              {/* Left (Card 1) */}
               <PhoneMedia 
                 item={basicEditsSection.media[0] as any} 
-                className="absolute w-full h-full z-10 transition-transform duration-500 hover:-translate-y-2 -translate-x-[120%] sm:-translate-x-[140%] md:-translate-x-[170%] translate-y-[20%] md:translate-y-[25%] -rotate-[8deg] md:-rotate-[12deg] scale-[0.8]" 
-              />
-              {/* L1 (Card 2) */}
-              <PhoneMedia 
-                item={basicEditsSection.media[1] as any} 
                 className="absolute w-full h-full z-20 transition-transform duration-500 hover:-translate-y-2 -translate-x-[60%] sm:-translate-x-[70%] md:-translate-x-[90%] translate-y-[10%] md:translate-y-[12%] -rotate-[4deg] md:-rotate-[6deg] scale-[0.9]" 
               />
-              {/* Center (Card 3) */}
+              {/* Center (Card 2) */}
               <PhoneMedia 
-                item={basicEditsSection.media[2] as any} 
+                item={basicEditsSection.media[1] as any} 
                 className="absolute w-full h-full z-40 shadow-2xl transition-transform duration-500 hover:-translate-y-2 translate-x-0 translate-y-0 rotate-0 scale-[1.05]" 
               />
-              {/* R1 (Card 4) */}
+              {/* Right (Card 3) */}
               <PhoneMedia 
-                item={basicEditsSection.media[3] as any} 
+                item={basicEditsSection.media[2] as any} 
                 className="absolute w-full h-full z-30 transition-transform duration-500 hover:-translate-y-2 translate-x-[60%] sm:translate-x-[70%] md:translate-x-[90%] translate-y-[10%] md:translate-y-[12%] rotate-[4deg] md:rotate-[6deg] scale-[0.9]" 
-              />
-              {/* R2 (Card 5) */}
-              <PhoneMedia 
-                item={basicEditsSection.media[4] as any} 
-                className="absolute w-full h-full z-20 transition-transform duration-500 hover:-translate-y-2 translate-x-[120%] sm:translate-x-[140%] md:translate-x-[170%] translate-y-[20%] md:translate-y-[25%] rotate-[8deg] md:rotate-[12deg] scale-[0.8]" 
-              />
-              {/* R3 (Card 6) */}
-              <PhoneMedia 
-                item={basicEditsSection.media[5] as any} 
-                className="absolute w-full h-full z-10 hidden md:block transition-transform duration-500 hover:-translate-y-2 translate-x-[240%] translate-y-[35%] rotate-[18deg] scale-[0.7]" 
               />
             </div>
 
@@ -843,7 +840,7 @@ export default function App() {
       {/* Commercials */}
       <div id="commercials" className="bg-[#f5f1e8] px-5 md:px-10 lg:px-20 content-stretch flex flex-col items-center py-[60px] md:py-[120px] relative shrink-0 w-full">
         <div className="content-stretch flex flex-col items-center max-w-7xl mx-auto relative shrink-0 w-full">
-          <div className="content-stretch flex items-center justify-between pb-[64px] relative shrink-0 w-full">
+          <div className="content-stretch flex flex-col sm:flex-row gap-[16px] sm:gap-[10px] items-start sm:items-center justify-between pb-[48px] md:pb-[64px] relative shrink-0 w-full">
             <div className="[word-break:break-word] content-stretch flex gap-[10px] items-center leading-[normal] not-italic relative shrink-0 text-[#999] text-[11px] uppercase whitespace-nowrap">
               <p className="font-['Barlow:Bold'] relative shrink-0 tracking-[3px]">07</p>
               <p className="font-['Barlow:Regular'] relative shrink-0 tracking-[2.5px]">/</p>
@@ -855,12 +852,12 @@ export default function App() {
               <p className="[word-break:break-word] font-['Barlow:Bold'] leading-[normal] not-italic relative shrink-0 text-[#f5f1e8] text-[11px] tracking-[2px] uppercase whitespace-nowrap">High-Impact Video</p>
             </div>
           </div>
-          <div className="[word-break:break-word] content-stretch flex flex-col items-center pb-[32px] relative shrink-0 w-full" style={{ fontSize: 'clamp(48px, 9vw, 120px)', lineHeight: '1.1' }}>
-            <div className="content-baseline flex flex-wrap gap-[24px] items-baseline justify-center relative shrink-0 w-full">
+          <div className="[word-break:break-word] content-stretch flex flex-col items-center pb-[32px] relative shrink-0 w-full" style={{ fontSize: 'clamp(36px, 9vw, 120px)', lineHeight: '1.1' }}>
+            <div className="content-baseline flex flex-wrap gap-[12px] md:gap-[24px] items-baseline justify-center relative shrink-0 w-full">
               <p className="font-['Playfair_Display:Italic'] font-normal italic relative shrink-0 text-[#111]">Commercial</p>
               <p className="font-['Oswald:Bold'] font-bold relative shrink-0 text-[#e8294a] uppercase">Edits</p>
             </div>
-            <div className="content-baseline flex flex-wrap gap-[24px] items-baseline justify-center relative shrink-0 text-[#111] w-full">
+            <div className="content-baseline flex flex-wrap gap-[12px] md:gap-[24px] items-baseline justify-center relative shrink-0 text-[#111] w-full">
               <p className="font-['Oswald:Bold'] font-bold relative shrink-0 uppercase">Built for</p>
               <p className="font-['Playfair_Display:Italic'] font-normal italic relative shrink-0">Impact</p>
             </div>
@@ -896,9 +893,9 @@ export default function App() {
             <p className="font-['Barlow:Bold'] relative shrink-0 text-[#999] tracking-[3px]">Portfolio Showcase</p>
             <p className="font-['Barlow:Regular'] relative shrink-0 text-[#bbb] tracking-[2px]">6 Projects</p>
           </div>
-          <div className="content-stretch flex flex-col md:flex-row gap-[20px] items-end pb-[20px] relative shrink-0 w-full">
-            <div className="content-stretch flex flex-col h-[400px] md:h-[480px] items-start justify-between overflow-clip p-[28px] relative rounded-[20px] shrink-0 w-full md:w-[55%] lg:w-[600px]">
-              <MediaCard item={showcaseItems[0]} className="absolute inset-0 size-full" imgClassName="rounded-[20px]" />
+          <div className="content-stretch flex flex-col md:flex-row gap-[20px] items-stretch md:items-end pb-[20px] relative shrink-0 w-full">
+            <div className="content-stretch flex flex-col aspect-[4/5] md:aspect-auto min-h-[400px] md:h-[480px] items-start justify-between overflow-clip p-[24px] md:p-[28px] relative rounded-[20px] shrink-0 w-full md:w-[55%] lg:w-[600px] group">
+              <MediaCard item={showcaseItems[0]} className="absolute inset-0 size-full" imgClassName="rounded-[20px] object-cover" />
               <div className="content-stretch flex items-center justify-between relative shrink-0 w-full">
                 <div className="bg-[rgba(255,255,255,0.13)] border border-[rgba(255,255,255,0.2)] border-solid content-stretch flex items-start px-[10px] py-[6px] relative rounded-[999px] shrink-0">
                   <p className="[word-break:break-word] font-['Barlow:Bold'] leading-[normal] not-italic relative shrink-0 text-[10px] text-white tracking-[1.5px] uppercase whitespace-nowrap">Hero Edit</p>
@@ -906,8 +903,8 @@ export default function App() {
                 <p className="[word-break:break-word] font-['Barlow:SemiBold'] leading-[normal] not-italic relative shrink-0 text-[12px] text-[rgba(255,255,255,0.67)] whitespace-nowrap">01</p>
               </div>
               <div className="content-stretch flex flex-col gap-[10px] items-start relative shrink-0 w-full">
-                <p className="[word-break:break-word] font-['Oswald:Bold'] font-bold leading-[52px] min-w-full relative shrink-0 text-[48px] text-white w-[min-content]">Commercial Edits</p>
-                <p className="[word-break:break-word] font-['Barlow:Regular'] leading-[1.6] min-w-full not-italic relative shrink-0 text-[14px] text-[rgba(255,255,255,0.8)] w-[min-content]">Premium pacing, cinematic color, and high-energy sound design for brands that need to move fast and feel premium.</p>
+                <p className="[word-break:break-word] font-['Oswald:Bold'] font-bold leading-[1.1] relative shrink-0 text-[clamp(32px,9vw,48px)] text-white w-full">Commercial Edits</p>
+                <p className="[word-break:break-word] font-['Barlow:Regular'] leading-[1.5] md:leading-[1.6] not-italic relative shrink-0 text-[clamp(13px,3.5vw,14px)] text-[rgba(255,255,255,0.8)] w-full max-w-full md:max-w-[90%]">Premium pacing, cinematic color, and high-energy sound design for brands that need to move fast and feel premium.</p>
                 <div className="content-stretch flex gap-[10px] items-center pt-[8px] relative shrink-0">
                   <div className="bg-white content-stretch flex items-start px-[18px] py-[10px] relative rounded-[999px] shrink-0 cursor-pointer">
                     <p className="[word-break:break-word] font-['Barlow:Bold'] leading-[normal] not-italic relative shrink-0 text-[#111] text-[13px] whitespace-nowrap">Watch the cut</p>
@@ -916,9 +913,9 @@ export default function App() {
                 </div>
               </div>
             </div>
-            <div className="content-stretch flex flex-[1_0_0] flex-col gap-[20px] items-start min-w-px relative">
-              <div className="content-stretch flex flex-col h-[230px] items-start justify-between overflow-clip p-[22px] relative rounded-[18px] shrink-0 w-full">
-                <MediaCard item={showcaseItems[1]} className="absolute inset-0 size-full" imgClassName="rounded-[18px]" />
+            <div className="content-stretch flex flex-[1_0_0] flex-col gap-[20px] items-stretch md:items-start min-w-px relative w-full md:w-auto">
+              <div className="content-stretch flex flex-col aspect-[4/5] md:aspect-auto md:h-[230px] items-start justify-between overflow-clip p-[20px] md:p-[22px] relative rounded-[18px] shrink-0 w-full group">
+                <MediaCard item={showcaseItems[1]} className="absolute inset-0 size-full" imgClassName="rounded-[18px] object-cover" />
                 <motion.svg className="absolute inset-0 overflow-visible pointer-events-none z-50" viewBox="0 0 300 230" preserveAspectRatio="none">
                   <motion.path initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: false, amount: 0.3 }} transition={{ duration: 0.8, ease: "easeOut" }} d="M -30 115 Q 150 0 280 115" fill="none" stroke="#111" strokeWidth="5" strokeLinecap="round" />
                   <motion.path initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: false, amount: 0.3 }} transition={{ duration: 0.4, ease: "easeOut", delay: 0.6 }} d="M 260 105 L 280 115 L 265 125" fill="none" stroke="#111" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
@@ -930,15 +927,15 @@ export default function App() {
                   <p className="[word-break:break-word] font-['Barlow:SemiBold'] leading-[normal] not-italic relative shrink-0 text-[12px] text-[rgba(255,255,255,0.67)] whitespace-nowrap">02</p>
                 </div>
                 <div className="[word-break:break-word] content-stretch flex flex-col gap-[6px] items-start relative shrink-0 text-white w-full">
-                  <p className="font-['Oswald:Bold'] font-bold leading-none min-w-full relative shrink-0 text-[26px] w-[min-content]">High-Energy Sequences</p>
+                  <p className="font-['Oswald:Bold'] font-bold leading-none relative shrink-0 text-[clamp(24px,6vw,26px)] w-full">High-Energy Sequences</p>
                   <div className="content-stretch flex font-['Barlow:SemiBold'] gap-[8px] items-center leading-[normal] relative shrink-0 text-[12px] whitespace-nowrap">
                     <p className="not-italic relative shrink-0">Watch edit</p>
                     <p className="font-semibold relative shrink-0" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>→</p>
                   </div>
                 </div>
               </div>
-              <div className="content-stretch flex flex-col h-[230px] items-start justify-between overflow-clip p-[22px] relative rounded-[18px] shrink-0 w-full">
-                <MediaCard item={showcaseItems[2]} className="absolute inset-0 size-full" imgClassName="rounded-[18px]" />
+              <div className="content-stretch flex flex-col aspect-[4/5] md:aspect-auto md:h-[230px] items-start justify-between overflow-clip p-[20px] md:p-[22px] relative rounded-[18px] shrink-0 w-full group">
+                <MediaCard item={showcaseItems[2]} className="absolute inset-0 size-full" imgClassName="rounded-[18px] object-cover" />
                 <motion.svg className="absolute inset-0 overflow-visible pointer-events-none z-50" viewBox="0 0 300 230" preserveAspectRatio="none">
                   <motion.path initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: false, amount: 0.3 }} transition={{ duration: 0.8, ease: "easeOut" }} d="M -10 220 Q 150 240 310 215" fill="none" stroke="#e63228" strokeWidth="5" strokeLinecap="round" />
                 </motion.svg>
@@ -949,7 +946,7 @@ export default function App() {
                   <p className="[word-break:break-word] font-['Barlow:SemiBold'] leading-[normal] not-italic relative shrink-0 text-[12px] text-[rgba(255,255,255,0.67)] whitespace-nowrap">03</p>
                 </div>
                 <div className="[word-break:break-word] content-stretch flex flex-col gap-[6px] items-start relative shrink-0 text-white w-full">
-                  <p className="font-['Oswald:Bold'] font-bold leading-none min-w-full relative shrink-0 text-[26px] w-[min-content]">High-Impact Audio</p>
+                  <p className="font-['Oswald:Bold'] font-bold leading-none relative shrink-0 text-[clamp(24px,6vw,26px)] w-full">High-Impact Audio</p>
                   <div className="content-stretch flex font-['Barlow:SemiBold'] gap-[8px] items-center leading-[normal] relative shrink-0 text-[12px] whitespace-nowrap">
                     <p className="not-italic relative shrink-0">Watch edit</p>
                     <p className="font-semibold relative shrink-0" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>→</p>
@@ -957,13 +954,13 @@ export default function App() {
                 </div>
               </div>
             </div>
-            <div className="hidden md:flex flex-col h-[480px] items-start justify-between overflow-clip p-[22px] relative rounded-[18px] shrink-0 w-[260px]">
-              <MediaCard item={showcaseItems[3]} className="absolute inset-0 size-full" imgClassName="rounded-[18px]" />
+            <div className="flex flex-col aspect-[4/5] md:aspect-auto md:h-[480px] items-start justify-between overflow-clip p-[20px] md:p-[22px] relative rounded-[18px] shrink-0 w-full md:w-[260px] group">
+              <MediaCard item={showcaseItems[3]} className="absolute inset-0 size-full" imgClassName="rounded-[18px] object-cover" />
               <div className="bg-[rgba(255,255,255,0.1)] border border-[rgba(255,255,255,0.16)] border-solid content-stretch flex items-start px-[10px] py-[5px] relative rounded-[999px] shrink-0">
                 <p className="[word-break:break-word] font-['Barlow:Bold'] leading-[normal] not-italic relative shrink-0 text-[10px] text-white tracking-[1.5px] uppercase whitespace-nowrap">Visual Flow</p>
               </div>
               <div className="[word-break:break-word] content-stretch flex flex-col gap-[6px] items-start relative shrink-0 text-white w-full">
-                <p className="font-['Oswald:Bold'] font-bold leading-none min-w-full relative shrink-0 text-[26px] w-[min-content]">Pro-Grade Visual Flow</p>
+                <p className="font-['Oswald:Bold'] font-bold leading-none relative shrink-0 text-[clamp(24px,6vw,26px)] w-full">Pro-Grade Visual Flow</p>
                 <div className="content-stretch flex font-['Barlow:SemiBold'] gap-[8px] items-center leading-[normal] relative shrink-0 text-[12px] whitespace-nowrap">
                   <p className="not-italic relative shrink-0">Watch edit</p>
                   <p className="font-semibold relative shrink-0" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>→</p>
@@ -971,9 +968,9 @@ export default function App() {
               </div>
             </div>
           </div>
-          <div className="content-stretch flex flex-col md:flex-row gap-[20px] items-start relative shrink-0 w-full">
-            <div className="content-stretch flex flex-col h-[300px] items-start justify-between overflow-clip p-[22px] relative rounded-[18px] w-full md:flex-[1_0_0] md:min-w-px">
-              <MediaCard item={showcaseItems[4]} className="absolute inset-0 size-full" imgClassName="rounded-[18px]" />
+          <div className="content-stretch flex flex-col md:flex-row gap-[20px] items-stretch md:items-start relative shrink-0 w-full">
+            <div className="content-stretch flex flex-col aspect-[4/5] md:aspect-auto md:h-[300px] items-start justify-between overflow-clip p-[20px] md:p-[22px] relative rounded-[18px] w-full md:flex-[1_0_0] md:min-w-px group">
+              <MediaCard item={showcaseItems[4]} className="absolute inset-0 size-full" imgClassName="rounded-[18px] object-cover" />
               <div className="content-stretch flex items-center justify-between relative shrink-0 w-full">
                 <div className="bg-[rgba(255,255,255,0.1)] border border-[rgba(255,255,255,0.16)] border-solid content-stretch flex items-start px-[10px] py-[5px] relative rounded-[999px] shrink-0">
                   <p className="[word-break:break-word] font-['Barlow:Bold'] leading-[normal] not-italic relative shrink-0 text-[10px] text-white tracking-[1.5px] uppercase whitespace-nowrap">Post Production</p>
@@ -981,16 +978,16 @@ export default function App() {
                 <p className="[word-break:break-word] font-['Barlow:SemiBold'] leading-[normal] not-italic relative shrink-0 text-[12px] text-[rgba(255,255,255,0.67)] whitespace-nowrap">05</p>
               </div>
               <div className="[word-break:break-word] content-stretch flex flex-col gap-[8px] items-start relative shrink-0 w-full">
-                <p className="font-['Oswald:Bold'] font-bold leading-none min-w-full relative shrink-0 text-[28px] text-white w-[min-content]">High-End Post Production</p>
-                <p className="font-['Barlow:Regular'] leading-[1.5] min-w-full not-italic relative shrink-0 text-[13px] text-[rgba(255,255,255,0.8)] w-[min-content]">Advanced grading, smooth transitions, and a polished finish.</p>
+                <p className="font-['Oswald:Bold'] font-bold leading-[1.1] relative shrink-0 text-[clamp(24px,7vw,28px)] text-white w-full">High-End Post Production</p>
+                <p className="font-['Barlow:Regular'] leading-[1.5] not-italic relative shrink-0 text-[clamp(13px,3.5vw,14px)] text-[rgba(255,255,255,0.8)] w-full max-w-[90%]">Advanced grading, smooth transitions, and a polished finish.</p>
                 <div className="content-stretch flex font-['Barlow:SemiBold'] gap-[8px] items-center leading-[normal] relative shrink-0 text-[12px] text-white whitespace-nowrap">
                   <p className="not-italic relative shrink-0">Watch edit</p>
                   <p className="font-semibold relative shrink-0" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>→</p>
                 </div>
               </div>
             </div>
-            <div className="bg-[#111] content-stretch flex flex-col h-[300px] items-start justify-between overflow-clip p-[28px] relative rounded-[18px] shrink-0 w-full md:w-[480px]">
-              <MediaCard item={showcaseItems[5]} className="absolute inset-0 size-full" imgClassName="rounded-[18px]" />
+            <div className="bg-[#111] content-stretch flex flex-col aspect-[4/5] md:aspect-auto md:h-[300px] items-start justify-between overflow-clip p-[24px] md:p-[28px] relative rounded-[18px] shrink-0 w-full md:w-[480px] group">
+              <MediaCard item={showcaseItems[5]} className="absolute inset-0 size-full" imgClassName="rounded-[18px] object-cover" />
               <div className="content-stretch flex items-center justify-between relative shrink-0 w-full">
                 <div className="bg-[rgba(255,255,255,0.08)] content-stretch flex items-start px-[10px] py-[5px] relative rounded-[999px] shrink-0">
                   <p className="[word-break:break-word] font-['Barlow:Bold'] leading-[normal] not-italic relative shrink-0 text-[#aaa] text-[10px] tracking-[1.5px] uppercase whitespace-nowrap">Brand Story</p>
@@ -998,8 +995,8 @@ export default function App() {
                 <p className="[word-break:break-word] font-['Barlow:SemiBold'] leading-[normal] not-italic relative shrink-0 text-[#666] text-[12px] whitespace-nowrap">06</p>
               </div>
               <div className="content-stretch flex flex-col gap-[12px] items-start relative shrink-0 w-full">
-                <p className="[word-break:break-word] font-['Playfair_Display:Italic'] font-normal italic leading-[40px] min-w-full relative shrink-0 text-[36px] text-white w-[min-content]">Brand-Centric Storytelling</p>
-                <p className="[word-break:break-word] font-['Barlow:Regular'] leading-[1.6] min-w-full not-italic relative shrink-0 text-[#aaa] text-[14px] w-[min-content]">Narrative-led edits that connect the audience to the brand, the product, and the message.</p>
+                <p className="[word-break:break-word] font-['Playfair_Display:Italic'] font-normal italic leading-[1.1] relative shrink-0 text-[clamp(28px,7vw,36px)] text-white w-full">Brand-Centric Storytelling</p>
+                <p className="[word-break:break-word] font-['Barlow:Regular'] leading-[1.5] md:leading-[1.6] not-italic relative shrink-0 text-[#aaa] text-[clamp(13px,3.5vw,14px)] w-full max-w-[90%]">Narrative-led edits that connect the audience to the brand, the product, and the message.</p>
                 <div className="content-stretch flex items-center pt-[4px] relative shrink-0">
                   <div className="bg-[#e8294a] content-stretch flex items-start px-[18px] py-[10px] relative rounded-[999px] shrink-0 cursor-pointer">
                     <p className="[word-break:break-word] font-['Barlow:Bold'] font-bold leading-[normal] relative shrink-0 text-[13px] text-white whitespace-nowrap" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>Watch edit →</p>
@@ -1019,7 +1016,7 @@ export default function App() {
       </div>
 
       {/* Some Stories / How It Works */}
-      <div>
+      <div className="hidden xl:block">
         <ScaledArtSection designHeight={1108.845}>
           <div className="absolute bg-[rgba(0,0,0,0)] h-[1108.845px] left-0 right-0 top-0">
           <div className="absolute bottom-0 h-[1108.845px] right-0 w-[1440px]">
@@ -1079,27 +1076,33 @@ export default function App() {
               <p className="leading-[23.788px]">visuals.</p>
             </div>
             <div className="absolute bottom-[131.4px] h-[272.716px] right-[125.87px] w-[188.803px]">
-              <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgImage52} />
+              <a href={storiesItems[0].mediaSrc} target="_blank" rel="noopener noreferrer" className="block absolute inset-0 size-full cursor-pointer hover:scale-[1.02] transition-transform duration-300 z-10">
+                <MediaCard item={storiesItems[0]} className="absolute inset-0 size-full" imgClassName="object-cover" />
+              </a>
               <motion.svg className="absolute inset-0 overflow-visible pointer-events-none" viewBox="0 0 189 273">
                 <motion.path initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: false, amount: 0.3 }} transition={{ duration: 1, ease: "easeInOut", delay: 1.2 }} d="M 95 10 C 200 0 210 280 95 285 C -10 290 0 20 95 10" fill="none" stroke="#e63228" strokeWidth="4" strokeLinecap="round" />
                 <motion.path initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: false, amount: 0.3 }} transition={{ duration: 0.6, ease: "easeOut", delay: 2.0 }} d="M 180 140 L 195 155 L 225 110" fill="none" stroke="#111" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
               </motion.svg>
             </div>
             <div className="absolute bottom-[120.91px] h-[289.199px] right-[365.62px] w-[205.286px]">
-              <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgImage58} />
+              <a href={storiesItems[1].mediaSrc} target="_blank" rel="noopener noreferrer" className="block absolute inset-0 size-full cursor-pointer hover:scale-[1.02] transition-transform duration-300 z-10">
+                <MediaCard item={storiesItems[1]} className="absolute inset-0 size-full" imgClassName="object-cover" />
+              </a>
               <motion.svg className="absolute inset-0 overflow-visible pointer-events-none -z-10 mix-blend-multiply" viewBox="0 0 205 289">
                 <motion.path initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: false, amount: 0.3 }} transition={{ duration: 0.8, ease: "easeOut", delay: 0.8 }} d="M -10 145 Q 100 120 215 155" fill="none" stroke="rgba(230, 50, 40, 0.4)" strokeWidth="60" strokeLinecap="round" />
               </motion.svg>
             </div>
             <div className="absolute bottom-[123.91px] h-[284.703px] right-[614.36px] w-[187.305px]">
-              <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgImage62} />
+              <a href={storiesItems[2].mediaSrc} target="_blank" rel="noopener noreferrer" className="block absolute inset-0 size-full cursor-pointer hover:scale-[1.02] transition-transform duration-300 z-10">
+                <MediaCard item={storiesItems[2]} className="absolute inset-0 size-full" imgClassName="object-cover" />
+              </a>
               <motion.svg className="absolute inset-0 overflow-visible pointer-events-none" viewBox="0 0 187 285">
                 <motion.path initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: false, amount: 0.3 }} transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }} d="M 0 285 Q 90 295 190 280" fill="none" stroke="#111" strokeWidth="4" strokeLinecap="round" />
                 <motion.path initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: false, amount: 0.3 }} transition={{ duration: 0.8, ease: "easeOut", delay: 0.6 }} d="M 90 -20 L 95 -5 L 110 -5 L 98 5 L 105 20 L 90 10 L 75 20 L 82 5 L 70 -5 L 85 -5 Z" fill="none" stroke="#e63228" strokeWidth="3" strokeLinejoin="round" />
               </motion.svg>
             </div>
             <div className="absolute bottom-[125.41px] h-[277.211px] right-[851.11px] w-[170.822px]">
-              <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgImage65} />
+              <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src="/assets/sketch-ideas.png" />
               <motion.svg className="absolute inset-0 overflow-visible pointer-events-none z-50" viewBox="0 0 171 277">
                 <motion.path initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: false, amount: 0.3 }} transition={{ duration: 1, ease: "easeInOut", delay: 0 }} d="M 85 0 C 180 -10 190 280 85 285 C -20 290 -10 10 85 0" fill="none" stroke="#e63228" strokeWidth="4" strokeLinecap="round" />
                 <motion.path initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: false, amount: 0.3 }} transition={{ duration: 0.6, ease: "easeOut", delay: 0.8 }} d="M 190 140 Q 220 130 250 150" fill="none" stroke="#111" strokeWidth="3" strokeLinecap="round" />
@@ -1138,28 +1141,190 @@ export default function App() {
               />
               <p className="leading-[normal]">HOW</p>
             </div>
-            <div className="[word-break:break-word] absolute bottom-[195.08px] flex flex-col font-['Inter:Regular'] font-normal h-[76.42px] justify-center leading-[0] not-italic right-[539.44px] text-[#a9a7a2] text-[14.984px] translate-x-full translate-y-1/2 w-[157.336px]">
-              <p className="leading-[22.898px] mb-0">We edit, animate</p>
-              <p className="leading-[22.898px] mb-0">and bring your vision</p>
-              <p className="leading-[22.898px]">to life.</p>
+            <div className="absolute bottom-[195.08px] flex flex-col font-['Inter:Regular'] font-normal h-auto justify-center not-italic right-[539.44px] text-[#222] text-[13.486px] translate-x-full translate-y-1/2 w-max bg-white/90 backdrop-blur-md px-4 py-3 rounded-xl shadow-lg border border-black/5 z-50">
+              <p className="leading-[22.898px] mb-0 font-medium">We edit, animate</p>
+              <p className="leading-[22.898px] mb-0 font-medium">and bring your vision</p>
+              <p className="leading-[22.898px] font-medium">to life.</p>
             </div>
-            <div className="[word-break:break-word] absolute bottom-[194.33px] flex flex-col font-['Inter:Regular'] font-normal h-[77.919px] justify-center leading-[0] not-italic right-[773.19px] text-[#a9a7a2] text-[14.984px] translate-x-full translate-y-1/2 w-[121.374px]">
-              <p className="leading-[23.202px] mb-0">We suggest the</p>
-              <p className="leading-[23.202px] mb-0">best approach</p>
-              <p className="leading-[23.202px]">and style</p>
+            <div className="absolute bottom-[194.33px] flex flex-col font-['Inter:Regular'] font-normal h-auto justify-center not-italic right-[773.19px] text-[#222] text-[13.486px] translate-x-full translate-y-1/2 w-max bg-white/90 backdrop-blur-md px-4 py-3 rounded-xl shadow-lg border border-black/5 z-50">
+              <p className="leading-[23.202px] mb-0 font-medium">We suggest the</p>
+              <p className="leading-[23.202px] mb-0 font-medium">best approach</p>
+              <p className="leading-[23.202px] font-medium">and style</p>
             </div>
-            <div className="[word-break:break-word] absolute bottom-[205.57px] flex flex-col font-['Inter:Regular'] font-normal h-[46.452px] justify-center leading-[0] not-italic right-[1006.95px] text-[#aaa8a2] text-[13.486px] translate-x-full translate-y-1/2 w-[143.85px]">
-              <p className="leading-[22.336px] mb-0">Share your ideas,</p>
-              <p className="leading-[22.336px]">references and goals</p>
+            <div className="absolute bottom-[205.57px] flex flex-col font-['Inter:Regular'] font-normal h-auto justify-center not-italic right-[1006.95px] text-[#222] text-[13.486px] translate-x-full translate-y-1/2 w-max bg-white/90 backdrop-blur-md px-4 py-3 rounded-xl shadow-lg border border-black/5 z-50">
+              <p className="leading-[22.336px] mb-0 font-medium">Share your ideas,</p>
+              <p className="leading-[22.336px] font-medium">references and goals</p>
             </div>
-            <div className="[word-break:break-word] absolute bottom-[201.08px] flex flex-col font-['Inter:Regular'] font-normal h-[76.42px] justify-center leading-[0] not-italic right-[287.7px] text-[#a5a39e] text-[14.984px] translate-x-full translate-y-1/2 w-[145.349px]">
-              <p className="leading-[22.898px] mb-0">You get high-quality</p>
-              <p className="leading-[22.898px] mb-0">content, ready</p>
-              <p className="leading-[22.898px]">to make an impact.</p>
+            <div className="absolute bottom-[201.08px] flex flex-col font-['Inter:Regular'] font-normal h-auto justify-center not-italic right-[287.7px] text-[#222] text-[13.486px] translate-x-full translate-y-1/2 w-max bg-white/90 backdrop-blur-md px-4 py-3 rounded-xl shadow-lg border border-black/5 z-50">
+              <p className="leading-[22.898px] mb-0 font-medium">You get high-quality</p>
+              <p className="leading-[22.898px] mb-0 font-medium">content, ready</p>
+              <p className="leading-[22.898px] font-medium">to make an impact.</p>
             </div>
           </div>
         </div>
       </ScaledArtSection>
+      </div>
+
+      {/* MOBILE & TABLET LAYOUT (How It Works + Stories) */}
+      <div className="block xl:hidden relative w-full overflow-hidden bg-[#F4F3CA] text-[#111]">
+        {/* Background Noise Overlay */}
+        <div className="absolute inset-0 z-0 pointer-events-none opacity-50 mix-blend-multiply" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }} />
+
+        <div className="relative z-10 max-w-[1024px] mx-auto px-5 md:px-12 py-20 flex flex-col gap-24">
+          
+          {/* ================================================= */}
+          {/* SECTION 09: HOW IT WORKS (MOBILE/TABLET)          */}
+          {/* ================================================= */}
+          <div className="flex flex-col gap-10">
+            {/* Heading */}
+            <div className="relative w-max">
+              <motion.div 
+                className="absolute -inset-x-2 -inset-y-1 bg-[#F4D160] -z-10 origin-left"
+                initial={{ scaleX: 0, rotate: -2 }} whileInView={{ scaleX: 1, rotate: -2 }} viewport={{ once: false, amount: 0.3 }} transition={{ duration: 0.5, ease: "easeOut" }}
+              />
+              <h2 className="font-['Oswald:Bold'] font-bold text-[#0f0f09] text-[clamp(48px,15vw,110px)] leading-[0.9] tracking-tight">
+                HOW<br/>IT<br/>WORKS
+              </h2>
+            </div>
+            
+            <p className="font-['Inter:Extra_Light'] text-[#555] text-[clamp(16px,4.5vw,22px)] leading-relaxed max-w-sm md:max-w-lg mb-4">
+              A simple, transparent process to turn your ideas into stunning visuals.
+            </p>
+
+            {/* Process Steps List */}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-16">
+              
+              {/* Step 1 */}
+              <div className="flex flex-col gap-3">
+                <div className="font-['Covered_By_Your_Grace:Regular'] text-[clamp(24px,6vw,32px)] text-[#e63228] rotate-[-2deg]">01 Discuss</div>
+                <div className="bg-white/90 backdrop-blur-md p-6 rounded-xl shadow-lg border border-black/5 rotate-[1deg] hover:rotate-0 transition-transform">
+                  <h3 className="font-medium text-[#222] mb-1 text-[clamp(16px,5vw,20px)]">Share your ideas</h3>
+                  <p className="text-[#666] text-sm leading-relaxed">Share your ideas, references and goals.</p>
+                </div>
+                {/* Embedded Doodle/Image */}
+                <motion.div 
+                  initial={{ opacity: 0, y: 10 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: false }}
+                  className="w-full max-w-[200px] mt-4 rotate-[-3deg] self-center md:self-start relative z-10"
+                >
+                  <img src="/assets/sketch-ideas.png" alt="Sketch graphic" className="w-full h-auto mix-blend-multiply opacity-95 shadow-sm rounded-sm" />
+                </motion.div>
+                {/* Arrow to next step */}
+                <motion.svg className="w-12 h-12 self-center mt-4 md:hidden overflow-visible" viewBox="0 0 50 50">
+                  <motion.path initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} d="M25,0 Q35,25 25,50" fill="none" stroke="#111" strokeWidth="2" strokeDasharray="4,4"/>
+                  <motion.path initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} d="M15,40 L25,50 L35,40" fill="none" stroke="#111" strokeWidth="2" strokeLinecap="round"/>
+                </motion.svg>
+              </div>
+
+              {/* Step 2 */}
+              <div className="flex flex-col gap-3 md:mt-16">
+                <div className="font-['Covered_By_Your_Grace:Regular'] text-[clamp(24px,6vw,32px)] text-[#e63228] rotate-[2deg]">02 Plan</div>
+                <div className="bg-white/90 backdrop-blur-md p-6 rounded-xl shadow-lg border border-black/5 rotate-[-1deg] hover:rotate-0 transition-transform relative z-20">
+                  <h3 className="font-medium text-[#222] mb-1 text-[clamp(16px,5vw,20px)]">We suggest the approach</h3>
+                  <p className="text-[#666] text-sm leading-relaxed">We suggest the best approach and style.</p>
+                </div>
+                <motion.svg className="w-12 h-12 self-center mt-4 md:hidden overflow-visible" viewBox="0 0 50 50">
+                  <motion.path initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} d="M25,0 Q15,25 25,50" fill="none" stroke="#111" strokeWidth="2" strokeDasharray="4,4"/>
+                  <motion.path initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} d="M15,40 L25,50 L35,40" fill="none" stroke="#111" strokeWidth="2" strokeLinecap="round"/>
+                </motion.svg>
+              </div>
+
+              {/* Step 3 */}
+              <div className="flex flex-col gap-3 relative">
+                <div className="font-['Covered_By_Your_Grace:Regular'] text-[clamp(24px,6vw,32px)] text-[#e63228] rotate-[-1deg]">03 Create</div>
+                <div className="bg-white/90 backdrop-blur-md p-6 rounded-xl shadow-lg border border-black/5 rotate-[1.5deg] hover:rotate-0 transition-transform relative z-20">
+                  <h3 className="font-medium text-[#222] mb-1 text-[clamp(16px,5vw,20px)]">We edit & animate</h3>
+                  <p className="text-[#666] text-sm leading-relaxed">We edit, animate and bring your vision to life.</p>
+                </div>
+                {/* Circle Annotation */}
+                <motion.svg className="absolute top-8 left-[-10px] w-[110%] h-[120%] pointer-events-none opacity-60 z-10" viewBox="0 0 200 100" preserveAspectRatio="none">
+                  <motion.path initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} transition={{ duration: 1 }} d="M20,50 C40,10 180,10 180,50 C180,90 40,90 20,50" fill="none" stroke="#e63228" strokeWidth="3" strokeLinecap="round" />
+                </motion.svg>
+                <motion.svg className="w-12 h-12 self-center mt-4 md:hidden overflow-visible" viewBox="0 0 50 50">
+                  <motion.path initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} d="M25,0 Q35,25 25,50" fill="none" stroke="#111" strokeWidth="2" strokeDasharray="4,4"/>
+                  <motion.path initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} d="M15,40 L25,50 L35,40" fill="none" stroke="#111" strokeWidth="2" strokeLinecap="round"/>
+                </motion.svg>
+              </div>
+
+              {/* Step 4 */}
+              <div className="flex flex-col gap-3 md:mt-16">
+                <div className="font-['Covered_By_Your_Grace:Regular'] text-[clamp(24px,6vw,32px)] text-[#e63228] rotate-[1deg]">04 Deliver</div>
+                <div className="bg-white/90 backdrop-blur-md p-6 rounded-xl shadow-lg border border-black/5 rotate-[-1.5deg] hover:rotate-0 transition-transform relative z-20">
+                  <h3 className="font-medium text-[#222] mb-1 text-[clamp(16px,5vw,20px)]">Ready to make an impact</h3>
+                  <p className="text-[#666] text-sm leading-relaxed">You get high-quality content, ready to make an impact.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* ================================================= */}
+          {/* SECTION 10: SOME STORIES WE'VE BUILT              */}
+          {/* ================================================= */}
+          <div className="flex flex-col gap-12 mt-4 pt-16 border-t-2 border-[#e63228]/20 border-dashed relative">
+            {/* Heading */}
+            <div className="relative w-max mb-2">
+              <h2 className="font-['Oswald:Bold'] font-bold text-[#e55377] text-[clamp(44px,12vw,80px)] leading-[0.95] tracking-tight">
+                SOME<br/><span className="text-[#181817]">STORIES</span><br/>WE'VE<br/>BUILT.
+              </h2>
+              <motion.svg className="absolute left-0 -bottom-4 w-[140px] h-[40px] overflow-visible pointer-events-none" viewBox="0 0 140 40">
+                <motion.path initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: false }} transition={{ duration: 0.8 }} d="M 0 30 Q 70 40 140 20" fill="none" stroke="#e63228" strokeWidth="4" strokeLinecap="round" />
+              </motion.svg>
+            </div>
+
+            <p className="font-['Inter:Regular'] text-[#777] text-[clamp(16px,4vw,20px)] leading-relaxed max-w-sm mb-4">
+              From ideas to impact — here are a few projects that turned vision into reality.
+            </p>
+
+            {/* Story Cards List */}
+            <div className="flex flex-col gap-8 md:gap-24">
+              
+              {/* Story 1 */}
+              <div className="relative flex flex-col gap-3 md:w-[85%]">
+                <div className="w-full aspect-[4/5] md:aspect-[16/9] relative rotate-[-1deg] shadow-2xl rounded-sm overflow-hidden group">
+                  <a href={storiesItems[0].mediaSrc} target="_blank" rel="noopener noreferrer" className="block absolute inset-0 size-full cursor-pointer hover:scale-[1.01] transition-transform duration-500 z-10">
+                    <MediaCard item={storiesItems[0]} className="absolute inset-0 size-full" imgClassName="object-cover" />
+                  </a>
+                  {/* Tape */}
+                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-24 h-8 bg-white/40 backdrop-blur-md border border-white/20 rotate-[3deg] z-20 shadow-sm" />
+                </div>
+                <div className="font-['Covered_By_Your_Grace:Regular'] text-[clamp(22px,6vw,28px)] text-[#111] rotate-[2deg] self-end mt-2 mr-4 relative w-max">
+                  Cinematic Edits
+                  <motion.svg className="absolute -bottom-2 left-0 w-full h-[10px] overflow-visible pointer-events-none" viewBox="0 0 100 10" preserveAspectRatio="none">
+                    <motion.path initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} d="M 0 5 Q 50 10 100 2" fill="none" stroke="#e63228" strokeWidth="2" strokeLinecap="round" />
+                  </motion.svg>
+                </div>
+              </div>
+
+              {/* Story 2 */}
+              <div className="relative flex flex-col gap-3 md:w-[85%] md:self-end">
+                <div className="w-full aspect-[4/5] md:aspect-[16/9] relative rotate-[1.5deg] shadow-2xl rounded-sm overflow-hidden group">
+                  <a href={storiesItems[1].mediaSrc} target="_blank" rel="noopener noreferrer" className="block absolute inset-0 size-full cursor-pointer hover:scale-[1.01] transition-transform duration-500 z-10">
+                    <MediaCard item={storiesItems[1]} className="absolute inset-0 size-full" imgClassName="object-cover" />
+                  </a>
+                  {/* Tape */}
+                  <div className="absolute -top-3 left-1/4 -translate-x-1/2 w-20 h-8 bg-white/40 backdrop-blur-md border border-white/20 rotate-[-4deg] z-20 shadow-sm" />
+                </div>
+                <div className="font-['Covered_By_Your_Grace:Regular'] text-[clamp(22px,6vw,28px)] text-[#111] rotate-[-1deg] self-start mt-2 ml-4">
+                  Motion Graphics
+                </div>
+              </div>
+
+              {/* Story 3 */}
+              <div className="relative flex flex-col gap-3 md:w-[85%] md:mx-auto">
+                <div className="w-full aspect-[4/5] md:aspect-[16/9] relative rotate-[-0.5deg] shadow-2xl rounded-sm overflow-hidden group">
+                  <a href={storiesItems[2].mediaSrc} target="_blank" rel="noopener noreferrer" className="block absolute inset-0 size-full cursor-pointer hover:scale-[1.01] transition-transform duration-500 z-10">
+                    <MediaCard item={storiesItems[2]} className="absolute inset-0 size-full" imgClassName="object-cover" />
+                  </a>
+                  {/* Tape */}
+                  <div className="absolute -top-3 right-1/4 translate-x-1/2 w-28 h-8 bg-white/40 backdrop-blur-md border border-white/20 rotate-[2deg] z-20 shadow-sm" />
+                </div>
+                <div className="font-['Covered_By_Your_Grace:Regular'] text-[clamp(22px,6vw,28px)] text-[#111] rotate-[1deg] self-center mt-2">
+                  Commercial Edits
+                </div>
+              </div>
+
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* Let's Create Together — Animated Scrapbook Version */}

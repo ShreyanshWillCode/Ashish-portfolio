@@ -15,6 +15,49 @@ export interface PortfolioItem {
 
 const assetPathPrefix = "/assets";
 
+export function optimizeCloudinaryUrl(url: string) {
+  if (!url.includes("/upload/")) return url;
+  return url.replace(
+    "/upload/",
+    "/upload/q_auto,f_auto,h_480/"
+  );
+}
+
+export function getPosterUrl(url: string) {
+  if (!url.includes("/upload/")) return url;
+  return url.replace(
+    "/upload/",
+    "/upload/so_0,q_auto,f_jpg/"
+  ).replace(/\.mp4$/, ".jpg");
+}
+
+export const portfolioMedia = {
+  commercial: {
+    ad1: "https://res.cloudinary.com/dxp7dcmvr/video/upload/v1735460290/adEdit1_ip7ucu.mp4",
+    ad2: "https://res.cloudinary.com/dxp7dcmvr/video/upload/v1735470833/ad2_1_rbq2t2.mp4",
+    ad3: "https://res.cloudinary.com/dxp7dcmvr/video/upload/v1735469354/ad3_zdkhtp.mp4"
+  },
+  basic: {
+    simple1: "https://res.cloudinary.com/dxp7dcmvr/video/upload/v1735469019/sp1_nqjoei.mp4",
+    simple2: "https://res.cloudinary.com/dxp7dcmvr/video/upload/v1735469032/sp3_xztapx.mp4",
+    simple3: "https://res.cloudinary.com/dxp7dcmvr/video/upload/v1735469055/sp2_eej222.mp4"
+  },
+  stories: {
+    motion1: "https://res.cloudinary.com/dxp7dcmvr/video/upload/v1735976869/ALL_THE_EDITSrf_cymctm.mp4",
+    motion2: "https://res.cloudinary.com/dxp7dcmvr/video/upload/v1735977983/Comp_1_1_fxehc0.mp4",
+    motion3: "https://res.cloudinary.com/dxp7dcmvr/video/upload/v1736136336/The%20Freelancer/motion%203.mp4"
+  },
+  podcast: {
+    pd1: "https://res.cloudinary.com/dxp7dcmvr/video/upload/v1766070412/prime_roll_eehsdu.mp4",
+    pd2: "https://res.cloudinary.com/dxp7dcmvr/video/upload/v1766065363/V-2_gm2i2s.mp4",
+    pd3: "https://res.cloudinary.com/dxp7dcmvr/video/upload/v1766065365/final_flag_ni9crx.mp4",
+    pd4: "https://res.cloudinary.com/dxp7dcmvr/video/upload/v1766065359/Why_Rakesh_Jhunjhunwala_was_the_GOATxashish_hhpgn4.mp4",
+    pd5: "https://res.cloudinary.com/dxp7dcmvr/video/upload/v1766065365/oahu_vid1_gqjmp0.mp4",
+    pd6: "https://res.cloudinary.com/dxp7dcmvr/video/upload/v1766068773/script_2_xo0aub.mp4",
+    pd7: "https://res.cloudinary.com/dxp7dcmvr/video/upload/v1766065323/WhatsApp_Video_2025-12-11_at_10.38.34_PM_irlr9m.mp4"
+  }
+};
+
 export const expertiseItems: PortfolioItem[] = [
   {
     id: "expertise-01",
@@ -58,8 +101,9 @@ export const showcaseItems: PortfolioItem[] = [
   {
     id: "showcase-hero",
     section: "showcase",
-    mediaType: "image",
-    mediaSrc: `${assetPathPrefix}/6f027.png`,
+    mediaType: "video",
+    mediaSrc: optimizeCloudinaryUrl(portfolioMedia.commercial.ad1),
+    poster: getPosterUrl(portfolioMedia.commercial.ad1),
     category: "Hero Edit",
     number: "01",
     title: "Commercial Edits",
@@ -68,8 +112,9 @@ export const showcaseItems: PortfolioItem[] = [
   {
     id: "showcase-02",
     section: "showcase",
-    mediaType: "image",
-    mediaSrc: `${assetPathPrefix}/56ab5.png`,
+    mediaType: "video",
+    mediaSrc: optimizeCloudinaryUrl(portfolioMedia.commercial.ad2),
+    poster: getPosterUrl(portfolioMedia.commercial.ad2),
     category: "Cinematic",
     number: "02",
     title: "High-Energy Sequences"
@@ -77,8 +122,9 @@ export const showcaseItems: PortfolioItem[] = [
   {
     id: "showcase-03",
     section: "showcase",
-    mediaType: "image",
-    mediaSrc: `${assetPathPrefix}/cffd5.png`,
+    mediaType: "video",
+    mediaSrc: optimizeCloudinaryUrl(portfolioMedia.commercial.ad3),
+    poster: getPosterUrl(portfolioMedia.commercial.ad3),
     category: "Sound Design",
     number: "03",
     title: "High-Impact Audio"
@@ -125,14 +171,21 @@ export const podcastEditsSection = {
   annotationRight: 'Your Story\ndeserves to be heard',
   features: ['Audio Clean', 'Seamless Transitions', 'Highlights & Clips'],
   media: [
-    { id: 'pod-01', type: 'video', src: 'https://assets.mixkit.co/videos/preview/mixkit-girl-in-neon-sign-1232-large.mp4', poster: 'https://images.unsplash.com/photo-1590602847861-f357a9332bbc?w=600&q=80', alt: 'Podcast 1' },
-    { id: 'pod-02', type: 'video', src: 'https://assets.mixkit.co/videos/preview/mixkit-tree-with-yellow-flowers-1173-large.mp4', poster: 'https://images.unsplash.com/photo-1589903308904-1010c2294adc?w=600&q=80', alt: 'Podcast 2' },
-    { id: 'pod-03', type: 'video', src: 'https://assets.mixkit.co/videos/preview/mixkit-taking-photos-from-different-angles-of-a-model-34421-large.mp4', poster: 'https://images.unsplash.com/photo-1611162617213-7d7a39e9b1d7?w=600&q=80', alt: 'Podcast 3' },
-    { id: 'pod-04', type: 'video', src: 'https://assets.mixkit.co/videos/preview/mixkit-girl-in-neon-sign-1232-large.mp4', poster: 'https://images.unsplash.com/photo-1598550880863-4e8aa3d0edb4?w=600&q=80', alt: 'Podcast 4' },
-    { id: 'pod-05', type: 'video', src: 'https://assets.mixkit.co/videos/preview/mixkit-tree-with-yellow-flowers-1173-large.mp4', poster: 'https://images.unsplash.com/photo-1606335192038-f5a05f761b3a?w=600&q=80', alt: 'Podcast 5' },
-    { id: 'pod-06', type: 'video', src: 'https://assets.mixkit.co/videos/preview/mixkit-taking-photos-from-different-angles-of-a-model-34421-large.mp4', poster: 'https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?w=600&q=80', alt: 'Podcast 6' }
+    { id: 'pod-01', type: 'video', src: optimizeCloudinaryUrl(portfolioMedia.podcast.pd1), poster: getPosterUrl(portfolioMedia.podcast.pd1), alt: 'Podcast 1' },
+    { id: 'pod-02', type: 'video', src: optimizeCloudinaryUrl(portfolioMedia.podcast.pd2), poster: getPosterUrl(portfolioMedia.podcast.pd2), alt: 'Podcast 2' },
+    { id: 'pod-03', type: 'video', src: optimizeCloudinaryUrl(portfolioMedia.podcast.pd3), poster: getPosterUrl(portfolioMedia.podcast.pd3), alt: 'Podcast 3' },
+    { id: 'pod-04', type: 'video', src: optimizeCloudinaryUrl(portfolioMedia.podcast.pd4), poster: getPosterUrl(portfolioMedia.podcast.pd4), alt: 'Podcast 4' },
+    { id: 'pod-05', type: 'video', src: optimizeCloudinaryUrl(portfolioMedia.podcast.pd5), poster: getPosterUrl(portfolioMedia.podcast.pd5), alt: 'Podcast 5' },
+    { id: 'pod-06', type: 'video', src: optimizeCloudinaryUrl(portfolioMedia.podcast.pd6), poster: getPosterUrl(portfolioMedia.podcast.pd6), alt: 'Podcast 6' },
+    { id: 'pod-07', type: 'video', src: optimizeCloudinaryUrl(portfolioMedia.podcast.pd7), poster: getPosterUrl(portfolioMedia.podcast.pd7), alt: 'Podcast 7' }
   ]
 };
+
+export const storiesItems: PortfolioItem[] = [
+  { id: 'story-01', section: 'stories', mediaType: 'video', mediaSrc: optimizeCloudinaryUrl(portfolioMedia.stories.motion1), poster: getPosterUrl(portfolioMedia.stories.motion1) },
+  { id: 'story-02', section: 'stories', mediaType: 'video', mediaSrc: optimizeCloudinaryUrl(portfolioMedia.stories.motion2), poster: getPosterUrl(portfolioMedia.stories.motion2) },
+  { id: 'story-03', section: 'stories', mediaType: 'video', mediaSrc: optimizeCloudinaryUrl(portfolioMedia.stories.motion3), poster: getPosterUrl(portfolioMedia.stories.motion3) }
+];
 
 export const basicEditsSection = {
   sectionNumber: '05',
@@ -145,12 +198,9 @@ export const basicEditsSection = {
   annotationRight: 'Elevate\nyour content',
   features: ['Fine Cuts', 'Smooth Transitions', 'Subtitles'],
   media: [
-    { id: 'basic-01', type: 'video', src: 'https://assets.mixkit.co/videos/preview/mixkit-girl-in-neon-sign-1232-large.mp4', poster: '', alt: 'Video 1' },
-    { id: 'basic-02', type: 'video', src: 'https://assets.mixkit.co/videos/preview/mixkit-tree-with-yellow-flowers-1173-large.mp4', poster: '', alt: 'Video 2' },
-    { id: 'basic-03', type: 'video', src: 'https://assets.mixkit.co/videos/preview/mixkit-taking-photos-from-different-angles-of-a-model-34421-large.mp4', poster: '', alt: 'Video 3' },
-    { id: 'basic-04', type: 'video', src: 'https://assets.mixkit.co/videos/preview/mixkit-girl-in-neon-sign-1232-large.mp4', poster: '', alt: 'Video 4' },
-    { id: 'basic-05', type: 'video', src: 'https://assets.mixkit.co/videos/preview/mixkit-tree-with-yellow-flowers-1173-large.mp4', poster: '', alt: 'Video 5' },
-    { id: 'basic-06', type: 'video', src: 'https://assets.mixkit.co/videos/preview/mixkit-taking-photos-from-different-angles-of-a-model-34421-large.mp4', poster: '', alt: 'Video 6' }
+    { id: 'basic-01', type: 'video', src: optimizeCloudinaryUrl(portfolioMedia.basic.simple1), poster: getPosterUrl(portfolioMedia.basic.simple1), alt: 'Video 1' },
+    { id: 'basic-02', type: 'video', src: optimizeCloudinaryUrl(portfolioMedia.basic.simple2), poster: getPosterUrl(portfolioMedia.basic.simple2), alt: 'Video 2' },
+    { id: 'basic-03', type: 'video', src: optimizeCloudinaryUrl(portfolioMedia.basic.simple3), poster: getPosterUrl(portfolioMedia.basic.simple3), alt: 'Video 3' }
   ]
 };
 

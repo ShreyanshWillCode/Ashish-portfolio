@@ -1,4 +1,4 @@
-import { useRef } from 'react';
+import { useRef, useState } from 'react';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { podcastEditsSection } from '../data/portfolio';
 import { PhoneMedia } from './PhoneMedia';
@@ -6,6 +6,20 @@ import { ScrollUnderline } from './ScrollUnderline';
 
 export function PodcastEdits() {
   const containerRef = useRef<HTMLDivElement>(null);
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const nextSlide = () => {
+    setCurrentIndex((prev) => (prev + 1) % podcastEditsSection.media.length);
+  };
+
+  const prevSlide = () => {
+    setCurrentIndex((prev) => (prev - 1 + podcastEditsSection.media.length) % podcastEditsSection.media.length);
+  };
+
+  const getMediaItem = (offset: number) => {
+    const index = (currentIndex + offset + podcastEditsSection.media.length) % podcastEditsSection.media.length;
+    return podcastEditsSection.media[index];
+  };
   
   const { scrollYProgress } = useScroll({
     target: containerRef,
@@ -91,19 +105,18 @@ export function PodcastEdits() {
           </div>
 
           {/* Carousel Buttons */}
-          <button className="absolute left-[2%] md:left-[8%] z-40 w-12 h-12 md:w-14 md:h-14 rounded-full border border-black/10 bg-[#F5F2E8]/80 backdrop-blur-sm flex items-center justify-center hover:bg-white hover:shadow-md transition-all pointer-events-auto cursor-pointer">
+          <button onClick={prevSlide} className="absolute left-[2%] md:left-[8%] z-40 w-12 h-12 md:w-14 md:h-14 rounded-full border border-black/10 bg-[#F5F2E8]/80 backdrop-blur-sm flex items-center justify-center hover:bg-white hover:shadow-md transition-all pointer-events-auto cursor-pointer">
             <svg className="w-6 h-6 text-[#111]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M15 19l-7-7 7-7" /></svg>
           </button>
 
-          {/* Cards */}
           <div className="absolute inset-0 flex items-center justify-center w-full max-w-[1000px] mx-auto z-20 pointer-events-auto">
             {/* 1 */}
-            <PhoneMedia item={podcastEditsSection.media[0] as any} className="absolute w-[240px] sm:w-[280px] md:w-[320px] h-[480px] sm:h-[560px] md:h-[640px] z-10 hidden md:block transition-transform duration-500 hover:-translate-y-2 -translate-x-[240%] translate-y-[35%] -rotate-[18deg] scale-[0.7]" />
+            <PhoneMedia item={getMediaItem(-2) as any} className="absolute w-[240px] sm:w-[280px] md:w-[320px] h-[480px] sm:h-[560px] md:h-[640px] z-10 hidden md:block transition-transform duration-500 hover:-translate-y-2 -translate-x-[240%] translate-y-[35%] -rotate-[18deg] scale-[0.7]" />
             {/* 2 */}
-            <PhoneMedia item={podcastEditsSection.media[1] as any} className="absolute w-[240px] sm:w-[280px] md:w-[320px] h-[480px] sm:h-[560px] md:h-[640px] z-20 transition-transform duration-500 hover:-translate-y-2 -translate-x-[80%] sm:-translate-x-[110%] md:-translate-x-[150%] translate-y-[15%] -rotate-[6deg] md:-rotate-[10deg] scale-[0.85]" />
+            <PhoneMedia item={getMediaItem(-1) as any} className="absolute w-[240px] sm:w-[280px] md:w-[320px] h-[480px] sm:h-[560px] md:h-[640px] z-20 transition-transform duration-500 hover:-translate-y-2 -translate-x-[80%] sm:-translate-x-[110%] md:-translate-x-[150%] translate-y-[15%] -rotate-[6deg] md:-rotate-[10deg] scale-[0.85]" />
             {/* 3 (Center Main) */}
             <div className="absolute w-[240px] sm:w-[280px] md:w-[320px] h-[480px] sm:h-[560px] md:h-[640px] z-30 transition-transform duration-500 hover:-translate-y-2 group translate-x-0 scale-100">
-               <PhoneMedia item={podcastEditsSection.media[2] as any} className="absolute inset-0 w-full h-full" />
+               <PhoneMedia item={getMediaItem(0) as any} className="absolute inset-0 w-full h-full" />
                
                {/* Live Scroll Waveform Bar overlay */}
                <div className="absolute bottom-[20%] left-0 w-full h-12 flex items-center justify-center px-6">
@@ -124,12 +137,12 @@ export function PodcastEdits() {
                </div>
             </div>
             {/* 4 */}
-            <PhoneMedia item={podcastEditsSection.media[3] as any} className="absolute w-[240px] sm:w-[280px] md:w-[320px] h-[480px] sm:h-[560px] md:h-[640px] z-20 transition-transform duration-500 hover:-translate-y-2 translate-x-[80%] sm:translate-x-[110%] md:translate-x-[150%] translate-y-[15%] rotate-[6deg] md:rotate-[10deg] scale-[0.85]" />
+            <PhoneMedia item={getMediaItem(1) as any} className="absolute w-[240px] sm:w-[280px] md:w-[320px] h-[480px] sm:h-[560px] md:h-[640px] z-20 transition-transform duration-500 hover:-translate-y-2 translate-x-[80%] sm:translate-x-[110%] md:translate-x-[150%] translate-y-[15%] rotate-[6deg] md:rotate-[10deg] scale-[0.85]" />
             {/* 5 */}
-            <PhoneMedia item={podcastEditsSection.media[4] as any} className="absolute w-[240px] sm:w-[280px] md:w-[320px] h-[480px] sm:h-[560px] md:h-[640px] z-10 hidden md:block transition-transform duration-500 hover:-translate-y-2 translate-x-[240%] translate-y-[35%] rotate-[18deg] scale-[0.7]" />
+            <PhoneMedia item={getMediaItem(2) as any} className="absolute w-[240px] sm:w-[280px] md:w-[320px] h-[480px] sm:h-[560px] md:h-[640px] z-10 hidden md:block transition-transform duration-500 hover:-translate-y-2 translate-x-[240%] translate-y-[35%] rotate-[18deg] scale-[0.7]" />
           </div>
 
-          <button className="absolute right-[2%] md:right-[8%] z-40 w-12 h-12 md:w-14 md:h-14 rounded-full border border-black/10 bg-[#F5F2E8]/80 backdrop-blur-sm flex items-center justify-center hover:bg-white hover:shadow-md transition-all pointer-events-auto cursor-pointer">
+          <button onClick={nextSlide} className="absolute right-[2%] md:right-[8%] z-40 w-12 h-12 md:w-14 md:h-14 rounded-full border border-black/10 bg-[#F5F2E8]/80 backdrop-blur-sm flex items-center justify-center hover:bg-white hover:shadow-md transition-all pointer-events-auto cursor-pointer">
             <svg className="w-6 h-6 text-[#111]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M9 5l7 7-7 7" /></svg>
           </button>
         </div>

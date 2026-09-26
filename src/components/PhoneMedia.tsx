@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 
 export interface PhoneMediaItem {
   id: string;
@@ -17,6 +17,28 @@ interface PhoneMediaProps {
 export function PhoneMedia({ item, className = "", style }: PhoneMediaProps) {
   const videoRef = useRef<HTMLVideoElement>(null);
   const [isPlaying, setIsPlaying] = useState(true);
+
+  useEffect(() => {
+    if (item.type !== 'video') return;
+    const currentVideo = videoRef.current;
+    if (!currentVideo) return;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            if (isPlaying) currentVideo.play().catch(() => {});
+          } else {
+            currentVideo.pause();
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+
+    observer.observe(currentVideo);
+    return () => observer.disconnect();
+  }, [item.type, item.src, isPlaying]);
 
   const togglePlay = () => {
     if (!videoRef.current) return;
@@ -44,7 +66,7 @@ export function PhoneMedia({ item, className = "", style }: PhoneMediaProps) {
           muted
           loop
           playsInline
-          autoPlay
+          preload="metadata"
           onClick={togglePlay}
         />
       ) : (
