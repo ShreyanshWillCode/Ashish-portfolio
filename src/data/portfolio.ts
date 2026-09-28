@@ -62,8 +62,9 @@ export const expertiseItems: PortfolioItem[] = [
   {
     id: "expertise-01",
     section: "expertise",
-    mediaType: "image",
-    mediaSrc: `${assetPathPrefix}/77dfe.png`,
+    mediaType: "video",
+    mediaSrc: optimizeCloudinaryUrl(portfolioMedia.podcast.pd1),
+    poster: getPosterUrl(portfolioMedia.podcast.pd1),
     title: "PODCAST EDITS",
     description: "Polished conversations for a bigger audience.",
     number: "01"
@@ -71,8 +72,9 @@ export const expertiseItems: PortfolioItem[] = [
   {
     id: "expertise-02",
     section: "expertise",
-    mediaType: "image",
-    mediaSrc: `${assetPathPrefix}/fe216.png`,
+    mediaType: "video",
+    mediaSrc: optimizeCloudinaryUrl(portfolioMedia.basic.simple1),
+    poster: getPosterUrl(portfolioMedia.basic.simple1),
     title: "BASIC EDITS",
     description: "Clean, engaging edits for everyday content.",
     number: "02"
@@ -80,8 +82,9 @@ export const expertiseItems: PortfolioItem[] = [
   {
     id: "expertise-03",
     section: "expertise",
-    mediaType: "image",
-    mediaSrc: `${assetPathPrefix}/f6f41.png`,
+    mediaType: "video",
+    mediaSrc: optimizeCloudinaryUrl(portfolioMedia.stories.motion2),
+    poster: getPosterUrl(portfolioMedia.stories.motion2),
     title: "MOTION GRAPHICS",
     description: "Turn ideas into stunning visual stories.",
     number: "03"
@@ -89,8 +92,9 @@ export const expertiseItems: PortfolioItem[] = [
   {
     id: "expertise-04",
     section: "expertise",
-    mediaType: "image",
-    mediaSrc: "",
+    mediaType: "video",
+    mediaSrc: optimizeCloudinaryUrl(portfolioMedia.commercial.ad1),
+    poster: getPosterUrl(portfolioMedia.commercial.ad1),
     title: "COMMERCIAL EDITS",
     description: "High-impact edits for brands and businesses.",
     number: "04"

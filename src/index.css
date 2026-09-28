@@ -112,10 +112,10 @@ body {
 
 /* ─── Clip-path text reveal ─── */
 @keyframes clipLtr {
-  from { clip-path: inset(0 100% 0 0); }
-  to   { clip-path: inset(0 0% 0 0); }
+  from { clip-path: inset(-20% 100% -20% 0); }
+  to   { clip-path: inset(-20% 0% -20% 0); }
 }
-.clip-reveal { clip-path: inset(0 100% 0 0); }
+.clip-reveal { clip-path: inset(-20% 100% -20% 0); }
 .in-view .clip-reveal {
   animation: clipLtr 1s cubic-bezier(.22,1,.36,1) both;
 }

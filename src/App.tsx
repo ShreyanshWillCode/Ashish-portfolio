@@ -25,6 +25,62 @@ function useReveal(threshold = 0.12) {
   return { ref, visible };
 }
 
+/* ── StoryMedia component ──────────────────────────────────── */
+function StoryMedia({ type, src, poster, alt, className = "" }: { type: 'video'|'image', src: string, poster?: string, alt?: string, className?: string }) {
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const prefersReducedMotion = useReducedMotion();
+  
+  useEffect(() => {
+    if (type !== 'video') return;
+    const currentVideo = videoRef.current;
+    if (!currentVideo) return;
+    
+    if (prefersReducedMotion) {
+      currentVideo.pause();
+      return;
+    }
+    
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            currentVideo.play().catch(() => {});
+          } else {
+            currentVideo.pause();
+          }
+        });
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(currentVideo);
+    return () => observer.disconnect();
+  }, [type, src, prefersReducedMotion]);
+
+  if (type === 'video') {
+    return (
+      <video
+        ref={videoRef}
+        src={src}
+        poster={poster}
+        className={`absolute inset-0 size-full object-cover pointer-events-none ${className}`}
+        muted
+        loop
+        playsInline
+        autoPlay
+        preload="metadata"
+      />
+    );
+  }
+  
+  return (
+    <img
+      src={src}
+      alt={alt || ''}
+      className={`absolute inset-0 size-full object-cover pointer-events-none ${className}`}
+    />
+  );
+}
+
 /* ── Parallax hook — returns a ref; updates --parallax-offset CSS var ── */
 function useParallax(speed = 0.18) {
   const ref = useRef<HTMLDivElement>(null);
@@ -250,6 +306,77 @@ const imgIcon = `${assetPathPrefix}/60b99.svg`;
 const imgLine = `${assetPathPrefix}/2b85c.svg`;
 const imgLetsBg = `${assetPathPrefix}/ca8d4.png`;
 const imgLetsRightPanel = `${assetPathPrefix}/b8ece.png`;
+
+const FeaturedStoryCard = ({ 
+  item, 
+  number, 
+  title, 
+  subtitle, 
+  tapeText, 
+  tapeColor, 
+  tapeRotation,
+  tapePosition,
+  cardRotation,
+  filmStrip = false
+}: {
+  item: any;
+  number: string;
+  title: string;
+  subtitle: string;
+  tapeText: string;
+  tapeColor: string;
+  tapeRotation: number;
+  tapePosition: string;
+  cardRotation: number;
+  filmStrip?: boolean;
+}) => {
+  return (
+    <div className="absolute inset-0 size-full z-10 transition-transform duration-500 hover:scale-[1.02] cursor-pointer" style={{ transform: `rotate(${cardRotation}deg)` }}>
+      {/* Paper Card Background */}
+      <div className="absolute -top-[15px] -bottom-[45px] -left-[15px] -right-[15px] bg-[#fdfdfc] shadow-[0_20px_40px_rgba(0,0,0,0.3)] pointer-events-none border border-black/5">
+        <div className="absolute inset-0 opacity-[0.04] mix-blend-multiply pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }} />
+      </div>
+
+      {/* Video Container */}
+      <div className="absolute inset-0 size-full overflow-hidden pointer-events-auto bg-[#111]">
+        <StoryMedia type={item.mediaType} src={item.mediaSrc} poster={item.poster} className="object-cover size-full opacity-90" />
+        
+        {/* Dark gradient for text legibility */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/80 pointer-events-none" />
+
+        {/* Film strip borders (pure CSS) */}
+        {filmStrip && (
+          <>
+            <div className="absolute inset-y-0 left-0 w-[24px] bg-black/40 flex flex-col justify-around py-2 items-center pointer-events-none border-r border-white/10">
+               {[...Array(10)].map((_, i) => <div key={`l-${i}`} className="w-2 h-3 bg-white/20 rounded-[1px]" />)}
+            </div>
+            <div className="absolute inset-y-0 right-0 w-[24px] bg-black/40 flex flex-col justify-around py-2 items-center pointer-events-none border-l border-white/10">
+               {[...Array(10)].map((_, i) => <div key={`r-${i}`} className="w-2 h-3 bg-white/20 rounded-[1px]" />)}
+            </div>
+          </>
+        )}
+        
+        {/* Overlaid Text */}
+        <div className="absolute top-4 left-4 bg-[#111] px-2 py-1 shadow-sm">
+          <span className="font-['Barlow:Bold'] text-white text-[12px]">{number}</span>
+        </div>
+        <div className="absolute bottom-5 left-5 right-5 flex flex-col items-start pointer-events-none">
+          <span className="font-['Inter:Bold'] font-bold text-white text-[24px] leading-[1.1] tracking-tight drop-shadow-lg shadow-black">{title}</span>
+          <span className="font-['Inter:Regular'] text-white/90 text-[10px] tracking-[0.2em] uppercase mt-1 drop-shadow-md shadow-black">{subtitle}</span>
+        </div>
+      </div>
+
+      {/* Tape Label */}
+      <div 
+        className={`absolute ${tapePosition} px-5 py-2 shadow-sm ${tapeColor} flex items-center justify-center pointer-events-none z-20 border border-black/5`}
+        style={{ transform: `rotate(${tapeRotation}deg)` }}
+      >
+        <div className="absolute inset-0 opacity-[0.05] mix-blend-multiply pointer-events-none" style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")` }} />
+        <span className="font-['Covered_By_Your_Grace:Regular'] text-[#111] text-[20px] opacity-90 leading-none">{tapeText}</span>
+      </div>
+    </div>
+  )
+}
 
 export default function App() {
   const heroParallaxRef = useParallax(0.25);
@@ -1075,33 +1202,61 @@ export default function App() {
               <p className="leading-[23.788px] mb-0">to turn your ideas into stunning</p>
               <p className="leading-[23.788px]">visuals.</p>
             </div>
-            <div className="absolute bottom-[131.4px] h-[272.716px] right-[125.87px] w-[188.803px]">
-              <a href={storiesItems[0].mediaSrc} target="_blank" rel="noopener noreferrer" className="block absolute inset-0 size-full cursor-pointer hover:scale-[1.02] transition-transform duration-300 z-10">
-                <MediaCard item={storiesItems[0]} className="absolute inset-0 size-full" imgClassName="object-cover" />
-              </a>
-              <motion.svg className="absolute inset-0 overflow-visible pointer-events-none" viewBox="0 0 189 273">
+            <div className="absolute bottom-[131.4px] h-[272.716px] right-[125.87px] w-[188.803px] z-20">
+              {/* Card 3: Commercial Edits (Rightmost) */}
+              <FeaturedStoryCard
+                item={storiesItems[2]}
+                number="03"
+                title="Commercial Edits"
+                subtitle="BRANDS THAT STAND OUT"
+                tapeText="COMMERCIAL EDITS"
+                tapeColor="bg-[#EBE5D9]"
+                tapeRotation={3}
+                tapePosition="-bottom-[20px] -right-[10px]"
+                cardRotation={4}
+              />
+              <motion.svg className="absolute inset-0 overflow-visible pointer-events-none z-30" viewBox="0 0 189 273">
                 <motion.path initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: false, amount: 0.3 }} transition={{ duration: 1, ease: "easeInOut", delay: 1.2 }} d="M 95 10 C 200 0 210 280 95 285 C -10 290 0 20 95 10" fill="none" stroke="#e63228" strokeWidth="4" strokeLinecap="round" />
                 <motion.path initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: false, amount: 0.3 }} transition={{ duration: 0.6, ease: "easeOut", delay: 2.0 }} d="M 180 140 L 195 155 L 225 110" fill="none" stroke="#111" strokeWidth="5" strokeLinecap="round" strokeLinejoin="round" />
               </motion.svg>
             </div>
-            <div className="absolute bottom-[120.91px] h-[289.199px] right-[365.62px] w-[205.286px]">
-              <a href={storiesItems[1].mediaSrc} target="_blank" rel="noopener noreferrer" className="block absolute inset-0 size-full cursor-pointer hover:scale-[1.02] transition-transform duration-300 z-10">
-                <MediaCard item={storiesItems[1]} className="absolute inset-0 size-full" imgClassName="object-cover" />
-              </a>
+            <div className="absolute bottom-[120.91px] h-[289.199px] right-[365.62px] w-[205.286px] z-20">
+              {/* Card 2: Motion Graphics (Middle) */}
+              <FeaturedStoryCard
+                item={storiesItems[1]}
+                number="02"
+                title="Motion Graphics"
+                subtitle="IDEAS IN MOTION"
+                tapeText="MOTION GRAPHICS"
+                tapeColor="bg-[#EBE5D9]"
+                tapeRotation={-2}
+                tapePosition="-bottom-[25px] left-[10px]"
+                cardRotation={-2}
+              />
               <motion.svg className="absolute inset-0 overflow-visible pointer-events-none -z-10 mix-blend-multiply" viewBox="0 0 205 289">
                 <motion.path initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: false, amount: 0.3 }} transition={{ duration: 0.8, ease: "easeOut", delay: 0.8 }} d="M -10 145 Q 100 120 215 155" fill="none" stroke="rgba(230, 50, 40, 0.4)" strokeWidth="60" strokeLinecap="round" />
               </motion.svg>
             </div>
-            <div className="absolute bottom-[123.91px] h-[284.703px] right-[614.36px] w-[187.305px]">
-              <a href={storiesItems[2].mediaSrc} target="_blank" rel="noopener noreferrer" className="block absolute inset-0 size-full cursor-pointer hover:scale-[1.02] transition-transform duration-300 z-10">
-                <MediaCard item={storiesItems[2]} className="absolute inset-0 size-full" imgClassName="object-cover" />
-              </a>
-              <motion.svg className="absolute inset-0 overflow-visible pointer-events-none" viewBox="0 0 187 285">
+            <div className="absolute bottom-[123.91px] h-[284.703px] right-[614.36px] w-[187.305px] z-30">
+              {/* Card 1: Cinematic Edits (Leftmost) */}
+              <FeaturedStoryCard
+                item={storiesItems[0]}
+                number="01"
+                title="Cinematic Edits"
+                subtitle="EMOTIONAL STORIES"
+                tapeText="VIDEO EDITS"
+                tapeColor="bg-[#F6E9A4]"
+                tapeRotation={-4}
+                tapePosition="-bottom-[15px] left-[20px]"
+                cardRotation={-5}
+                filmStrip={true}
+              />
+              <motion.svg className="absolute inset-0 overflow-visible pointer-events-none z-30" viewBox="0 0 187 285">
                 <motion.path initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: false, amount: 0.3 }} transition={{ duration: 0.8, ease: "easeOut", delay: 0.4 }} d="M 0 285 Q 90 295 190 280" fill="none" stroke="#111" strokeWidth="4" strokeLinecap="round" />
                 <motion.path initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: false, amount: 0.3 }} transition={{ duration: 0.8, ease: "easeOut", delay: 0.6 }} d="M 90 -20 L 95 -5 L 110 -5 L 98 5 L 105 20 L 90 10 L 75 20 L 82 5 L 70 -5 L 85 -5 Z" fill="none" stroke="#e63228" strokeWidth="3" strokeLinejoin="round" />
               </motion.svg>
             </div>
-            <div className="absolute bottom-[125.41px] h-[277.211px] right-[851.11px] w-[170.822px]">
+            <div className="absolute bottom-[125.41px] h-[277.211px] right-[851.11px] w-[170.822px] z-10 opacity-70">
               <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src="/assets/sketch-ideas.png" />
               <motion.svg className="absolute inset-0 overflow-visible pointer-events-none z-50" viewBox="0 0 171 277">
                 <motion.path initial={{ pathLength: 0 }} whileInView={{ pathLength: 1 }} viewport={{ once: false, amount: 0.3 }} transition={{ duration: 1, ease: "easeInOut", delay: 0 }} d="M 85 0 C 180 -10 190 280 85 285 C -20 290 -10 10 85 0" fill="none" stroke="#e63228" strokeWidth="4" strokeLinecap="round" />
@@ -1281,7 +1436,7 @@ export default function App() {
               <div className="relative flex flex-col gap-3 md:w-[85%]">
                 <div className="w-full aspect-[4/5] md:aspect-[16/9] relative rotate-[-1deg] shadow-2xl rounded-sm overflow-hidden group">
                   <a href={storiesItems[0].mediaSrc} target="_blank" rel="noopener noreferrer" className="block absolute inset-0 size-full cursor-pointer hover:scale-[1.01] transition-transform duration-500 z-10">
-                    <MediaCard item={storiesItems[0]} className="absolute inset-0 size-full" imgClassName="object-cover" />
+                    <StoryMedia type={storiesItems[0].mediaType} src={storiesItems[0].mediaSrc} poster={storiesItems[0].poster} alt="Cinematic Edits" className="object-cover" />
                   </a>
                   {/* Tape */}
                   <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-24 h-8 bg-white/40 backdrop-blur-md border border-white/20 rotate-[3deg] z-20 shadow-sm" />
@@ -1298,7 +1453,7 @@ export default function App() {
               <div className="relative flex flex-col gap-3 md:w-[85%] md:self-end">
                 <div className="w-full aspect-[4/5] md:aspect-[16/9] relative rotate-[1.5deg] shadow-2xl rounded-sm overflow-hidden group">
                   <a href={storiesItems[1].mediaSrc} target="_blank" rel="noopener noreferrer" className="block absolute inset-0 size-full cursor-pointer hover:scale-[1.01] transition-transform duration-500 z-10">
-                    <MediaCard item={storiesItems[1]} className="absolute inset-0 size-full" imgClassName="object-cover" />
+                    <StoryMedia type={storiesItems[1].mediaType} src={storiesItems[1].mediaSrc} poster={storiesItems[1].poster} alt="Motion Graphics" className="object-cover" />
                   </a>
                   {/* Tape */}
                   <div className="absolute -top-3 left-1/4 -translate-x-1/2 w-20 h-8 bg-white/40 backdrop-blur-md border border-white/20 rotate-[-4deg] z-20 shadow-sm" />
@@ -1312,7 +1467,7 @@ export default function App() {
               <div className="relative flex flex-col gap-3 md:w-[85%] md:mx-auto">
                 <div className="w-full aspect-[4/5] md:aspect-[16/9] relative rotate-[-0.5deg] shadow-2xl rounded-sm overflow-hidden group">
                   <a href={storiesItems[2].mediaSrc} target="_blank" rel="noopener noreferrer" className="block absolute inset-0 size-full cursor-pointer hover:scale-[1.01] transition-transform duration-500 z-10">
-                    <MediaCard item={storiesItems[2]} className="absolute inset-0 size-full" imgClassName="object-cover" />
+                    <StoryMedia type={storiesItems[2].mediaType} src={storiesItems[2].mediaSrc} poster={storiesItems[2].poster} alt="Commercial Edits" className="object-cover" />
                   </a>
                   {/* Tape */}
                   <div className="absolute -top-3 right-1/4 translate-x-1/2 w-28 h-8 bg-white/40 backdrop-blur-md border border-white/20 rotate-[2deg] z-20 shadow-sm" />
