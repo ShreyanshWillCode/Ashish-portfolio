@@ -510,7 +510,11 @@ export default function App() {
       // Open native mail client as a fallback since no backend is wired
       const subject = `New Project Inquiry from ${formData.name}`;
       const body = `Name: ${formData.name}\nEmail: ${formData.email}\nProject Type: ${formData.projectType || 'Not specified'}\n\nMessage:\n${formData.message}`;
-      window.location.href = `mailto:hello@golfedits.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      // Open Gmail web client
+      const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=thefreelancers27@gmail.com&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+      window.open(gmailUrl, '_blank');
+      // Fallback for native mail client
+      window.location.href = `mailto:thefreelancers27@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
       
       await new Promise(r => setTimeout(r, 800)); // Short UI delay for feedback
       setFormStatus('success');
@@ -1520,14 +1524,14 @@ export default function App() {
               <div className="mt-16 flex flex-col gap-6 border-l border-black/10 pl-6">
                 <p className="font-['Barlow:Bold'] text-[#111] text-xs tracking-widest uppercase">Other ways to reach me</p>
                 <div className="flex flex-col gap-4">
-                  <a href="mailto:hello@golfedits.com" className="flex items-center gap-4 no-underline group w-fit">
-                    <span className="font-['Inter:Regular'] text-[#555] group-hover:text-[#e63228] transition-colors">hello@golfedits.com</span>
+                  <a href="mailto:thefreelancers27@gmail.com" className="flex items-center gap-4 no-underline group w-fit">
+                    <span className="font-['Inter:Regular'] text-[#555] group-hover:text-[#e63228] transition-colors">thefreelancers27@gmail.com</span>
                   </a>
-                  <a href="https://instagram.com/golfedits" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 no-underline group w-fit">
-                    <span className="font-['Inter:Regular'] text-[#555] group-hover:text-[#e63228] transition-colors">@golfedits</span>
+                  <a href="https://instagram.com/the_freelancer27" target="_blank" rel="noopener noreferrer" className="flex items-center gap-4 no-underline group w-fit">
+                    <span className="font-['Inter:Regular'] text-[#555] group-hover:text-[#e63228] transition-colors">@the_freelancer27</span>
                   </a>
-                  <a href="tel:+919876543210" className="flex items-center gap-4 no-underline group w-fit">
-                    <span className="font-['Inter:Regular'] text-[#555] group-hover:text-[#e63228] transition-colors">+91 98765 43210</span>
+                  <a href="tel:+917004505998" className="flex items-center gap-4 no-underline group w-fit">
+                    <span className="font-['Inter:Regular'] text-[#555] group-hover:text-[#e63228] transition-colors">+91 7004505998</span>
                   </a>
                   <div className="flex items-center gap-4">
                     <span className="font-['Inter:Regular'] text-[#888]">Bokaro Steel City, Jharkhand</span>
