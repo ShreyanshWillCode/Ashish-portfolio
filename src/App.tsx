@@ -6,6 +6,7 @@ import { MediaCard } from './components/MediaCard';
 import { PhoneMedia } from './components/PhoneMedia';
 import { PodcastEdits } from './components/PodcastEdits';
 import { ScrollUnderline } from './components/ScrollUnderline';
+import { WebDevelopmentShowcase } from './components/WebDevelopmentShowcase';
 
 const DESIGN_W = 1440;
 
@@ -538,7 +539,7 @@ export default function App() {
             TF.
           </a>
           <div className="hidden md:flex [word-break:break-word] content-stretch font-['DM_Sans:Regular'] font-normal gap-[20px] lg:gap-[32px] items-center leading-[normal] relative shrink-0 text-[#111] text-[13px] whitespace-nowrap">
-            {[['Home','hero'],['Expertise','expertise'],['Podcast Edits','podcast'],['Basic Edits','basic'],['Testimonials','testimonials'],['Commercial Edits','commercials'],['Contact','contact']].map(([label, id]) => (
+            {[['Home','hero'],['Expertise','expertise'],['Podcast Edits','podcast'],['Basic Edits','basic'],['Testimonials','testimonials'],['Commercial Edits','commercials'],['Web Dev','web-dev'],['Contact','contact']].map(([label, id]) => (
               <a key={label} href={`#${id}`} onClick={e => { e.preventDefault(); scrollTo(id); }} className="relative shrink-0 hover:text-[#e63228] transition-colors duration-150 no-underline text-[#111]" style={{ fontVariationSettings: '"opsz" 14' }}>{label}</a>
             ))}
           </div>
@@ -560,7 +561,7 @@ export default function App() {
         {/* Mobile menu */}
         {mobileMenuOpen && (
           <div className="md:hidden w-full bg-[#f0ece4] border-t border-[#ddd9d0] py-[16px] px-[20px] flex flex-col gap-[4px]">
-            {[['Home','hero'],['Expertise','expertise'],['Podcast Edits','podcast'],['Basic Edits','basic'],['Testimonials','testimonials'],['Commercial Edits','commercials'],['Contact','contact']].map(([label, id]) => (
+            {[['Home','hero'],['Expertise','expertise'],['Podcast Edits','podcast'],['Basic Edits','basic'],['Testimonials','testimonials'],['Commercial Edits','commercials'],['Web Dev','web-dev'],['Contact','contact']].map(([label, id]) => (
               <a key={label} href={`#${id}`} onClick={e => { e.preventDefault(); scrollTo(id); }} className="block py-[12px] font-['DM_Sans:Regular'] text-[#111] text-[15px] border-b border-[#ddd9d0] last:border-0 no-underline hover:text-[#e63228] transition-colors duration-150" style={{ fontVariationSettings: '"opsz" 14' }}>{label}</a>
             ))}
           </div>
@@ -579,16 +580,16 @@ export default function App() {
         <div className="absolute inset-0 pointer-events-none z-0" style={{ background: 'radial-gradient(ellipse 90% 85% at 50% 50%, transparent 60%, rgba(180,165,140,0.25) 100%)' }} />
 
         {/* ── MAIN GRID ── */}
-        <div className="relative z-10 w-full max-w-[1440px] mx-auto px-5 sm:px-8 md:px-10 lg:px-14 pt-[80px] md:pt-[92px] pb-10 grid grid-cols-1 xl:grid-cols-12 gap-8 lg:gap-10 items-center">
+        <div className="relative z-10 w-full max-w-[1440px] mx-auto px-4 sm:px-8 md:px-10 lg:px-14 pt-[68px] sm:pt-[84px] md:pt-[92px] pb-6 sm:pb-10 grid grid-cols-1 xl:grid-cols-12 gap-6 sm:gap-8 lg:gap-10 items-center">
 
           {/* ─── LEFT COLUMN: Typography & CTAs ─── */}
-          <div className="hero-enter flex flex-col items-start gap-3.5 relative z-20 xl:col-span-5 w-full" style={{ animationDelay: '0.05s' }}>
+          <div className="hero-enter flex flex-col items-start gap-3 sm:gap-3.5 relative z-20 xl:col-span-5 w-full" style={{ animationDelay: '0.05s' }}>
             {/* Eyebrow */}
             <div className="flex items-center gap-2">
-              <span className="font-['Covered_By_Your_Grace:Regular'] text-[#786C5E] text-[16px] md:text-[18px] tracking-wide">
+              <span className="font-['Covered_By_Your_Grace:Regular'] text-[#786C5E] text-[15px] sm:text-[16px] md:text-[18px] tracking-wide">
                 EDITOR · CREATOR · PROBLEM SOLVER
               </span>
-              <svg className="w-8 h-5 text-[#786C5E] -rotate-12 translate-y-1" viewBox="0 0 32 20" fill="none">
+              <svg className="w-7 sm:w-8 h-4 sm:h-5 text-[#786C5E] -rotate-12 translate-y-1" viewBox="0 0 32 20" fill="none">
                 <path d="M4 6 C12 4, 20 8, 26 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
                 <path d="M20 15 L26 15 L25 10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
@@ -596,55 +597,55 @@ export default function App() {
 
             {/* Main headline */}
             <div className="relative w-fit">
-              <h1 className="hero-enter font-['Barlow_Condensed:Black'] text-[clamp(48px,6.2vw,84px)] leading-[0.88] text-[#111] uppercase tracking-[-0.02em] mb-0" style={{ animationDelay: '0.1s' }}>
+              <h1 className="hero-enter font-['Barlow_Condensed:Black'] text-[clamp(42px,8vw,84px)] leading-[0.88] text-[#111] uppercase tracking-[-0.02em] mb-0" style={{ animationDelay: '0.1s' }}>
                 THE<br />FREELANCERS
               </h1>
               {/* Blue hand-drawn underline SVG */}
-              <svg className="hero-enter w-full max-w-[clamp(260px,32vw,410px)] h-[12px] mt-1.5" viewBox="0 0 410 12" fill="none" style={{ animationDelay: '0.35s' }}>
+              <svg className="hero-enter w-full max-w-[clamp(240px,32vw,410px)] h-[12px] mt-1 sm:mt-1.5" viewBox="0 0 410 12" fill="none" style={{ animationDelay: '0.35s' }}>
                 <path d="M4 8 C60 4, 150 10, 240 6 C310 2, 360 8, 406 5" stroke="#2563EB" strokeWidth="3.5" strokeLinecap="round" fill="none"/>
               </svg>
             </div>
 
             {/* Service lines with marker highlights */}
-            <div className="hero-enter flex flex-col gap-[6px] mt-1.5" style={{ animationDelay: '0.2s' }}>
+            <div className="hero-enter flex flex-col gap-[5px] sm:gap-[6px] mt-1 sm:mt-1.5" style={{ animationDelay: '0.2s' }}>
               <div className="relative inline-block w-fit">
-                <span className="absolute inset-0 -mx-2 -my-0.5 bg-[#FDE047] rotate-[-0.6deg] rounded-[2px]" />
-                <span className="relative font-['Barlow_Condensed:Black'] text-[clamp(20px,2.6vw,32px)] uppercase tracking-tight text-[#111] px-2 block">
+                <span className="absolute inset-0 -mx-1.5 sm:-mx-2 -my-0.5 bg-[#FDE047] rotate-[-0.6deg] rounded-[2px]" />
+                <span className="relative font-['Barlow_Condensed:Black'] text-[clamp(18px,3.8vw,32px)] uppercase tracking-tight text-[#111] px-1.5 sm:px-2 block">
                   VIDEO EDITING &amp;
                 </span>
               </div>
               <div className="relative inline-block w-fit">
-                <span className="absolute inset-0 -mx-2 -my-0.5 bg-[#93C5FD] rotate-[0.4deg] rounded-[2px]" />
-                <span className="relative font-['Barlow_Condensed:Black'] text-[clamp(20px,2.6vw,32px)] uppercase tracking-tight text-[#111] px-2 block">
+                <span className="absolute inset-0 -mx-1.5 sm:-mx-2 -my-0.5 bg-[#93C5FD] rotate-[0.4deg] rounded-[2px]" />
+                <span className="relative font-['Barlow_Condensed:Black'] text-[clamp(18px,3.8vw,32px)] uppercase tracking-tight text-[#111] px-1.5 sm:px-2 block">
                   WEB DEVELOPMENT
                 </span>
               </div>
             </div>
 
             {/* Supporting copy */}
-            <p className="hero-enter font-['Barlow:Regular'] text-[#5F554B] text-[clamp(14px,1.4vw,16px)] leading-[1.6] max-w-[380px] mt-1" style={{ animationDelay: '0.28s' }}>
+            <p className="hero-enter font-['Barlow:Regular'] text-[#5F554B] text-[clamp(13px,1.4vw,16px)] leading-[1.55] max-w-[380px] mt-0.5 sm:mt-1" style={{ animationDelay: '0.28s' }}>
               High-impact edits and modern web experiences for brands that want to stand out.
             </p>
 
             {/* CTAs */}
-            <div className="hero-enter flex flex-wrap gap-3 mt-2" style={{ animationDelay: '0.36s' }}>
+            <div className="hero-enter flex flex-col sm:flex-row gap-2.5 sm:gap-3 w-full sm:w-auto mt-1.5 sm:mt-2" style={{ animationDelay: '0.36s' }}>
               <button
                 onClick={() => scrollTo('expertise')}
-                className="group flex items-center gap-2 bg-[#111] text-[#F0EBE0] font-['Barlow:SemiBold'] text-[13px] tracking-[1.5px] uppercase px-6 py-3.5 hover:bg-[#e63228] transition-all duration-300 cursor-pointer shadow-[3px_3px_0px_rgba(0,0,0,0.25)] hover:shadow-[1px_1px_0px_rgba(0,0,0,0.3)] hover:-translate-y-0.5"
+                className="group flex items-center justify-center gap-2 bg-[#111] text-[#F0EBE0] font-['Barlow:SemiBold'] text-[13px] tracking-[1.5px] uppercase px-6 py-3 sm:py-3.5 hover:bg-[#e63228] transition-all duration-300 cursor-pointer shadow-[3px_3px_0px_rgba(0,0,0,0.25)] hover:shadow-[1px_1px_0px_rgba(0,0,0,0.3)] hover:-translate-y-0.5 w-full sm:w-auto text-center"
               >
                 Explore Our Work
                 <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
               </button>
               <button
                 onClick={() => scrollTo('contact')}
-                className="flex items-center gap-2 border-2 border-[#111] text-[#111] font-['Barlow:SemiBold'] text-[13px] tracking-[1.5px] uppercase px-6 py-3.5 hover:bg-[#111] hover:text-[#F0EBE0] transition-all duration-300 cursor-pointer"
+                className="flex items-center justify-center gap-2 border-2 border-[#111] text-[#111] font-['Barlow:SemiBold'] text-[13px] tracking-[1.5px] uppercase px-6 py-3 sm:py-3.5 hover:bg-[#111] hover:text-[#F0EBE0] transition-all duration-300 cursor-pointer w-full sm:w-auto text-center"
               >
                 Let's Work Together
               </button>
             </div>
 
             {/* Brands row */}
-            <div className="hero-enter flex flex-wrap gap-4 items-center mt-3" style={{ animationDelay: '0.48s' }}>
+            <div className="hero-enter flex flex-wrap gap-3 sm:gap-4 items-center mt-2 sm:mt-3" style={{ animationDelay: '0.48s' }}>
               <div className="flex items-center">
                 {heroBrands.map((brand, i) => (
                   <div
@@ -655,54 +656,50 @@ export default function App() {
                     <a
                       href={brand.href}
                       aria-label={`View ${brand.name} project`}
-                      className="block group border-2 border-[#F0EBE0] rounded-[18px] size-[34px] relative overflow-hidden hover:scale-110 hover:-translate-y-0.5 transition-all duration-300"
+                      className="block group border-2 border-[#F0EBE0] rounded-[18px] size-[32px] sm:size-[34px] relative overflow-hidden hover:scale-110 hover:-translate-y-0.5 transition-all duration-300"
                     >
                       <img alt="" className="absolute inset-0 size-full object-cover" src={brand.logo} />
                     </a>
                   </div>
                 ))}
               </div>
-              <span className="font-['Barlow_Condensed:Black'] text-[#111] text-[20px] leading-none">100+</span>
-              <span className="font-['Barlow:Regular'] text-[#786C5E] text-[13px]">Brands That Trust Us</span>
+              <span className="font-['Barlow_Condensed:Black'] text-[#111] text-[18px] sm:text-[20px] leading-none">100+</span>
+              <span className="font-['Barlow:Regular'] text-[#786C5E] text-[12px] sm:text-[13px]">Brands That Trust Us</span>
             </div>
 
             {/* Scroll indicator */}
-            <p className="scroll-bounce font-['DM_Sans:Regular'] text-[#B0A090] text-[10px] tracking-[2px] uppercase mt-4 hidden md:block" style={{ fontVariationSettings: '"opsz" 14' }}>Scroll To Explore</p>
+            <p className="scroll-bounce font-['DM_Sans:Regular'] text-[#B0A090] text-[10px] tracking-[2px] uppercase mt-3 sm:mt-4 hidden md:block" style={{ fontVariationSettings: '"opsz" 14' }}>Scroll To Explore</p>
           </div>
 
           {/* ─── RIGHT COLUMN: Scrapbook Collage & Owner Subject ─── */}
-          <div className="relative xl:col-span-7 w-full flex items-center justify-center min-h-[360px] sm:min-h-[440px] md:min-h-[540px] xl:min-h-[600px] mt-6 xl:mt-0">
-            <div className="relative w-full max-w-[620px] xl:max-w-[680px] h-full min-h-[360px] sm:min-h-[440px] md:min-h-[540px] xl:min-h-[600px] flex items-center justify-center">
+          <div className="relative xl:col-span-7 w-full flex items-center justify-center min-h-[320px] sm:min-h-[420px] md:min-h-[520px] xl:min-h-[600px] mt-4 sm:mt-6 xl:mt-0">
+            <div className="relative w-full max-w-[560px] xl:max-w-[680px] h-full min-h-[320px] sm:min-h-[420px] md:min-h-[520px] xl:min-h-[600px] flex items-center justify-center">
 
               {/* ── LAYER 2: Main Paper Mat Frame (Behind Owner) ── */}
               <div
-                className="hero-enter absolute w-[86%] md:w-[82%] max-w-[500px] h-[86%] md:h-[80%] bg-[#FAF7F2] rounded-[4px] border border-[#E4DDD2] shadow-[0_16px_50px_rgba(0,0,0,0.08)] pointer-events-none"
+                className="absolute inset-x-0 mx-auto w-[270px] sm:w-[340px] md:w-[82%] max-w-[490px] h-[310px] sm:h-[380px] md:h-[80%] bg-[#FAF7F2] rounded-[4px] border border-[#E4DDD2] shadow-[0_16px_50px_rgba(0,0,0,0.08)] pointer-events-none"
                 style={{
-                  top: '8%',
-                  left: '50%',
-                  transform: 'translateX(-50%) rotate(-1deg)',
+                  top: '6%',
+                  rotate: '-1deg',
                   zIndex: 2,
-                  animationDelay: '0.15s'
                 }}
               >
                 {/* Subtle inner border */}
-                <div className="absolute inset-2.5 sm:inset-3 border border-[#EFE9DF] rounded-[2px]" />
+                <div className="absolute inset-2 sm:inset-3 border border-[#EFE9DF] rounded-[2px]" />
                 {/* Tape on top-left and bottom-right */}
-                <div className="absolute -top-3.5 -left-3.5 w-12 h-5 bg-[#FDE047]/70 rotate-[-35deg] shadow-xs" />
-                <div className="absolute -bottom-3.5 -right-3.5 w-12 h-5 bg-[#FDE047]/70 rotate-[-35deg] shadow-xs" />
+                <div className="absolute -top-3.5 -left-3 w-10 sm:w-12 h-4 sm:h-5 bg-[#FDE047]/70 rotate-[-35deg] shadow-xs" />
+                <div className="absolute -bottom-3.5 -right-3 w-10 sm:w-12 h-4 sm:h-5 bg-[#FDE047]/70 rotate-[-35deg] shadow-xs" />
               </div>
 
               {/* ── LAYER 1: Dark Editing Workspace Monitor (Behind Owner) ── */}
               <div
-                className="hero-enter absolute hidden md:block rounded-[8px] bg-[#141620] border border-[#2D3144] shadow-[0_22px_55px_rgba(0,0,0,0.25)] overflow-hidden"
+                className="absolute hidden md:block rounded-[8px] bg-[#141620] border border-[#2D3144] shadow-[0_22px_55px_rgba(0,0,0,0.25)] overflow-hidden inset-x-0 mx-auto"
                 style={{
                   width: 'clamp(340px, 42vw, 490px)',
                   height: 'clamp(195px, 25vw, 270px)',
                   top: '7%',
-                  left: '50%',
-                  transform: 'translateX(-50%) rotate(0.8deg)',
+                  rotate: '0.8deg',
                   zIndex: 4,
-                  animationDelay: '0.4s'
                 }}
               >
                 {/* Window title bar */}
@@ -748,20 +745,19 @@ export default function App() {
 
               {/* ── LAYER 4: Yellow Sticky Note: "Ideas. Edit. Design. Repeat." ── */}
               <div
-                className="hero-enter hero-deco-float absolute bg-[#FEF08A] shadow-md p-2.5 z-10 hidden md:block"
+                className="hero-deco-float absolute bg-[#FEF08A] shadow-md p-2 sm:p-2.5 z-20"
                 style={{
-                  width: '108px',
-                  top: '3%',
-                  left: '10%',
-                  transform: 'rotate(-3deg)',
-                  animationDelay: '0.5s'
+                  width: '92px',
+                  top: '1%',
+                  left: '4%',
+                  rotate: '-3deg'
                 }}
               >
-                <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-8 h-3.5 bg-[#FDE047]/85 shadow-xs" />
-                <p className="font-['Covered_By_Your_Grace:Regular'] text-[#5B4A2E] text-[15px] leading-[1.35]">
+                <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-7 sm:w-8 h-3 sm:h-3.5 bg-[#FDE047]/85 shadow-xs" />
+                <p className="font-['Covered_By_Your_Grace:Regular'] text-[#5B4A2E] text-[13px] sm:text-[15px] leading-[1.3]">
                   Ideas.<br />Edit.<br />Design.<br />Repeat.
                 </p>
-                <svg className="w-8 h-8 text-[#5B4A2E] mt-0.5 ml-auto block" viewBox="0 0 32 32" fill="none">
+                <svg className="w-6 sm:w-8 h-6 sm:h-8 text-[#5B4A2E] mt-0.5 ml-auto block" viewBox="0 0 32 32" fill="none">
                   <path d="M4 6 C12 6, 20 14, 24 22" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
                   <path d="M18 22 L24 22 L24 16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
@@ -769,8 +765,8 @@ export default function App() {
 
               {/* ── LAYER 5: Comic Burst Rays above Owner Head ── */}
               <svg
-                className="hero-enter absolute hidden md:block text-[#111] pointer-events-none"
-                style={{ top: '5%', left: '50%', transform: 'translateX(-50%)', zIndex: 16 }}
+                className="absolute hidden md:block text-[#111] pointer-events-none inset-x-0 mx-auto"
+                style={{ top: '5%', zIndex: 16 }}
                 width="140" height="46" viewBox="0 0 140 46" fill="none"
               >
                 <path d="M30 38 L12 24" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
@@ -783,20 +779,19 @@ export default function App() {
 
               {/* ── LAYER 3: OWNER CUTOUT FOREGROUND SUBJECT (HIGHEST PRIORITY) ── */}
               <div
-                className="hero-enter relative flex justify-center items-end"
+                className="relative flex justify-center items-end w-full"
                 style={{
                   zIndex: 15,
-                  animationDelay: '0.2s'
                 }}
               >
                 <img
                   src={imgOwnerCutout}
                   alt="Asish — Founder of The Freelancers"
-                  className="relative w-auto max-w-[250px] sm:max-w-[320px] md:max-w-[380px] lg:max-w-[430px] xl:max-w-[460px] h-auto block select-none pointer-events-none"
+                  className="relative w-auto max-w-[210px] sm:max-w-[280px] md:max-w-[360px] lg:max-w-[420px] xl:max-w-[450px] h-auto block select-none pointer-events-none mx-auto"
                   style={{
-                    maxHeight: 'clamp(340px, 60vh, 580px)',
+                    maxHeight: 'clamp(300px, 52vh, 580px)',
                     objectFit: 'contain',
-                    filter: 'drop-shadow(0 0 2px #fff) drop-shadow(0 0 4px #fff) drop-shadow(0 20px 42px rgba(0,0,0,0.24))'
+                    filter: 'drop-shadow(0 0 2px #fff) drop-shadow(0 0 4px #fff) drop-shadow(0 16px 36px rgba(0,0,0,0.22))'
                   }}
                 />
               </div>
@@ -1854,6 +1849,9 @@ export default function App() {
         </div>
       </div>
 
+      {/* ─── WEB DEVELOPMENT PORTFOLIO SHOWCASE ─── */}
+      <WebDevelopmentShowcase />
+
       {/* Let's Create Together — Animated Scrapbook Version */}
       <section id="contact" ref={contactRef} className="relative w-full min-h-[100dvh] bg-[#F5F2E8] overflow-hidden flex flex-col justify-center py-24 md:py-32">
         {/* Background Noise Overlay */}
@@ -2023,7 +2021,7 @@ export default function App() {
           <div className="content-stretch flex flex-col md:flex-row gap-[24px] md:gap-0 items-start md:items-center justify-between relative shrink-0 w-full">
             <a href="#hero" onClick={e => { e.preventDefault(); scrollTo('hero'); }} className="no-underline [word-break:break-word] font-['DM_Sans:Bold'] font-bold leading-[normal] relative shrink-0 text-[#575754] text-[28px] whitespace-nowrap hover:text-[#333] transition-colors" style={{ fontVariationSettings: '"opsz" 14' }}>TF.</a>
             <nav aria-label="Footer navigation" className="[word-break:break-word] content-stretch flex flex-wrap font-['DM_Sans:Regular'] font-normal gap-x-[24px] md:gap-x-[40px] gap-y-[12px] items-start leading-[normal] relative shrink-0 text-[#575754] text-[14px] md:text-[16px]">
-              {[['Home','hero'],['Expertise','expertise'],['Podcast Edits','podcast'],['Basic Edits','basic'],['Testimonials','testimonials'],['Commercial Edits','commercials'],['Contact','contact']].map(([label, id]) => (
+              {[['Home','hero'],['Expertise','expertise'],['Podcast Edits','podcast'],['Basic Edits','basic'],['Testimonials','testimonials'],['Commercial Edits','commercials'],['Web Dev','web-dev'],['Contact','contact']].map(([label, id]) => (
                 <a key={label} href={`#${id}`} onClick={e => { e.preventDefault(); scrollTo(id); }} className="relative shrink-0 no-underline text-[#575754] hover:text-[#333] transition-colors" style={{ fontVariationSettings: '"opsz" 14' }}>{label}</a>
               ))}
             </nav>

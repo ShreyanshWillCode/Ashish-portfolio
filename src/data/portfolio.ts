@@ -221,3 +221,199 @@ export const testimonialsSection = {
     { id: 't3', name: 'Rohan Mehta', role: 'Content Creator', image: 'https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=200&auto=format&fit=crop', quote: 'The edits were beyond my expectations. Super professional and easy to work with!' }
   ]
 };
+
+export interface WebProject {
+  id: string;
+  number: string;
+  title: string;
+  category: string;
+  filterCategory: "all" | "freelance" | "web" | "python";
+  tagline: string;
+  description: string;
+  tags: string[];
+  url: string;
+  repoUrl?: string;
+  displayUrl: string;
+  tapeText: string;
+  tapeColor: string;
+  tapeRotation: number;
+  rotation: number;
+  accentColor: string;
+  images: string[];
+  annotation?: {
+    text: string;
+    position: 'top-right' | 'top-left' | 'bottom-right' | 'bottom-left';
+    arrowDirection?: 'up' | 'down' | 'left' | 'right';
+  };
+  metrics?: { label: string; value: string }[];
+}
+
+export const webDevelopmentProjects: WebProject[] = [
+  {
+    id: 'web-01',
+    number: '01',
+    category: 'FREELANCE PLATFORM',
+    filterCategory: 'freelance',
+    title: 'VELORAGT',
+    tagline: 'Reddit Marketing & Multi-Tier RBAC Dashboard',
+    description: 'A full-stack Reddit marketing platform with role-based access control (RBAC) powering dashboards for owners, distributors, members, and moderators managing campaign queues at scale.',
+    tags: ['React', 'Node.js', 'RBAC', 'WebSocket', 'Tailwind CSS'],
+    url: 'https://veloragt.in/',
+    displayUrl: 'veloragt.in',
+    tapeText: 'FEATURED FREELANCE',
+    tapeColor: 'bg-[#FFE873]',
+    tapeRotation: -3,
+    rotation: -1.2,
+    accentColor: '#FF573E',
+    images: ['/projects/reddit1 (1).png', '/projects/reddit1 (2).png'],
+    annotation: {
+      text: 'Live RBAC Engine ⚡',
+      position: 'top-right',
+      arrowDirection: 'down'
+    },
+    metrics: [
+      { label: 'Architecture', value: '4-Tier RBAC' },
+      { label: 'Queue Engine', value: 'Real-time WebSocket' }
+    ]
+  },
+  {
+    id: 'web-02',
+    number: '02',
+    category: 'LOCAL COMMERCE',
+    filterCategory: 'freelance',
+    title: 'ZAIGRO',
+    tagline: 'On-Demand Food & Grocery Delivery Platform',
+    description: 'A responsive freelance digital platform engineered for a local food and grocery delivery service in Jhalda, Purulia — featuring dynamic item catalogs and streamlined ordering.',
+    tags: ['React', 'Tailwind CSS', 'Web Delivery', 'Vite'],
+    url: 'https://zaigro.in/',
+    displayUrl: 'zaigro.in',
+    tapeText: 'DELIVERY APP',
+    tapeColor: 'bg-[#FFDFDF]',
+    tapeRotation: 2,
+    rotation: 1.5,
+    accentColor: '#FF573E',
+    images: ['/projects/Zaigro.png', '/projects/zaigroo.png'],
+    annotation: {
+      text: 'Real-World Delivery 🛵',
+      position: 'bottom-left',
+      arrowDirection: 'up'
+    },
+    metrics: [
+      { label: 'Service Area', value: 'Jhalda, Purulia' },
+      { label: 'Target', value: 'Food & Groceries' }
+    ]
+  },
+  {
+    id: 'web-03',
+    number: '03',
+    category: 'HEALTHCARE WEB',
+    filterCategory: 'freelance',
+    title: 'DENTAL CLINIC',
+    tagline: 'Modern Clinical Patient Portal & Booking Experience',
+    description: 'A modern, responsive healthcare website showcasing specialized dental procedures, doctor qualifications, patient reviews, and instant appointment scheduling.',
+    tags: ['React', 'Responsive Design', 'Appointment Portal', 'CSS3'],
+    url: 'https://dental-clinic-sample-swart.vercel.app/',
+    displayUrl: 'dental-clinic-sample.vercel.app',
+    tapeText: 'HEALTHCARE PORTAL',
+    tapeColor: 'bg-[#D2E9FF]',
+    tapeRotation: -2,
+    rotation: -0.8,
+    accentColor: '#FF573E',
+    images: ['/projects/dental.png', '/projects/dental clinic.png', '/projects/dental clinic 2.png'],
+    annotation: {
+      text: 'Patient Booking Flow 🦷',
+      position: 'top-left',
+      arrowDirection: 'right'
+    },
+    metrics: [
+      { label: 'Deployment', value: 'Vercel Live' },
+      { label: 'Responsiveness', value: '100% Fluid' }
+    ]
+  },
+  {
+    id: 'web-04',
+    number: '04',
+    category: 'PROPERTY PORTAL',
+    filterCategory: 'web',
+    title: 'HOUSE RENTAL',
+    tagline: 'Property Listing & Real Estate Management Web App',
+    description: 'A modern full-stack rental platform allowing users to browse, filter, list, and manage real estate properties with search filters and detail modals.',
+    tags: ['React', 'Node.js', 'MongoDB', 'Express', 'REST API'],
+    url: 'https://house-rental-blush.vercel.app/',
+    repoUrl: 'https://github.com/ShreyanshWillCode/House-Rental-',
+    displayUrl: 'house-rental-blush.vercel.app',
+    tapeText: 'REAL ESTATE APP',
+    tapeColor: 'bg-[#FFE873]',
+    tapeRotation: 3,
+    rotation: 1.1,
+    accentColor: '#FF573E',
+    images: ['/projects/House.png', '/projects/House rental.png', '/projects/House rental2.png'],
+    annotation: {
+      text: 'MERN Property Search 🏡',
+      position: 'top-right',
+      arrowDirection: 'down'
+    },
+    metrics: [
+      { label: 'Stack', value: 'MERN Stack' },
+      { label: 'Database', value: 'MongoDB Atlas' }
+    ]
+  },
+  {
+    id: 'web-05',
+    number: '05',
+    category: 'ALGORITHMS & SEARCH',
+    filterCategory: 'python',
+    title: 'MINI-SEARCH ENGINE',
+    tagline: 'Web Crawler & TF-IDF Ranking Engine from Scratch',
+    description: 'A lightweight search engine that crawls web pages, tokenizes content, and computes relevance ranking using TF-IDF and BFS graph exploration — built from scratch.',
+    tags: ['Python', 'TF-IDF', 'BFS Crawler', 'Algorithms', 'FastAPI'],
+    url: 'https://mini-search-engine-eight.vercel.app/',
+    repoUrl: 'https://github.com/ShreyanshWillCode/Mini-Search-Engine',
+    displayUrl: 'mini-search-engine.vercel.app',
+    tapeText: 'PYTHON & ALGORITHMS',
+    tapeColor: 'bg-[#E5D4FF]',
+    tapeRotation: -2.5,
+    rotation: -1.3,
+    accentColor: '#FF573E',
+    images: ['/projects/gravity search.png'],
+    annotation: {
+      text: 'Custom TF-IDF Crawler 🔍',
+      position: 'bottom-right',
+      arrowDirection: 'up'
+    },
+    metrics: [
+      { label: 'Algorithm', value: 'TF-IDF & BFS' },
+      { label: 'Language', value: 'Python Core' }
+    ]
+  },
+  {
+    id: 'web-06',
+    number: '06',
+    category: 'FINTECH APP',
+    filterCategory: 'web',
+    title: 'EWALLET',
+    tagline: 'Digital Wallet & Peer-to-Peer Balance Transfers',
+    description: 'A secure digital wallet application featuring peer-to-peer balance transfers, transaction ledgers, bank account linking, and real-time balance updates.',
+    tags: ['React', 'Tailwind CSS', 'Node.js', 'MongoDB', 'JWT Auth'],
+    url: 'https://ewallet-eight.vercel.app/',
+    repoUrl: 'https://github.com/ShreyanshWillCode/User-Wallet-APP',
+    displayUrl: 'ewallet-eight.vercel.app',
+    tapeText: 'FINTECH PLATFORM',
+    tapeColor: 'bg-[#D2E9FF]',
+    tapeRotation: 1.8,
+    rotation: 0.9,
+    accentColor: '#FF573E',
+    images: ['/projects/Ewallet.png'],
+    annotation: {
+      text: 'Secure P2P Transfers 💳',
+      position: 'top-left',
+      arrowDirection: 'right'
+    },
+    metrics: [
+      { label: 'Security', value: 'JWT & Session Auth' },
+      { label: 'Database', value: 'MongoDB Ledger' }
+    ]
+  }
+];
+
+

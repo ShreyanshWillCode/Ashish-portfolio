@@ -8,9 +8,26 @@ html {
   overflow-x: clip;
 }
 
-#hero, #expertise, #podcast, #basic, #testimonials, #commercials, #contact {
+#hero, #expertise, #podcast, #basic, #testimonials, #commercials, #web-dev, #contact {
   scroll-margin-top: var(--navbar-height);
 }
+
+/* ─── WebBuilders outlined typography & geometric utilities ─── */
+.text-stroke-black {
+  -webkit-text-stroke: 1.5px #111111;
+  color: transparent;
+}
+.text-stroke-coral {
+  -webkit-text-stroke: 1.5px #FF573E;
+  color: transparent;
+}
+@media (min-width: 768px) {
+  .text-stroke-black-lg {
+    -webkit-text-stroke: 2.5px #111111;
+    color: transparent;
+  }
+}
+
 
 body {
   overflow-x: hidden;
