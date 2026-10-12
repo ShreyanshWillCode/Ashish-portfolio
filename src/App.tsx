@@ -188,6 +188,11 @@ function ScaledArtSection({
 }
 
 const assetPathPrefix = "/assets";
+const imgOwnerCutout = `${assetPathPrefix}/owner-cutout.png`;
+const imgOwnerPolaroid = `${assetPathPrefix}/owner-polaroid.jpg`;
+const imgScrapbookCamera = `${assetPathPrefix}/scrapbook-camera.jpg`;
+const imgScrapbookLaptop = `${assetPathPrefix}/scrapbook-laptop.jpg`;
+const imgScrapbookMonitor = `${assetPathPrefix}/scrapbook-monitor.jpg`;
 const imgRectangle = `${assetPathPrefix}/58afb.png`;
 const imgRectangle1 = `${assetPathPrefix}/b133d.png`;
 const imgRectangle2 = `${assetPathPrefix}/cfc6c.png`;
@@ -562,90 +567,453 @@ export default function App() {
         )}
       </nav>
 
-      {/* Hero */}
-      <div id="hero" className="bg-[#ece8df] px-5 md:px-10 lg:px-20 content-stretch flex flex-col items-center pb-[48px] md:pb-[64px] pt-[76px] md:pt-[104px] relative shrink-0 w-full overflow-hidden">
-        <div ref={heroParallaxRef} className="parallax-inner content-stretch flex flex-col md:flex-row gap-[40px] md:gap-[80px] items-center max-w-7xl mx-auto relative shrink-0 w-full">
-          <div className="content-stretch flex flex-[1_0_0] flex-col gap-[12px] md:gap-[20px] items-start min-w-px relative w-full">
-            <div className="hero-enter content-stretch flex gap-[12px] items-center relative shrink-0" style={{ animationDelay: '0.05s' }}>
-              <p className="[word-break:break-word] font-['Barlow:Regular'] leading-[normal] not-italic relative shrink-0 text-[#bebcb6] text-[12px] tracking-[1px] whitespace-nowrap">001</p>
-              <div className="bg-[#bebcb6] h-px relative shrink-0 w-[32px]" />
-              <ScrollUnderline className="[word-break:break-word] font-['Barlow:Regular'] leading-[normal] not-italic relative shrink-0 text-[#bebcb6] text-[11px] tracking-[0.5px] uppercase">
-                {`Video Editing & Motion Design Studio`}
-              </ScrollUnderline>
+      {/* ─── HERO: Scrapbook Editorial ─────────────────────────── */}
+      <div id="hero" className="relative w-full overflow-x-clip bg-[#F0EBE0]" style={{ minHeight: '100dvh' }}>
+        {/* Paper grain texture overlay */}
+        <div
+          className="absolute inset-0 pointer-events-none z-0 opacity-[0.35]"
+          style={{ backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E")`, backgroundSize: '256px 256px' }}
+        />
+
+        {/* Warm vignette at edges */}
+        <div className="absolute inset-0 pointer-events-none z-0" style={{ background: 'radial-gradient(ellipse 90% 85% at 50% 50%, transparent 60%, rgba(180,165,140,0.25) 100%)' }} />
+
+        {/* ── MAIN GRID ── */}
+        <div className="relative z-10 w-full max-w-[1440px] mx-auto px-5 sm:px-8 md:px-10 lg:px-14 pt-[80px] md:pt-[92px] pb-10 grid grid-cols-1 xl:grid-cols-12 gap-8 lg:gap-10 items-center">
+
+          {/* ─── LEFT COLUMN: Typography & CTAs ─── */}
+          <div className="hero-enter flex flex-col items-start gap-3.5 relative z-20 xl:col-span-5 w-full" style={{ animationDelay: '0.05s' }}>
+            {/* Eyebrow */}
+            <div className="flex items-center gap-2">
+              <span className="font-['Covered_By_Your_Grace:Regular'] text-[#786C5E] text-[16px] md:text-[18px] tracking-wide">
+                EDITOR · CREATOR · PROBLEM SOLVER
+              </span>
+              <svg className="w-8 h-5 text-[#786C5E] -rotate-12 translate-y-1" viewBox="0 0 32 20" fill="none">
+                <path d="M4 6 C12 4, 20 8, 26 15" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                <path d="M20 15 L26 15 L25 10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+              </svg>
             </div>
-            <div className="[word-break:break-word] content-stretch flex flex-col gap-[clamp(4px,1vw,8px)] items-start not-italic relative shrink-0 w-full" style={{ fontSize: 'clamp(48px, 9vw, 96px)' }}>
-              <div className="hero-enter font-['Barlow_Condensed:ExtraBold'] leading-[1] relative shrink-0 text-[#242423] w-full" style={{ animationDelay: '0.18s' }}>
-                <p className="leading-[1] mb-0">{`Editing That Turns `}</p>
-                <p className="leading-[1]">Vision Into</p>
+
+            {/* Main headline */}
+            <div className="relative w-fit">
+              <h1 className="hero-enter font-['Barlow_Condensed:Black'] text-[clamp(48px,6.2vw,84px)] leading-[0.88] text-[#111] uppercase tracking-[-0.02em] mb-0" style={{ animationDelay: '0.1s' }}>
+                THE<br />FREELANCERS
+              </h1>
+              {/* Blue hand-drawn underline SVG */}
+              <svg className="hero-enter w-full max-w-[clamp(260px,32vw,410px)] h-[12px] mt-1.5" viewBox="0 0 410 12" fill="none" style={{ animationDelay: '0.35s' }}>
+                <path d="M4 8 C60 4, 150 10, 240 6 C310 2, 360 8, 406 5" stroke="#2563EB" strokeWidth="3.5" strokeLinecap="round" fill="none"/>
+              </svg>
+            </div>
+
+            {/* Service lines with marker highlights */}
+            <div className="hero-enter flex flex-col gap-[6px] mt-1.5" style={{ animationDelay: '0.2s' }}>
+              <div className="relative inline-block w-fit">
+                <span className="absolute inset-0 -mx-2 -my-0.5 bg-[#FDE047] rotate-[-0.6deg] rounded-[2px]" />
+                <span className="relative font-['Barlow_Condensed:Black'] text-[clamp(20px,2.6vw,32px)] uppercase tracking-tight text-[#111] px-2 block">
+                  VIDEO EDITING &amp;
+                </span>
               </div>
-              <p className="hero-enter font-['Barlow_Condensed:Black'] leading-[1] relative shrink-0 text-[#828280]" style={{ animationDelay: '0.3s' }}>
-                Cinematic Reality
-              </p>
+              <div className="relative inline-block w-fit">
+                <span className="absolute inset-0 -mx-2 -my-0.5 bg-[#93C5FD] rotate-[0.4deg] rounded-[2px]" />
+                <span className="relative font-['Barlow_Condensed:Black'] text-[clamp(20px,2.6vw,32px)] uppercase tracking-tight text-[#111] px-2 block">
+                  WEB DEVELOPMENT
+                </span>
+              </div>
             </div>
-            <p className="hero-enter [word-break:break-word] font-['Barlow:Regular'] leading-[1.5] not-italic relative shrink-0 text-[#787774] text-[clamp(16px,2vw,20px)] w-full max-w-[480px]" style={{ animationDelay: '0.44s' }}>{`Professional video editing & motion design built to increase engagement, retention, and brand authority.`}</p>
-            <div className="hero-enter content-stretch flex items-start pt-[12px] relative shrink-0" style={{ animationDelay: '0.56s' }}>
-              <button onClick={() => scrollTo('expertise')} className="[word-break:break-word] bg-[#111] content-stretch flex font-['Barlow:SemiBold'] gap-[12px] items-center leading-[normal] px-[24px] py-[12px] relative rounded-[24px] shrink-0 whitespace-nowrap cursor-pointer hover:bg-[#333] transition-colors duration-150">
-                <span className="not-italic relative shrink-0 text-[#a09f99] text-[15px] tracking-[1.2px]">View Our Work</span>
-                <span className="font-semibold relative shrink-0 text-[#868684] text-[14px]" style={{ fontVariationSettings: '"CTGR" 0, "wdth" 100' }}>→</span>
+
+            {/* Supporting copy */}
+            <p className="hero-enter font-['Barlow:Regular'] text-[#5F554B] text-[clamp(14px,1.4vw,16px)] leading-[1.6] max-w-[380px] mt-1" style={{ animationDelay: '0.28s' }}>
+              High-impact edits and modern web experiences for brands that want to stand out.
+            </p>
+
+            {/* CTAs */}
+            <div className="hero-enter flex flex-wrap gap-3 mt-2" style={{ animationDelay: '0.36s' }}>
+              <button
+                onClick={() => scrollTo('expertise')}
+                className="group flex items-center gap-2 bg-[#111] text-[#F0EBE0] font-['Barlow:SemiBold'] text-[13px] tracking-[1.5px] uppercase px-6 py-3.5 hover:bg-[#e63228] transition-all duration-300 cursor-pointer shadow-[3px_3px_0px_rgba(0,0,0,0.25)] hover:shadow-[1px_1px_0px_rgba(0,0,0,0.3)] hover:-translate-y-0.5"
+              >
+                Explore Our Work
+                <svg className="w-4 h-4 transition-transform duration-300 group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14 5l7 7m0 0l-7 7m7-7H3" /></svg>
+              </button>
+              <button
+                onClick={() => scrollTo('contact')}
+                className="flex items-center gap-2 border-2 border-[#111] text-[#111] font-['Barlow:SemiBold'] text-[13px] tracking-[1.5px] uppercase px-6 py-3.5 hover:bg-[#111] hover:text-[#F0EBE0] transition-all duration-300 cursor-pointer"
+              >
+                Let's Work Together
               </button>
             </div>
-            <div className="content-stretch flex flex-wrap gap-[16px] items-center pt-[24px] relative shrink-0">
-              <div className="content-stretch flex items-start relative shrink-0">
+
+            {/* Brands row */}
+            <div className="hero-enter flex flex-wrap gap-4 items-center mt-3" style={{ animationDelay: '0.48s' }}>
+              <div className="flex items-center">
                 {heroBrands.map((brand, i) => (
-                  <div 
+                  <div
                     key={brand.id}
-                    className="hero-enter relative shrink-0"
-                    style={{
-                      marginRight: i === heroBrands.length - 1 ? '0' : '-8px',
-                      zIndex: heroBrands.length - i,
-                      animationDelay: `${0.68 + i * 0.1}s`
-                    }}
+                    style={{ marginRight: i === heroBrands.length - 1 ? 0 : '-8px', zIndex: heroBrands.length - i }}
+                    className="relative"
                   >
                     <a
                       href={brand.href}
                       aria-label={`View ${brand.name} project`}
-                      className="block group border-2 border-[#ece8df] border-solid relative rounded-[18px] shrink-0 size-[36px] cursor-pointer outline-none focus-visible:ring-2 focus-visible:ring-[#e63228] transition-all duration-300 hover:scale-[1.15] hover:-translate-y-1 hover:shadow-md hover:border-white animate-floatLogo motion-reduce:animate-none"
-                      style={{ animationDelay: brand.delay }}
+                      className="block group border-2 border-[#F0EBE0] rounded-[18px] size-[34px] relative overflow-hidden hover:scale-110 hover:-translate-y-0.5 transition-all duration-300"
                     >
-                      <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none rounded-[18px] size-full" src={brand.logo} />
-                      
-                      {/* Tooltip */}
-                      <div className="hidden md:block absolute -top-10 left-1/2 -translate-x-1/2 opacity-0 group-hover:opacity-100 transition-opacity duration-200 pointer-events-none bg-[#111] text-[#ece8df] text-[11px] font-['DM_Sans:Medium'] px-2 py-1 rounded shadow-md whitespace-nowrap z-50">
-                        {brand.name}
-                        <div className="absolute top-full left-1/2 -translate-x-1/2 border-4 border-transparent border-t-[#111]" />
-                      </div>
+                      <img alt="" className="absolute inset-0 size-full object-cover" src={brand.logo} />
                     </a>
                   </div>
                 ))}
               </div>
-              <p className="hero-enter [word-break:break-word] font-['DM_Sans:Bold'] font-bold leading-[normal] relative shrink-0 text-[#787774] text-[clamp(16px,2vw,18px)] whitespace-nowrap" style={{ fontVariationSettings: '"opsz" 14', animationDelay: `${0.68 + heroBrands.length * 0.1}s` }}>100+</p>
-              <p className="hero-enter [word-break:break-word] font-['DM_Sans:Regular'] font-normal leading-[normal] relative shrink-0 text-[#b4b1ab] text-[clamp(12px,1.5vw,13px)] whitespace-nowrap" style={{ fontVariationSettings: '"opsz" 14', animationDelay: `${0.68 + heroBrands.length * 0.1 + 0.1}s` }}>Brands That Trust Us</p>
+              <span className="font-['Barlow_Condensed:Black'] text-[#111] text-[20px] leading-none">100+</span>
+              <span className="font-['Barlow:Regular'] text-[#786C5E] text-[13px]">Brands That Trust Us</span>
             </div>
+
+            {/* Scroll indicator */}
+            <p className="scroll-bounce font-['DM_Sans:Regular'] text-[#B0A090] text-[10px] tracking-[2px] uppercase mt-4 hidden md:block" style={{ fontVariationSettings: '"opsz" 14' }}>Scroll To Explore</p>
           </div>
-          <div className="hero-enter flex content-stretch h-[clamp(320px,50vw,540px)] items-center justify-center relative shrink-0 w-[clamp(180px,30vw,263px)] mx-auto md:mx-0 mt-8 md:mt-0" style={{ animationDelay: '0.25s' }}>
-            <div className="content-stretch flex h-full items-start relative rounded-[8px] shrink-0 w-full overflow-hidden">
-              <div className="flex-[1_0_0] h-full min-w-px relative">
-                <img alt="" className="absolute inset-0 max-w-none object-cover pointer-events-none size-full" src={imgRectangle4} />
+
+          {/* ─── RIGHT COLUMN: Scrapbook Collage & Owner Subject ─── */}
+          <div className="relative xl:col-span-7 w-full flex items-center justify-center min-h-[360px] sm:min-h-[440px] md:min-h-[540px] xl:min-h-[600px] mt-6 xl:mt-0">
+            <div className="relative w-full max-w-[620px] xl:max-w-[680px] h-full min-h-[360px] sm:min-h-[440px] md:min-h-[540px] xl:min-h-[600px] flex items-center justify-center">
+
+              {/* ── LAYER 2: Main Paper Mat Frame (Behind Owner) ── */}
+              <div
+                className="hero-enter absolute w-[86%] md:w-[82%] max-w-[500px] h-[86%] md:h-[80%] bg-[#FAF7F2] rounded-[4px] border border-[#E4DDD2] shadow-[0_16px_50px_rgba(0,0,0,0.08)] pointer-events-none"
+                style={{
+                  top: '8%',
+                  left: '50%',
+                  transform: 'translateX(-50%) rotate(-1deg)',
+                  zIndex: 2,
+                  animationDelay: '0.15s'
+                }}
+              >
+                {/* Subtle inner border */}
+                <div className="absolute inset-2.5 sm:inset-3 border border-[#EFE9DF] rounded-[2px]" />
+                {/* Tape on top-left and bottom-right */}
+                <div className="absolute -top-3.5 -left-3.5 w-12 h-5 bg-[#FDE047]/70 rotate-[-35deg] shadow-xs" />
+                <div className="absolute -bottom-3.5 -right-3.5 w-12 h-5 bg-[#FDE047]/70 rotate-[-35deg] shadow-xs" />
               </div>
-              {/* Decorative badge — floats inside image, bottom-right area */}
-              <div className="absolute bottom-[24px] right-[12px]">
-                <div className="badge-float">
-                  <div className="bg-[#f5f0d0] content-stretch drop-shadow-[0px_4px_5px_rgba(0,0,0,0.1)] flex flex-col items-start p-[12px] relative">
-                    <div className="[word-break:break-word] font-['Oswald:Bold'] font-bold leading-[0] relative shrink-0 text-[#111] text-[12px] text-center whitespace-nowrap">
-                      <p className="leading-[1.15] mb-0">Good</p>
-                      <p className="leading-[1.15] mb-0">Edits</p>
-                      <p className="leading-[1.15] mb-0">Better</p>
-                      <p className="leading-[1.15]">Stories.</p>
+
+              {/* ── LAYER 1: Dark Editing Workspace Monitor (Behind Owner) ── */}
+              <div
+                className="hero-enter absolute hidden md:block rounded-[8px] bg-[#141620] border border-[#2D3144] shadow-[0_22px_55px_rgba(0,0,0,0.25)] overflow-hidden"
+                style={{
+                  width: 'clamp(340px, 42vw, 490px)',
+                  height: 'clamp(195px, 25vw, 270px)',
+                  top: '7%',
+                  left: '50%',
+                  transform: 'translateX(-50%) rotate(0.8deg)',
+                  zIndex: 4,
+                  animationDelay: '0.4s'
+                }}
+              >
+                {/* Window title bar */}
+                <div className="bg-[#0D0F17] h-6 flex items-center px-3 gap-2 border-b border-[#232738]">
+                  <div className="w-2 h-2 rounded-full bg-[#EF4444]" />
+                  <div className="w-2 h-2 rounded-full bg-[#F59E0B]" />
+                  <div className="w-2 h-2 rounded-full bg-[#10B981]" />
+                  <span className="text-[#64748B] text-[9px] ml-2 font-['Barlow:Regular'] tracking-widest uppercase">
+                    PREMIERE PRO · THE_FREELANCERS.PRPROJ
+                  </span>
+                </div>
+                {/* Workspace interior */}
+                <div className="p-2 flex flex-col h-[calc(100%-24px)] justify-between bg-[#11131C]">
+                  {/* Video viewer frame */}
+                  <div className="relative w-full h-[64%] bg-[#08090E] rounded overflow-hidden border border-[#232738]">
+                    <img
+                      src={imgOwnerPolaroid}
+                      alt=""
+                      className="w-full h-full object-cover opacity-80 contrast-125"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-transparent to-transparent flex items-end justify-between p-2">
+                      <span className="text-[9px] text-white/90 font-mono tracking-wider">00:01:24:18 / REC ●</span>
+                      <span className="text-[8px] text-yellow-300 font-mono uppercase bg-yellow-500/20 px-1 rounded">4K 60FPS</span>
+                    </div>
+                  </div>
+                  {/* Multi-track Timeline */}
+                  <div className="h-[30%] bg-[#0B0D14] rounded p-1.5 flex flex-col justify-center gap-1 border border-[#1E2232]">
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-[8px] text-[#64748B] w-4 font-mono">V1</span>
+                      <div className="h-2 rounded-xs bg-[#3B82F6] opacity-85 w-[45%]" />
+                      <div className="h-2 rounded-xs bg-[#F59E0B] opacity-85 w-[35%]" />
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-[8px] text-[#64748B] w-4 font-mono">A1</span>
+                      <div className="h-2 rounded-xs bg-[#10B981] opacity-80 w-[70%]" />
+                      <div className="h-2 rounded-xs bg-[#EC4899] opacity-80 w-[25%]" />
                     </div>
                   </div>
                 </div>
+                {/* Masking tape on top */}
+                <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 w-16 h-5 bg-[#FDE047]/65 rotate-[-1deg] shadow-xs pointer-events-none" />
               </div>
+
+              {/* ── LAYER 4: Yellow Sticky Note: "Ideas. Edit. Design. Repeat." ── */}
+              <div
+                className="hero-enter hero-deco-float absolute bg-[#FEF08A] shadow-md p-2.5 z-10 hidden md:block"
+                style={{
+                  width: '108px',
+                  top: '3%',
+                  left: '10%',
+                  transform: 'rotate(-3deg)',
+                  animationDelay: '0.5s'
+                }}
+              >
+                <div className="absolute -top-2 left-1/2 -translate-x-1/2 w-8 h-3.5 bg-[#FDE047]/85 shadow-xs" />
+                <p className="font-['Covered_By_Your_Grace:Regular'] text-[#5B4A2E] text-[15px] leading-[1.35]">
+                  Ideas.<br />Edit.<br />Design.<br />Repeat.
+                </p>
+                <svg className="w-8 h-8 text-[#5B4A2E] mt-0.5 ml-auto block" viewBox="0 0 32 32" fill="none">
+                  <path d="M4 6 C12 6, 20 14, 24 22" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                  <path d="M18 22 L24 22 L24 16" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+              </div>
+
+              {/* ── LAYER 5: Comic Burst Rays above Owner Head ── */}
+              <svg
+                className="hero-enter absolute hidden md:block text-[#111] pointer-events-none"
+                style={{ top: '5%', left: '50%', transform: 'translateX(-50%)', zIndex: 16 }}
+                width="140" height="46" viewBox="0 0 140 46" fill="none"
+              >
+                <path d="M30 38 L12 24" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+                <path d="M42 28 L30 12" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+                <path d="M52 24 L48 6" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+                <path d="M88 24 L92 6" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+                <path d="M98 28 L110 12" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+                <path d="M110 38 L128 24" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" />
+              </svg>
+
+              {/* ── LAYER 3: OWNER CUTOUT FOREGROUND SUBJECT (HIGHEST PRIORITY) ── */}
+              <div
+                className="hero-enter relative flex justify-center items-end"
+                style={{
+                  zIndex: 15,
+                  animationDelay: '0.2s'
+                }}
+              >
+                <img
+                  src={imgOwnerCutout}
+                  alt="Asish — Founder of The Freelancers"
+                  className="relative w-auto max-w-[250px] sm:max-w-[320px] md:max-w-[380px] lg:max-w-[430px] xl:max-w-[460px] h-auto block select-none pointer-events-none"
+                  style={{
+                    maxHeight: 'clamp(340px, 60vh, 580px)',
+                    objectFit: 'contain',
+                    filter: 'drop-shadow(0 0 2px #fff) drop-shadow(0 0 4px #fff) drop-shadow(0 20px 42px rgba(0,0,0,0.24))'
+                  }}
+                />
+              </div>
+
+              {/* ── LAYER 4: "Beyond Creativity" Tools Notebook Card (Top Right) ── */}
+              <div
+                className="hero-enter hero-deco-float absolute bg-white shadow-[4px_8px_24px_rgba(0,0,0,0.12)] p-3.5 sm:p-4 rounded-[2px] z-20 hidden lg:block"
+                style={{
+                  width: '175px',
+                  top: '3%',
+                  right: '3%',
+                  transform: 'rotate(2.5deg)',
+                  animationDelay: '0.55s'
+                }}
+              >
+                <div className="absolute -top-3 left-1/2 -translate-x-1/2 w-12 h-5 bg-[#FDE047]/80 shadow-xs rotate-[1deg]" />
+                <div className="relative mb-2.5">
+                  <p className="font-['Covered_By_Your_Grace:Regular'] text-[#111] text-[19px] leading-tight relative z-10">
+                    Beyond <span className="relative inline-block"><span className="absolute inset-0 bg-[#FDE047] -my-0.5 -mx-1 -z-10 rotate-[-1deg]" />Creativity</span>
+                  </p>
+                </div>
+                <div className="flex flex-col gap-2">
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-5 h-5 rounded-[3px] bg-[#39285C] text-[#9999FF] font-bold text-[9px] flex items-center justify-center font-sans">Ae</div>
+                    <span className="font-['Barlow:Regular'] text-[#333] text-[12px]">After Effects</span>
+                  </div>
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-5 h-5 rounded-[3px] bg-[#00005B] text-[#9999FF] font-bold text-[9px] flex items-center justify-center font-sans">Pr</div>
+                    <span className="font-['Barlow:Regular'] text-[#333] text-[12px]">Premiere Pro</span>
+                  </div>
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-5 h-5 rounded-full bg-gradient-to-tr from-[#EF4444] via-[#10B981] to-[#3B82F6] p-[1.5px] flex items-center justify-center">
+                      <div className="w-full h-full bg-[#111] rounded-full flex items-center justify-center">
+                        <div className="w-1.5 h-1.5 rounded-full bg-white" />
+                      </div>
+                    </div>
+                    <span className="font-['Barlow:Regular'] text-[#333] text-[12px]">DaVinci Resolve</span>
+                  </div>
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-5 h-5 rounded-[3px] bg-[#2C2D30] flex items-center justify-center">
+                      <svg className="w-3 h-3" viewBox="0 0 38 57" fill="none">
+                        <path d="M19 28.5C19 23.2533 23.2533 19 28.5 19C33.7467 19 38 23.2533 38 28.5C38 33.7467 33.7467 38 28.5 38C23.2533 38 19 33.7467 19 28.5Z" fill="#1ABCFE"/>
+                        <path d="M0 47.5C0 42.2533 4.25329 38 9.5 38H19V47.5C19 52.7467 14.7467 57 9.5 57C4.25329 57 0 52.7467 0 47.5Z" fill="#0ACF83"/>
+                        <path d="M19 0V19H28.5C33.7467 19 38 14.7467 38 9.5C38 4.25329 33.7467 0 28.5 0H19Z" fill="#FF7262"/>
+                        <path d="M0 9.5C0 14.7467 4.25329 19 9.5 19H19V0H9.5C4.25329 0 0 4.25329 0 9.5Z" fill="#F24E1E"/>
+                        <path d="M0 28.5C0 33.7467 4.25329 38 9.5 38H19V19H9.5C4.25329 19 0 23.2533 0 28.5Z" fill="#A259FF"/>
+                      </svg>
+                    </div>
+                    <span className="font-['Barlow:Regular'] text-[#333] text-[12px]">Figma</span>
+                  </div>
+                  <div className="flex items-center gap-2.5">
+                    <div className="w-5 h-5 rounded-[3px] bg-[#1E293B] text-[#38BDF8] font-mono font-bold text-[9px] flex items-center justify-center">&lt;/&gt;</div>
+                    <span className="font-['Barlow:Regular'] text-[#333] text-[12px]">Web Development</span>
+                  </div>
+                </div>
+                <div className="mt-3 flex flex-col gap-[6px]">
+                  {[...Array(3)].map((_, i) => <div key={i} className="h-px bg-[#3B82F6]/20 w-full" />)}
+                </div>
+              </div>
+
+              {/* ── LAYER 5: "SAME IDEAS MORE IMPACT." (Far Right Annotation) ── */}
+              <div
+                className="hero-enter absolute hidden xl:block"
+                style={{
+                  top: '5%',
+                  right: '-10%',
+                  transform: 'rotate(2deg)',
+                  animationDelay: '0.7s',
+                  zIndex: 25
+                }}
+              >
+                <p className="font-['Barlow_Condensed:Black'] text-[#111] text-[15px] leading-tight uppercase tracking-wider">
+                  SAME<br />IDEAS.<br />MORE<br />IMPACT.
+                </p>
+                <svg className="w-8 h-10 text-[#111] mt-1 ml-2" viewBox="0 0 32 40" fill="none">
+                  <path d="M8 4 C18 12, 22 24, 14 36" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                  <path d="M12 30 L14 36 L20 34" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                </svg>
+                <svg className="w-5 h-5 text-[#111] ml-4 mt-1" viewBox="0 0 24 24" fill="currentColor">
+                  <path d="M12 0 L14 9 L23 12 L14 15 L12 24 L10 15 L1 12 L10 9 Z"/>
+                </svg>
+              </div>
+
+              {/* ── LAYER 4: Polaroid Photo Card: "THE FACE BEHIND THE EDITS" (Left) ── */}
+              <div
+                className="hero-enter absolute bg-white shadow-[4px_10px_28px_rgba(0,0,0,0.18)] p-2.5 pb-6 z-22 hidden sm:block"
+                style={{
+                  width: '124px',
+                  bottom: '10%',
+                  left: '2%',
+                  transform: 'rotate(-4deg)',
+                  animationDelay: '0.6s'
+                }}
+              >
+                <div className="w-full aspect-[4/4.4] bg-[#1a1a1a] overflow-hidden relative">
+                  <img
+                    src={imgOwnerPolaroid}
+                    alt="The face behind the edits"
+                    className="absolute inset-0 size-full object-cover"
+                  />
+                </div>
+                <div className="absolute -top-2.5 left-1/2 -translate-x-1/2 w-11 h-4 bg-[#FDE047]/75 shadow-xs rotate-[1deg]" />
+                <p className="font-['Covered_By_Your_Grace:Regular'] text-[#444] text-[12px] text-center mt-2 leading-tight tracking-wide">
+                  THE FACE<br />BEHIND THE EDITS
+                </p>
+              </div>
+
+              {/* ── LAYER 4: Checklist Note: "Edit / Animate / Design / Develop" (Bottom Right) ── */}
+              <div
+                className="hero-enter absolute hidden md:block bg-[#FEF9EE] border border-[#EDE4D2] shadow-[3px_6px_20px_rgba(0,0,0,0.1)] p-3 rounded-[2px]"
+                style={{
+                  bottom: '8%',
+                  right: '16%',
+                  transform: 'rotate(1.5deg)',
+                  animationDelay: '0.65s',
+                  zIndex: 22
+                }}
+              >
+                <div className="flex flex-col gap-1.5">
+                  {['Edit', 'Animate', 'Design', 'Develop'].map((item) => (
+                    <div key={item} className="flex items-center gap-2">
+                      <svg className="w-4 h-4 text-[#111] flex-shrink-0" viewBox="0 0 16 16" fill="none">
+                        <rect x="1.5" y="1.5" width="13" height="13" rx="2" stroke="currentColor" strokeWidth="1.5" fill="#FAF6EE"/>
+                        <path d="M4 8.5l2.8 2.8 5.4-5.6" stroke="#2563EB" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      </svg>
+                      <span className="font-['Covered_By_Your_Grace:Regular'] text-[#1a1a1a] text-[17px] leading-none">{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* ── LAYER 5: "GOOD VISUALS BRIGHTER BRANDS." Vintage Red Stamp (Bottom) ── */}
+              <div
+                className="hero-enter absolute hidden sm:block"
+                style={{
+                  bottom: '2%',
+                  left: '20%',
+                  transform: 'rotate(-5deg)',
+                  animationDelay: '0.75s',
+                  zIndex: 25
+                }}
+              >
+                <div className="border-[2.5px] border-[#DC2626] px-3 py-1.5 bg-[#FAF7F2]/90 backdrop-blur-xs relative shadow-xs">
+                  <div className="absolute inset-0.5 border border-[#DC2626] pointer-events-none" />
+                  <p className="font-['Barlow_Condensed:Black'] text-[#DC2626] text-[13px] leading-tight uppercase tracking-widest text-center">
+                    GOOD<br />VISUALS<br />BRIGHTER<br />BRANDS.
+                  </p>
+                </div>
+              </div>
+
+              {/* ── LAYER 4: Camera Scrapbook Note (Bottom Left on xl screens) ── */}
+              <div
+                className="hero-enter absolute hidden xl:block z-18 pointer-events-none"
+                style={{
+                  bottom: '5%',
+                  left: '-14%',
+                  transform: 'rotate(-2deg)',
+                  animationDelay: '0.68s'
+                }}
+              >
+                <div className="relative">
+                  <div className="absolute -top-7 left-0 w-36">
+                    <p className="font-['Covered_By_Your_Grace:Regular'] text-[#444] text-[12px] leading-tight">
+                      TURNING IDEAS INTO<br />SCROLL-STOPPING VIDEOS.
+                    </p>
+                    <svg className="w-5 h-5 text-[#444] -rotate-45" viewBox="0 0 24 24" fill="none">
+                      <path d="M4 12 C10 12, 16 14, 20 20" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" />
+                      <path d="M14 20 L20 20 L20 14" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                  </div>
+                  <img
+                    src={imgScrapbookCamera}
+                    alt=""
+                    className="w-[105px] h-auto rounded-[3px] shadow-[4px_6px_20px_rgba(0,0,0,0.15)] mt-6"
+                  />
+                </div>
+              </div>
+
+              {/* ── LAYER 4: Laptop on Wooden Crate (Bottom Right on xl screens) ── */}
+              <div
+                className="hero-enter absolute hidden xl:block z-18 pointer-events-none"
+                style={{
+                  bottom: '2%',
+                  right: '-10%',
+                  transform: 'rotate(1deg)',
+                  animationDelay: '0.72s'
+                }}
+              >
+                <div className="relative">
+                  <img
+                    src={imgScrapbookLaptop}
+                    alt=""
+                    className="w-[125px] h-auto rounded-[3px] shadow-[4px_8px_24px_rgba(0,0,0,0.15)]"
+                  />
+                </div>
+              </div>
+
+              {/* ── LAYER 5: Animated Red Star ── */}
+              <motion.svg
+                className="absolute hidden md:block"
+                style={{ top: '2%', left: '38%', zIndex: 14 }}
+                width="30" height="30" viewBox="0 0 32 32" fill="none"
+                initial={{ rotate: 0, scale: 0 }}
+                animate={{ rotate: 360, scale: 1 }}
+                transition={{ delay: 0.8, duration: 0.6, type: 'spring' }}
+              >
+                <path d="M16 2 L18 13 L29 11 L20 18 L25 29 L16 22 L7 29 L12 18 L3 11 L14 13 Z" stroke="#DC2626" strokeWidth="1.6" fill="none" strokeLinejoin="round"/>
+              </motion.svg>
+
             </div>
           </div>
         </div>
-        <div className="[word-break:break-word] content-stretch flex font-normal items-center justify-between leading-[normal] max-w-7xl mx-auto pt-[32px] md:pt-[48px] relative shrink-0 text-[11px] w-full">
-          <p className="scroll-bounce font-['DM_Sans:Regular'] relative shrink-0 text-[#c0beb8] tracking-[1px] uppercase whitespace-nowrap" style={{ fontVariationSettings: '"opsz" 14' }}>Scroll To Explore</p>
-          <p className="hidden sm:block font-['DM_Sans:Italic'] italic relative shrink-0 text-[#b4b1ab] whitespace-nowrap" style={{ fontVariationSettings: '"opsz" 14' }}>the pleasant earthy smell after rain</p>
+
+        {/* ── BOTTOM: Scroll To Explore ── */}
+        <div className="relative z-10 max-w-[1440px] mx-auto px-5 sm:px-8 md:px-10 lg:px-14 pb-8 flex items-center justify-between">
+          <p className="scroll-bounce font-['DM_Sans:Regular'] text-[#B0A090] text-[10px] tracking-[2px] uppercase md:hidden" style={{ fontVariationSettings: '"opsz" 14' }}>Scroll To Explore</p>
+          <p className="hidden sm:block font-['DM_Sans:Italic'] italic text-[#B0A090] text-[11px]" style={{ fontVariationSettings: '"opsz" 14' }}>the pleasant earthy smell after rain</p>
         </div>
       </div>
 
